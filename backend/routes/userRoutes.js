@@ -1,23 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const {
-  getAll,
-  getOne,
-  createOne,
-  updateOne,
-  deleteOne,
-} = require("../controllers/todolistController");
+const { login, register, logout } = [];
 
-router.use(express.json());
+router.post("/login", login);
 
-router.get("/", getAll);
+router.post("/logout", logout);
 
-router.get("/:id", getOne);
-
-router.post("/", createOne);
-
-router.patch("/:id", updateOne);
-
-router.delete("/:id", deleteOne);
+router.post("/register", register);
 
 module.exports = router;
