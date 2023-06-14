@@ -4,4 +4,4 @@ const register = () => {};
 
 const login = () => {};
 
-module.exports = { registerController: register, loginController: login };
+module.exports = { register, login };
