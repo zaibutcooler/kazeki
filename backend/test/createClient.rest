@@ -1,0 +1,27 @@
+POST http://localhost:5000/client/
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Dimmy",
+  "bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "bod": "1990-01-01",
+  "user": "648bd99940ac81bf44a466eb",
+  "organization": "Acme Corp",
+  "organizationLink": "https://www.acmecorp.com",
+  "contactLink": [
+    {
+      "name": "Email",
+      "link": "john.doe@example.com"
+    },
+    {
+      "name": "LinkedIn",
+      "link": "https://www.linkedin.com/in/johndoe"
+    }
+  ],
+  "photo": "Base64 encoded image data"
+}
+###
+GET http://localhost:5000/client/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDhiZDc5ZWE1ZmIzYTMyMGQ0NTFhMzYiLCJpYXQiOjE2ODY4ODc3MTQsImV4cCI6MTY4Njg5MTMxNH0.ZIHwuomKXVCakQWnvfwQFs47L7M9cepKzUOHSvZqPN0
+

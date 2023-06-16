@@ -10,8 +10,6 @@ const jobOfferSchema = mongoose.Schema({
   onsite: { type: Boolean },
   requirements: [{ type: String }],
   responsibilities: [{ type: String }],
-  creator: { type: mongoose.Schema.Types.ObjectId, ref: "Client" },
-  receiver: { type: mongoose.Schema.Types.ObjectId, ref: "JobSeeker" },
   contactLink: [{ name: { type: String }, link: { type: String } }],
   salaryRange: { from: { type: Number }, to: { type: Number } },
   created: { type: Date, default: Date.now },
