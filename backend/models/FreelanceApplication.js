@@ -9,6 +9,8 @@ const freelanceApplicationSchema = mongoose.Schema({
   },
   otherLinks: [{ name: String, link: { type: String } }],
   expectedAmount: { type: Number },
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "JobSeeker" },
+  receiver: { type: mongoose.Schema.Types.ObjectId, ref: "Client" },
   created: { type: Date, default: Date.now },
 });
 

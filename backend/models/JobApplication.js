@@ -8,6 +8,8 @@ const jobApplicationSchema = mongoose.Schema({
     contentType: String,
   },
   otherLinks: [{ name: String, link: { type: String } }],
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "JobSeeker" },
+  receiver: { type: mongoose.Schema.Types.ObjectId, ref: "Client" },
   expectedAmount: { type: Number },
   created: { type: Date, default: Date.now },
 });

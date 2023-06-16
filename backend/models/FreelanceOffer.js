@@ -9,6 +9,8 @@ const freelanceOfferSchema = mongoose.Schema({
   deadline: { type: Date },
   fixed: { type: Boolean },
   hourlyRate: { from: { type: Number }, to: { type: Number } },
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "Client" },
+  receiver: { type: mongoose.Schema.Types.ObjectId, ref: "JobSeeker" },
   fixedRate: { type: Number },
   created: { type: Date, default: Date.now },
 });

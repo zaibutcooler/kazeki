@@ -9,6 +9,7 @@ const jobSeekerSchema = mongoose.Schema({
   highSchool: { type: String },
   collage: { type: String },
   pastJobs: [{ type: String }],
+  skills: [{ type: String }],
   socialMediaLinks: [{ name: { type: String }, link: { type: String } }],
   photo: { type: Buffer },
   created: { type: Date, default: Date.now },
