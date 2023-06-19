@@ -15,17 +15,12 @@ import HomePage from "./pages/HomePage";
 function App() {
   return (
     <>
-      <div className="p-4">Hello world</div>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/applications" element={<ApplicationsPage />} />
-        <Route
-          path="/create-freelance-offer"
-          element={<CreateFreelanceOfferPage />}
-        />
         <Route path="/create-job-offer" element={<CreateJobOfferPage />} />
         <Route path="/create-profile" element={<CreateProfilePage />} />
         <Route path="/profile" element={<ProfileDetailPage />} />
