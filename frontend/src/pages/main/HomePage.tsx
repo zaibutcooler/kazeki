@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../store";
-import { setName, setNone, addName, blankName } from "../store/namingSlice";
+import { RootState } from "../../store";
+import { setName, setNone, addName, blankName } from "../../store/namingSlice";
 
 const HomePage = () => {
   const name = useSelector((state: RootState) => state.naming.value);
