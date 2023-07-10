@@ -19,7 +19,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDhiZ
 {
   "title": "Job Offer Title",
   "description": "Job Offer Description",
-  "creator": "648bda2f40ac81bf44a466ee",   
+  "creator": "60c982ec89a7340015d3c7be",   
   "country": "Country Name",
   "city": "City Name",
   "location": "Location Details",
@@ -78,4 +78,3 @@ Content-Type: application/json
 
 # Delete a Job Offer
 DELETE http://localhost:5000/job-offer/648be24ed2bc41dfc1869464
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDhiZDc5ZWE1ZmIzYTMyMGQ0NTFhMzYiLCJpYXQiOjE2ODY4ODc3MTQsImV4cCI6MTY4Njg5MTMxNH0.ZIHwuomKXVCakQWnvfwQFs47L7M9cepKzUOHSvZqPN0
