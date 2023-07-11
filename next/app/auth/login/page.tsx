@@ -1,6 +1,3 @@
-const page = () => {
-    return <div>page</div>;
-  };
-  
-  export default page;
-  
+export default function Login() {
+  return <main>Login</main>;
+}

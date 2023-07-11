@@ -1,5 +1,3 @@
-const page = () => {
-  return <div>page</div>;
-};
-
-export default page;
+export default function JobSeeking() {
+  return <main>Job Seeking</main>;
+}

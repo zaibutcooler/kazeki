@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar />
         <section className="container mx-auto">
-          <main className="">{children}</main>
+          <main className="min-h-[100vh]">{children}</main>
           <Footer />
         </section>
       </body>

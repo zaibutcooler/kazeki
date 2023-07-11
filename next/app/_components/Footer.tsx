@@ -1,5 +1,10 @@
 const Footer = () => {
-  return <div>Footer</div>;
+  return (
+    <div className="pb-4">
+      <hr />
+      Footer
+    </div>
+  );
 };
 
 export default Footer;
