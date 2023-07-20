@@ -36,7 +36,7 @@ const FreelanceOfferForm: React.FC = () => {
   return (
     <main className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur first-line:z-50 px-2">
       <div className="mx-auto">
-        <div className="bg-white shadow-md rounded-md py-4 w-[600px]">
+        <div className="bg-white shadow-md rounded-md py-4 w-full md:w-[500px] lg:w-[600px] text-xs md:text-sm">
           <div className="h-[40px] px-8 flex border-b border-gray-100 justify-between items-top">
             <span className="font-semibold">Create a Freelance Offer</span>
             <button>
@@ -55,7 +55,7 @@ const FreelanceOfferForm: React.FC = () => {
                 id="title"
                 name="title"
                 required
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the job title"
               />
             </div>
@@ -71,7 +71,7 @@ const FreelanceOfferForm: React.FC = () => {
                 name="detail"
                 required
                 rows={4}
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the job detail"
               />
             </div>
@@ -88,7 +88,7 @@ const FreelanceOfferForm: React.FC = () => {
                   type="text"
                   name={`responsibilities[${index}]`}
                   required
-                  className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                  className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                   placeholder="Enter Responsibilities"
                 />
               ))}
@@ -111,7 +111,7 @@ const FreelanceOfferForm: React.FC = () => {
                   type="text"
                   name={`requirements[${index}]`}
                   required
-                  className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                  className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                   placeholder="Enter a requirement"
                 />
               ))}
@@ -133,7 +133,7 @@ const FreelanceOfferForm: React.FC = () => {
                 id="salaryFrom"
                 name="salaryFrom"
                 required
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the starting salary"
               />
             </div>
@@ -149,7 +149,7 @@ const FreelanceOfferForm: React.FC = () => {
                 id="salaryTo"
                 name="salaryTo"
                 required
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the maximum salary"
               />
             </div>
@@ -165,7 +165,7 @@ const FreelanceOfferForm: React.FC = () => {
                 id="field"
                 name="field"
                 required
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the job field"
               />
             </div>
@@ -181,7 +181,7 @@ const FreelanceOfferForm: React.FC = () => {
                 id="timeRange"
                 name="timeRange"
                 required
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the time range for the job"
               />
             </div>
@@ -189,7 +189,7 @@ const FreelanceOfferForm: React.FC = () => {
             <div>
               <label
                 htmlFor="contact"
-                className="block text-sm font-medium text-gray-700">
+                className="block font-medium text-gray-700">
                 Contact
               </label>
               {initialFormData.contact.map((contact, index) => (
@@ -198,14 +198,14 @@ const FreelanceOfferForm: React.FC = () => {
                     type="text"
                     name={`contact[${index}].label`}
                     required
-                    className="focus:ring-gray-400 focus:border-gray-400 block w-1/3 sm:text-sm border-gray-300 rounded-md p-2 mr-4"
+                    className="focus:ring-gray-400 focus:border-gray-400 block w-1/3 border-gray-300 rounded-md p-2 mr-4"
                     placeholder="Enter contact label"
                   />
                   <input
                     type="text"
                     name={`contact[${index}].link`}
                     required
-                    className="focus:ring-gray-400 focus:border-gray-400 block w-4/6 sm:text-sm border-gray-300 rounded-md p-2"
+                    className="focus:ring-gray-400 focus:border-gray-400 block w-4/6 border-gray-300 rounded-md p-2"
                     placeholder="Enter contact link"
                   />
                 </div>
@@ -229,14 +229,14 @@ const FreelanceOfferForm: React.FC = () => {
                   id="formClose"
                   name="formClose"
                   required
-                  className="mt-1 mr-2 focus:ring-gray-400 focus:border-gray-400 block w-1/2 sm:text-sm border-gray-300 rounded-md p-2"
+                  className="mt-1 mr-2 focus:ring-gray-400 focus:border-gray-400 block w-1/2 border-gray-300 rounded-md p-2"
                 />
                 <input
                   type="time"
                   id="formCloseTime"
                   name="formCloseTime"
                   required
-                  className="mt-1 ml-2 focus:ring-gray-400 focus:border-gray-400 block w-1/2 sm:text-sm border-gray-300 rounded-md p-2"
+                  className="mt-1 ml-2 focus:ring-gray-400 focus:border-gray-400 block w-1/2 border-gray-300 rounded-md p-2"
                 />
               </div>
             </div>

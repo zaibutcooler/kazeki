@@ -43,7 +43,7 @@ const JobOfferForm: React.FC = () => {
   return (
     <main className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur first-line:z-50 px-2">
       <div className="mx-auto">
-        <div className="bg-white shadow-md rounded-md py-4  w-[600px] ">
+        <div className="bg-white shadow-md rounded-md py-4 w-full md:w-[500px] lg:w-[600px] text-xs md:text-sm">
           <div className="h-[40px] px-8 flex border-b border-gray-100 justify-between items-top">
             <span className="font-semibold">Create a Job Offer</span>
             <button>
@@ -54,7 +54,7 @@ const JobOfferForm: React.FC = () => {
             <div>
               <label
                 htmlFor="title"
-                className="block text-sm font-medium text-gray-700">
+                className="block font-medium text-gray-700">
                 Job Title
               </label>
               <input
@@ -62,7 +62,7 @@ const JobOfferForm: React.FC = () => {
                 id="title"
                 name="title"
                 required
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the job title"
               />
             </div>
@@ -70,7 +70,7 @@ const JobOfferForm: React.FC = () => {
             <div>
               <label
                 htmlFor="description"
-                className="block text-sm font-medium text-gray-700">
+                className="block font-medium text-gray-700">
                 Job Description
               </label>
               <textarea
@@ -78,7 +78,7 @@ const JobOfferForm: React.FC = () => {
                 name="description"
                 required
                 rows={4}
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the job description"
               />
             </div>
@@ -86,7 +86,7 @@ const JobOfferForm: React.FC = () => {
             <div>
               <label
                 htmlFor="responsibilities"
-                className="block text-sm font-medium text-gray-700">
+                className="block font-medium text-gray-700">
                 Responsibilities
               </label>
               {initialFormData.responsibilities.map((responsibility, index) => (
@@ -95,13 +95,13 @@ const JobOfferForm: React.FC = () => {
                   type="text"
                   name={`responsibilities[${index}]`}
                   required
-                  className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                  className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                   placeholder="Enter Responsibilities"
                 />
               ))}
               <button
                 type="button"
-                className="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
+                className="mt-2 inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
                 + Add More
               </button>
             </div>
@@ -109,7 +109,7 @@ const JobOfferForm: React.FC = () => {
             <div>
               <label
                 htmlFor="requirements"
-                className="block text-sm font-medium text-gray-700">
+                className="block font-medium text-gray-700">
                 Requirements
               </label>
               {initialFormData.requirements.map((requirement, index) => (
@@ -118,13 +118,13 @@ const JobOfferForm: React.FC = () => {
                   type="text"
                   name={`requirements[${index}]`}
                   required
-                  className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                  className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                   placeholder="Enter a requirement"
                 />
               ))}
               <button
                 type="button"
-                className="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
+                className="mt-2 inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
                 + Add Requirement
               </button>
             </div>
@@ -132,7 +132,7 @@ const JobOfferForm: React.FC = () => {
             <div>
               <label
                 htmlFor="onSite"
-                className="block text-sm font-medium text-gray-700">
+                className="block font-medium text-gray-700">
                 On-Site
               </label>
               <input
@@ -146,14 +146,14 @@ const JobOfferForm: React.FC = () => {
             <div>
               <label
                 htmlFor="location"
-                className="block text-sm font-medium text-gray-700">
+                className="block font-medium text-gray-700">
                 Location
               </label>
               <input
                 type="text"
                 id="location"
                 name="location"
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the job location"
               />
             </div>
@@ -161,7 +161,7 @@ const JobOfferForm: React.FC = () => {
             <div>
               <label
                 htmlFor="salary"
-                className="block text-sm font-medium text-gray-700">
+                className="block font-medium text-gray-700">
                 Salary
               </label>
               <input
@@ -169,7 +169,7 @@ const JobOfferForm: React.FC = () => {
                 id="salary"
                 name="salary"
                 required
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the job salary"
               />
             </div>
@@ -177,7 +177,7 @@ const JobOfferForm: React.FC = () => {
             <div>
               <label
                 htmlFor="allowance"
-                className="block text-sm font-medium text-gray-700">
+                className="block font-medium text-gray-700">
                 Allowance
               </label>
               {initialFormData.allowance.map((allowance, index) => (
@@ -186,13 +186,13 @@ const JobOfferForm: React.FC = () => {
                   type="text"
                   name={`allowance[${index}]`}
                   required
-                  className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                  className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                   placeholder="Enter an allowance"
                 />
               ))}
               <button
                 type="button"
-                className="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
+                className="mt-2 inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
                 + Add Allowance
               </button>
             </div>
@@ -200,7 +200,7 @@ const JobOfferForm: React.FC = () => {
             <div>
               <label
                 htmlFor="deadline"
-                className="block text-sm font-medium text-gray-700">
+                className="block font-medium text-gray-700">
                 Deadline
               </label>
               <input
@@ -208,14 +208,14 @@ const JobOfferForm: React.FC = () => {
                 id="deadline"
                 name="deadline"
                 required
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
               />
             </div>
 
             <div>
               <label
                 htmlFor="contact"
-                className="block text-sm font-medium text-gray-700">
+                className="block font-medium text-gray-700">
                 Contact
               </label>
               {initialFormData.contact.map((contact, index) => (
@@ -224,21 +224,21 @@ const JobOfferForm: React.FC = () => {
                     type="text"
                     name={`contact[${index}].label`}
                     required
-                    className="focus:ring-gray-400 focus:border-gray-400 block w-1/3 sm:text-sm border-gray-300 rounded-md p-2 mr-4"
+                    className="focus:ring-gray-400 focus:border-gray-400 block w-1/3 border-gray-300 rounded-md p-2 mr-4"
                     placeholder="Enter contact label"
                   />
                   <input
                     type="text"
                     name={`contact[${index}].link`}
                     required
-                    className="focus:ring-gray-400 focus:border-gray-400 block w-4/6 sm:text-sm border-gray-300 rounded-md p-2"
+                    className="focus:ring-gray-400 focus:border-gray-400 block w-4/6 border-gray-300 rounded-md p-2"
                     placeholder="Enter contact link"
                   />
                 </div>
               ))}
               <button
                 type="button"
-                className="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
+                className="mt-2 inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
                 + Add Contact
               </button>
             </div>
