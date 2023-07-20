@@ -3,6 +3,10 @@ import {
   AiOutlineForm,
   AiOutlineClockCircle,
   AiOutlineUsergroupAdd,
+  AiOutlineCheckCircle, // New icon suggestion 1
+  AiOutlineProject, // New icon suggestion 2
+  AiOutlineSchedule, // New icon suggestion 3
+  AiOutlineTool, // New icon suggestion 4
 } from "react-icons/ai";
 
 export const jobSeekingLinks = [
@@ -30,7 +34,7 @@ export const jobSeekingLinks = [
 
 export const freelanceLinks = [
   {
-    name: "Freelance Listings",
+    name: "Freelance Projects",
     go: "home/freelance/listing",
     icon: <AiOutlineFundView />,
   },
@@ -49,7 +53,14 @@ export const freelanceLinks = [
     go: "home/freelance/appointments",
     icon: <AiOutlineUsergroupAdd />,
   },
+  {
+    name: "Completed Projects",
+    go: "home/freelance/completed",
+    icon: <AiOutlineCheckCircle />,
+  },
+  {
+    name: "Ongoing Projects",
+    go: "home/freelance/ongoing",
+    icon: <AiOutlineProject />,
+  },
 ];
-
-console.log("jobSeekingLinks:", jobSeekingLinks);
-console.log("freelanceLinks:", freelanceLinks);

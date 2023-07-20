@@ -17,10 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
         <Navbar />
-        <section className="flex justify-center">
-          <main className="container w-[900px] bg-gray-300 px-3 md:px-0">
+        <section className="flex justify-center ">
+          <main className="container w-[900px] px-3 md:px-0">
             <div className="min-h-[100vh]">{children}</div>
             <Footer />
           </main>
