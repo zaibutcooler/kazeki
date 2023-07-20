@@ -1,51 +1,44 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { FaCross } from "react-icons/fa6";
 
 interface LinkType {
   label: string;
   link: string;
 }
 
-interface JobOfferFormState {
+interface FreelanceOfferFormState {
   title: string;
-  description: string;
+  detail: string;
   requirements: string[];
-  requireCount: number;
   responsibilities: string[];
-  responsibilityCount: number;
-  onSite: boolean;
-  location: string | null;
-  salary: number;
-  allowance: string[];
-  allowanceCount: number;
-  deadline: string;
+  salaryFrom: number;
+  salaryTo: number;
+  field: string[];
+  timeRange: string;
   contact: LinkType[];
+  formClose: string;
 }
 
-const JobOfferForm: React.FC = () => {
-  const initialFormData: JobOfferFormState = {
+const FreelanceOfferForm: React.FC = () => {
+  const initialFormData: FreelanceOfferFormState = {
     title: "",
-    description: "",
+    detail: "",
     requirements: [""],
-    requireCount: 1,
     responsibilities: [""],
-    responsibilityCount: 1,
-    onSite: true,
-    location: null,
-    salary: 0,
-    allowance: [""],
-    allowanceCount: 1,
-    deadline: new Date().toISOString().substr(0, 10),
+    salaryFrom: 0,
+    salaryTo: 0,
+    field: [],
+    timeRange: "",
     contact: [{ label: "", link: "" }],
+    formClose: "",
   };
 
   return (
     <main className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur first-line:z-50 px-2">
       <div className="mx-auto">
-        <div className="bg-white shadow-md rounded-md py-4  w-[600px] ">
+        <div className="bg-white shadow-md rounded-md py-4 w-[600px]">
           <div className="h-[40px] px-8 flex border-b border-gray-100 justify-between items-top">
-            <span className="font-semibold">Create a Job Offer</span>
+            <span className="font-semibold">Create a Freelance Offer</span>
             <button>
               <AiOutlineClose className="font-bold" />
             </button>
@@ -69,17 +62,17 @@ const JobOfferForm: React.FC = () => {
 
             <div>
               <label
-                htmlFor="description"
+                htmlFor="detail"
                 className="block text-sm font-medium text-gray-700">
-                Job Description
+                Job Detail
               </label>
               <textarea
-                id="description"
-                name="description"
+                id="detail"
+                name="detail"
                 required
                 rows={4}
                 className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
-                placeholder="Enter the job description"
+                placeholder="Enter the job detail"
               />
             </div>
 
@@ -131,84 +124,65 @@ const JobOfferForm: React.FC = () => {
 
             <div>
               <label
-                htmlFor="onSite"
+                htmlFor="salaryFrom"
                 className="block text-sm font-medium text-gray-700">
-                On-Site
-              </label>
-              <input
-                type="checkbox"
-                id="onSite"
-                name="onSite"
-                className="focus:ring-gray-400 h-4 w-4 text-slate-600 border-gray-300 rounded"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="location"
-                className="block text-sm font-medium text-gray-700">
-                Location
-              </label>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
-                placeholder="Enter the job location"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="salary"
-                className="block text-sm font-medium text-gray-700">
-                Salary
+                Salary From
               </label>
               <input
                 type="number"
-                id="salary"
-                name="salary"
+                id="salaryFrom"
+                name="salaryFrom"
                 required
                 className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
-                placeholder="Enter the job salary"
+                placeholder="Enter the starting salary"
               />
             </div>
 
             <div>
               <label
-                htmlFor="allowance"
+                htmlFor="salaryTo"
                 className="block text-sm font-medium text-gray-700">
-                Allowance
+                Salary To
               </label>
-              {initialFormData.allowance.map((allowance, index) => (
-                <input
-                  key={index}
-                  type="text"
-                  name={`allowance[${index}]`}
-                  required
-                  className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
-                  placeholder="Enter an allowance"
-                />
-              ))}
-              <button
-                type="button"
-                className="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
-                + Add Allowance
-              </button>
+              <input
+                type="number"
+                id="salaryTo"
+                name="salaryTo"
+                required
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                placeholder="Enter the maximum salary"
+              />
             </div>
 
             <div>
               <label
-                htmlFor="deadline"
+                htmlFor="field"
                 className="block text-sm font-medium text-gray-700">
-                Deadline
+                Field (e.g., web, software, programming)
               </label>
               <input
-                type="date"
-                id="deadline"
-                name="deadline"
+                type="text"
+                id="field"
+                name="field"
                 required
                 className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                placeholder="Enter the job field"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="timeRange"
+                className="block text-sm font-medium text-gray-700">
+                Time Range (e.g., 1 day, 1 week, 1 month)
+              </label>
+              <input
+                type="text"
+                id="timeRange"
+                name="timeRange"
+                required
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full sm:text-sm border-gray-300 rounded-md p-2"
+                placeholder="Enter the time range for the job"
               />
             </div>
 
@@ -243,6 +217,30 @@ const JobOfferForm: React.FC = () => {
               </button>
             </div>
 
+            <div>
+              <label
+                htmlFor="formClose"
+                className="block text-sm font-medium text-gray-700">
+                Form Close Date
+              </label>
+              <div className="flex">
+                <input
+                  type="date"
+                  id="formClose"
+                  name="formClose"
+                  required
+                  className="mt-1 mr-2 focus:ring-gray-400 focus:border-gray-400 block w-1/2 sm:text-sm border-gray-300 rounded-md p-2"
+                />
+                <input
+                  type="time"
+                  id="formCloseTime"
+                  name="formCloseTime"
+                  required
+                  className="mt-1 ml-2 focus:ring-gray-400 focus:border-gray-400 block w-1/2 sm:text-sm border-gray-300 rounded-md p-2"
+                />
+              </div>
+            </div>
+
             <div className="flex justify-center">
               <button
                 type="submit"
@@ -257,4 +255,4 @@ const JobOfferForm: React.FC = () => {
   );
 };
 
-export default JobOfferForm;
+export default FreelanceOfferForm;

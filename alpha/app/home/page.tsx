@@ -1,9 +1,9 @@
-import JobOfferForm from "@/components/client/JobOfferForm";
+import FreelanceApplicationForm from "@/components/freelancer/FreelanceApplicationForm";
 
 export default function HomePage() {
   return (
     <main>
-      <JobOfferForm />
+      <FreelanceApplicationForm />
     </main>
   );
 }
