@@ -1,62 +1,23 @@
 import Link from "next/link";
-import { useState } from "react";
-
+import { jobSeekingLinks } from "@/data/sidebarLinks";
+import { freelanceLinks } from "@/data/sidebarLinks";
 import {
-  AiOutlineFundView,
-  AiOutlineForm,
-  AiOutlineClockCircle,
-  AiOutlineUsergroupAdd,
-  AiOutlineInfoCircle,
-  AiOutlineStar,
-  AiOutlineMail,
-  AiOutlineQuestionCircle,
-  AiOutlineBulb,
-  AiOutlineLogout,
   AiOutlineHome,
+  AiOutlineInfoCircle,
+  AiOutlineLogout,
 } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
 
 interface Props {
   toggleSidebar: () => void;
 }
 
 const Sidebar: React.FC<Props> = ({ toggleSidebar }) => {
-  const jobSeekingLinks = [
-    { name: "Job Listings", go: "/job-listings", icon: <AiOutlineFundView /> },
-    {
-      name: "Job Applications",
-      go: "/job-applications",
-      icon: <AiOutlineForm />,
-    },
-    { name: "Interviews", go: "/interviews", icon: <AiOutlineClockCircle /> },
-    { name: "Resources", go: "/resources", icon: <AiOutlineUsergroupAdd /> },
-  ];
-
-  const freelanceLinks = [
-    {
-      name: "Freelance Listings",
-      go: "/freelance-listings",
-      icon: <AiOutlineFundView />,
-    },
-    { name: "Proposals", go: "/proposals", icon: <AiOutlineForm /> },
-    { name: "Contracts", go: "/contracts", icon: <AiOutlineClockCircle /> },
-    { name: "Resources", go: "/resources", icon: <AiOutlineUsergroupAdd /> },
-  ];
-
-  const otherLinks = [
-    { name: "About Us", go: "/about", icon: <AiOutlineInfoCircle /> },
-    { name: "Features", go: "/features", icon: <AiOutlineStar /> },
-    { name: "Contact", go: "/contact", icon: <AiOutlineMail /> },
-    { name: "Support", go: "/support", icon: <AiOutlineQuestionCircle /> },
-    { name: "Light/Dark Mode", go: "/mode", icon: <AiOutlineBulb /> },
-  ];
-
   return (
     <div>
-      <div
-        className="fixed inset-0 z-10 backdrop-filter backdrop-blur"
-        onClick={toggleSidebar}>
+      <div className="fixed inset-0 z-10 backdrop-filter backdrop-blur">
         <div
-          className="w-3/5 md:w-2/5 lg:w-1/5 bg-superwhite h-screen p-4 border-r overflow-y-auto"
+          className="w-2/3 md:w-2/5 lg:w-1/5 bg-superwhite h-screen p-4 border-r overflow-y-auto"
           onClick={() => {}}>
           <div className="text-sm font-bold flex justify-end">
             <button onClick={toggleSidebar}>Close</button>
@@ -102,7 +63,7 @@ const Sidebar: React.FC<Props> = ({ toggleSidebar }) => {
               </div>
               <div className="py-3 px-4 hover:bg-gray-100">
                 <Link href="/" className="flex items-center">
-                  <AiOutlineLogout /> <span className="ml-2">Logout</span>
+                  <FiLogOut /> <span className="ml-2">Logout</span>
                 </Link>
               </div>
             </div>

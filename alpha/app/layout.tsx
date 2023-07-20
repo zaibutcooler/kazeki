@@ -19,9 +19,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <section className="container mx-auto">
-          <main className="min-h-[100vh]">{children}</main>
-          <Footer />
+        <section className="flex justify-center">
+          <main className="container w-[900px] bg-gray-300 px-3 md:px-0">
+            <div className="min-h-[100vh]">{children}</div>
+            <Footer />
+          </main>
         </section>
       </body>
     </html>
