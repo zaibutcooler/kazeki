@@ -18,13 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-        <Navbar />
-        <section className="flex justify-center ">
-          <main className="container w-[900px] px-3 md:px-0">
-            <div className="min-h-[100vh]">{children}</div>
-            <Footer />
-          </main>
-        </section>
+        {children}
       </body>
     </html>
   );
