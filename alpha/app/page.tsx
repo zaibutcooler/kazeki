@@ -1,10 +1,10 @@
-import AboutSection from "@/components/landing/AboutSection";
-import ContactSupportSection from "@/components/landing/ContactSupportSection";
-import LandingFooter from "@/components/landing/LandingFooter";
-import LandingNavbar from "@/components/landing/LandingNavbar";
-import FreelanceFeaturesSection from "@/components/landing/FreelanceFeaturesSection";
-import JobSeekingSection from "@/components/landing/JobSeekingSection";
-import HeroSection from "@/components/landing/HeroSection";
+import AboutSection from "@/components/landing/sections/AboutSection";
+import ContactSupportSection from "@/components/landing/sections/ContactSupportSection";
+import LandingFooter from "@/components/landing/sections/LandingFooter";
+import LandingNavbar from "@/components/landing/sections/LandingNavbar";
+import FreelanceFeaturesSection from "@/components/landing/sections/FreelanceFeaturesSection";
+import JobSeekingSection from "@/components/landing/sections/JobSeekingSection";
+import HeroSection from "@/components/landing/sections/HeroSection";
 
 export default function LandingPage() {
   return (
