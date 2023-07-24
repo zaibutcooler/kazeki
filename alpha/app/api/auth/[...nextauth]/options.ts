@@ -1,9 +1,9 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import AppleProvider from "next-auth/providers/apple";
 import GithubProvider from "next-auth/providers/github";
-import { connectToDB } from "@/models/connectDB";
+import LinkedInProvider from "next-auth/providers/linkedin";
+import { connectToDB } from "@/utils/connectDB";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -43,9 +43,9 @@ export const options: NextAuthOptions = {
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
-    AppleProvider({
-      clientId: process.env.APPLE_ID as string,
-      clientSecret: process.env.APPLE_SECRET as string,
+    LinkedInProvider({
+      clientId: process.env.LINKEDIN_CLIENT_ID as string,
+      clientSecret: process.env.LINKEDIN_CLIENT_SECRET as string,
     }),
   ],
   pages: {},

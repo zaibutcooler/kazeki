@@ -1,7 +1,7 @@
 import { Schema, model, models } from "mongoose";
 
 const freelanceOfferSchema = new Schema({
-  user: { type: String },
+  user: { type: Schema.Types.ObjectId, ref: "User" },
   title: { type: String },
   detail: { type: String },
   requirements: [{ type: String }],

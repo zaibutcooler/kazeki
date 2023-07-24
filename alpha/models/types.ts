@@ -18,12 +18,11 @@ export interface JobOfferType {
   created: Date;
 }
 
-export interface JobApplicationType {
-  user: string;
+export interface ReplyType {
   title: string;
   description: string;
-  cv: string; //file type
-  links: LinkType[]; //
+  appointment: Date;
+  link: LinkType[];
   created: Date;
 }
 
@@ -48,5 +47,17 @@ export interface FreelanceApplicationType {
   cv: string; //file type
   negoSalary: number; //
   links: LinkType[]; //
+  approved: boolean;
+  created: Date;
+}
+
+export interface JobApplicationType {
+  user: string;
+  title: string;
+  description: string;
+  cv: string; //file type
+  links: LinkType[]; //
+  approved: boolean;
+  reply: ReplyType;
   created: Date;
 }
