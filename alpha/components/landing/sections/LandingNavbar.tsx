@@ -4,12 +4,13 @@ import { FaCircleUser, FaListUl } from "react-icons/fa6";
 import { FiMenu } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const LandingNavbar = () => {
   const [sidebarIsShowed, setSideBarIsShowed] = useState(false);
   const [authDropDown, setAuthDropDown] = useState(false);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { data: session } = useSession();
 
   const toggleSidebar = () => {
     setSideBarIsShowed(!sidebarIsShowed);
@@ -47,19 +48,33 @@ const LandingNavbar = () => {
                 onMouseLeave={() => {
                   setAuthDropDown(false);
                 }}>
-                <Link
-                  href="/auth/login"
-                  onClick={() => setAuthDropDown(false)}
-                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
-                  Login
-                </Link>
+                {session ? (
+                  <button
+                    onClick={() => {
+                      setAuthDropDown(false);
+                      signOut();
+                    }}
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                    Log Out
+                  </button>
+                ) : (
+                  <div>
+                    <button
+                      onClick={() => {
+                        setAuthDropDown(false);
+                        signIn();
+                      }}
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                      Login
+                    </button>
 
-                <Link
-                  href="/auth/register"
-                  onClick={() => setAuthDropDown(false)}
-                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 ">
-                  Register
-                </Link>
+                    <button
+                      onClick={() => setAuthDropDown(false)}
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 ">
+                      Register
+                    </button>
+                  </div>
+                )}
 
                 <hr className="my-2" />
 

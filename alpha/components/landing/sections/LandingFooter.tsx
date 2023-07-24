@@ -1,7 +1,7 @@
 import React from "react";
 
-const Footer = () => {
-  return <div className="min-h-[200px]">Footer</div>;
+const LandingFooter = () => {
+  return <div className="min-h-[200px]">LandingFooter</div>;
 };
 
-export default Footer;
+export default LandingFooter;
