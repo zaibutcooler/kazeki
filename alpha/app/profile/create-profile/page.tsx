@@ -1,3 +1,9 @@
+import MainProfileCreateForm from "@/components/profile/create/MainProfileCreateForm";
+
 export default function CreateProfilePage() {
-  return <main>Create Profile</main>;
+  return (
+    <main>
+      <MainProfileCreateForm />
+    </main>
+  );
 }

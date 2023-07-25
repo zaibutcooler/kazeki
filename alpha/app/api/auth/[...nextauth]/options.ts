@@ -10,7 +10,7 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: {
+        email: {
           label: "Username:",
           type: "text",
           placeholder: "Your username",
@@ -21,13 +21,18 @@ export const options: NextAuthOptions = {
           placeholder: "Your password",
         },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         connectToDB();
 
-        const user = { id: "33", name: "Zai", password: "123" };
+        const user = {
+          id: "33",
+          email: "zaiyellyintaung@gmail.com",
+          password: "123",
+        };
         if (
-          credentials?.username === user.name &&
-          credentials?.password === user.password
+          user
+          // credentials?.email === user.email &&
+          // credentials?.password === user.password
         ) {
           return user;
         } else {
@@ -35,24 +40,24 @@ export const options: NextAuthOptions = {
         }
       },
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    }),
-    GithubProvider({
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
-    }),
-    LinkedInProvider({
-      clientId: process.env.LINKEDIN_CLIENT_ID as string,
-      clientSecret: process.env.LINKEDIN_CLIENT_SECRET as string,
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID as string,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    // }),
+    // GithubProvider({
+    //   clientId: process.env.GITHUB_ID as string,
+    //   clientSecret: process.env.GITHUB_SECRET as string,
+    // }),
+    // LinkedInProvider({
+    //   clientId: process.env.LINKEDIN_CLIENT_ID as string,
+    //   clientSecret: process.env.LINKEDIN_CLIENT_SECRET as string,
+    // }),
   ],
   pages: {
-    signIn: "/auth/signin",
-    signOut: "/auth/signout",
-    error: "/auth/error", // Error code passed in query string as ?error=
-    verifyRequest: "/auth/verify-request", // (used for check email message)
-    newUser: "/auth/new-user", // New users will be directed here on first sign in (leave the property out if not of interest)
+    signIn: "/auth/login",
+    //signOut: "/", //after sign out
+    // error: "/auth/error",
+    // verifyRequest: "/auth/verify-request",
+    // newUser: "/", //redirect for new users
   },
 };

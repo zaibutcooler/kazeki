@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState } from "react";
 import { FaUser, FaBriefcase, FaSearchDollar } from "react-icons/fa";
 
@@ -18,13 +19,18 @@ const MainCard = () => {
               Recruit fast and efficently only in 10 days effectively and
               efficently
             </p>
-            <button className="px-4 py-3 border mb-6 rounded-md text-sm font-semibold bg-gray-900 text-white hover:bg-gray-700">
-              Sign up and recruit
-            </button>
-
+            <div className="mb-6">
+              <Link
+                href="/auth/register"
+                className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white hover:bg-gray-700">
+                Sign up and recruit
+              </Link>
+            </div>
             <p className="text-xs text-gray-500">
               Already created a client account ?{" "}
-              <a className="text-black">Sign in</a>
+              <Link href="/auth/signin" className="text-black">
+                Sign in
+              </Link>
             </p>
           </>
         );
@@ -39,16 +45,22 @@ const MainCard = () => {
               ideal job
             </p>
             <div className="mb-6 flex">
-              <button className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white mr-6  hover:bg-gray-700">
+              <Link
+                href="/auth/register"
+                className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white mr-6  hover:bg-gray-700">
                 Create Account
-              </button>
-              <button className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-200 text-gray-800 mr-6 hover:bg-gray-300">
+              </Link>
+              <Link
+                href="/home/job-seeking"
+                className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-200 text-gray-800 mr-6 hover:bg-gray-300">
                 Job Listing
-              </button>
+              </Link>
             </div>
             <p className="text-xs text-gray-500">
               Already created a client account ?{" "}
-              <a className="text-black">Sign in</a>
+              <Link href="/auth/login" className="text-black">
+                Sign in
+              </Link>
             </p>
           </>
         );
@@ -63,16 +75,22 @@ const MainCard = () => {
               and talents.
             </p>
             <div className="mb-6 flex">
-              <button className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white mr-6  hover:bg-gray-700">
+              <Link
+                href="/auth/register"
+                className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white mr-6  hover:bg-gray-700">
                 Sign Up and Explore
-              </button>
-              <button className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-200 text-gray-800 mr-6 hover:bg-gray-300">
+              </Link>
+              <Link
+                href="/home/freelance"
+                className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-200 text-gray-800 mr-6 hover:bg-gray-300">
                 Explore
-              </button>
+              </Link>
             </div>
             <p className="text-xs text-gray-500">
               Already created a client account ?{" "}
-              <a className="text-black">Sign in</a>
+              <Link href="/auth/login" className="text-black">
+                Sign in
+              </Link>
             </p>
           </>
         );

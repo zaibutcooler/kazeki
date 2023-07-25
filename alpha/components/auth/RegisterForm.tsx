@@ -1,25 +1,23 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const RegisterForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
+
+  const handleSubmit = () => {};
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="max-w-md w-full px-6 py-8 bg-white shadow-md">
+      <Link href="/" className="fixed left-0 top-0 font-bold p-4">
+        <AiOutlineArrowLeft />
+      </Link>
+      <div className="max-w-md w-full px-6 py-8 bg-white shadow-md mx-3">
         <div className="text-2xl font-semibold mb-6 text-center">Sign Up</div>
-        <form>
-          <div className="mb-4">
-            <label
-              htmlFor="name"
-              className="block text-gray-700 text-sm font-bold mb-2">
-              Username
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="w-full border border-gray-200 px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
-              required
-            />
-          </div>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -30,6 +28,8 @@ const RegisterForm = () => {
               type="email"
               id="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full border border-gray-200 px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
               required
             />
@@ -44,6 +44,8 @@ const RegisterForm = () => {
               type="password"
               id="password"
               name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full border border-gray-200 px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
               required
             />
@@ -58,6 +60,8 @@ const RegisterForm = () => {
               type="password"
               id="password"
               name="password"
+              value={password2}
+              onChange={(e) => setPassword2(e.target.value)}
               className="w-full border border-gray-200 px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
               required
             />
