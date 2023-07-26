@@ -65,6 +65,7 @@ const LoginForm = () => {
               className="bg-gray-800 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-opacity-50">
               Login
             </button>
+            {/* need to add login with google, linkedin and github */}
             <Link
               href="#"
               className="text-gray-800 hover:text-gray-500 text-sm font-semibold">
