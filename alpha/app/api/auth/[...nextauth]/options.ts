@@ -4,6 +4,8 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import LinkedInProvider from "next-auth/providers/linkedin";
 import { connectToDB } from "@/utils/connectDB";
+import User from "@/models/User";
+import bcrypt from "bcrypt";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -14,16 +16,17 @@ export const options: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const user = {
-          id: "1",
-          email: "zaiyellyintaung@gmail.com",
-          password: "123",
-        };
+        await connectToDB();
+        const user = await User.findOne({ email: credentials?.email });
 
-        if (
-          credentials?.email === user.email &&
-          credentials?.password === user.password
-        ) {
+        if (!credentials?.password || !user) {
+          return null;
+        }
+        const validPassword = await bcrypt.compare(
+          credentials?.password,
+          user.password
+        );
+        if (user && validPassword) {
           return user;
         } else {
           return null;

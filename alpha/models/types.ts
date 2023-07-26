@@ -61,3 +61,9 @@ export interface JobApplicationType {
   reply: ReplyType;
   created: Date;
 }
+
+export interface UserType {
+  email: string;
+  password: string;
+  userProfile: string;
+}

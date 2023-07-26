@@ -1,5 +1,7 @@
 "use client";
+import { redirect } from "next/dist/server/api-utils";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
@@ -8,13 +10,34 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
 
-  const handleSubmit = () => {};
+  const [error, setError] = useState("");
+
+  const handleSubmit = async () => {
+    if (password !== password2) {
+      return;
+    }
+    try {
+      const response = await fetch("/api/user/register", {
+        method: "POST",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      if (response.ok) {
+        console.log("success");
+      }
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <Link href="/" className="fixed left-0 top-0 font-bold p-4">
         <AiOutlineArrowLeft />
       </Link>
+      {error && <div className="w-full text-center">{error}</div>}
       <div className="max-w-md w-full px-6 py-8 bg-white shadow-md mx-3">
         <div className="text-2xl font-semibold mb-6 text-center">Sign Up</div>
         <form onSubmit={handleSubmit}>

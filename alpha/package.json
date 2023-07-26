@@ -14,6 +14,7 @@
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "autoprefixer": "10.4.14",
+    "bcrypt": "^5.1.0",
     "next": "13.4.9",
     "next-auth": "^4.22.3",
     "postcss": "8.4.25",
@@ -25,6 +26,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "tailwind-scrollbar": "^3.0.4"
   }
 }

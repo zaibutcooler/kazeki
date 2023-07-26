@@ -54,7 +54,7 @@ const LandingNavbar = () => {
                       setAuthDropDown(false);
                       signOut();
                     }}
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 w-full">
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
                     Log Out
                   </button>
                 )}
@@ -69,11 +69,12 @@ const LandingNavbar = () => {
                   </button>
                 )}
                 {!session && (
-                  <button
+                  <Link
+                    href="/auth/register"
                     onClick={() => setAuthDropDown(false)}
                     className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
                     Register
-                  </button>
+                  </Link>
                 )}
 
                 <hr className="my-2" />
