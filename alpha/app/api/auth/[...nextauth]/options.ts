@@ -10,29 +10,19 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: {
-          label: "Username:",
-          type: "text",
-          placeholder: "Your username",
-        },
-        password: {
-          label: "Password:",
-          type: "password",
-          placeholder: "Your password",
-        },
+        email: { label: "email", type: "text", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        connectToDB();
-
         const user = {
-          id: "33",
+          id: "1",
           email: "zaiyellyintaung@gmail.com",
           password: "123",
         };
+
         if (
-          user
-          // credentials?.email === user.email &&
-          // credentials?.password === user.password
+          credentials?.email === user.email &&
+          credentials?.password === user.password
         ) {
           return user;
         } else {

@@ -48,32 +48,32 @@ const LandingNavbar = () => {
                 onMouseLeave={() => {
                   setAuthDropDown(false);
                 }}>
-                {session ? (
+                {session && (
                   <button
                     onClick={() => {
                       setAuthDropDown(false);
                       signOut();
                     }}
-                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 w-full">
                     Log Out
                   </button>
-                ) : (
-                  <div>
-                    <button
-                      onClick={() => {
-                        setAuthDropDown(false);
-                        signIn();
-                      }}
-                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
-                      Login
-                    </button>
-
-                    <button
-                      onClick={() => setAuthDropDown(false)}
-                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 ">
-                      Register
-                    </button>
-                  </div>
+                )}
+                {!session && (
+                  <button
+                    onClick={() => {
+                      setAuthDropDown(false);
+                      signIn();
+                    }}
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                    Login
+                  </button>
+                )}
+                {!session && (
+                  <button
+                    onClick={() => setAuthDropDown(false)}
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                    Register
+                  </button>
                 )}
 
                 <hr className="my-2" />
