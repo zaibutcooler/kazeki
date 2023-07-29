@@ -33,7 +33,7 @@ const FreelanceApplicationForm: React.FC = () => {
               <AiOutlineClose className="font-bold" />
             </button>
           </div>
-          <form className="bg-bg_white space-y-4 px-8 py-3 max-h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+          <form className="bg-white space-y-4 px-8 py-3 max-h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
             <div>
               <label
                 htmlFor="title"
@@ -45,7 +45,7 @@ const FreelanceApplicationForm: React.FC = () => {
                 id="title"
                 name="title"
                 required
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full text-xs border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full text-xs border-gray-300 rounded-md border p-2"
                 placeholder="Your Title"
               />
             </div>
@@ -56,7 +56,7 @@ const FreelanceApplicationForm: React.FC = () => {
                 name="description"
                 required
                 rows={4}
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full text-xs border-gray-300 rounded-md p-2"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full text-xs border-gray-300 rounded-md border p-2"
                 placeholder="Your Description"
               />
             </div>
@@ -73,23 +73,7 @@ const FreelanceApplicationForm: React.FC = () => {
                 name="cv"
                 required
                 accept=".pdf,.doc,.docx"
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full text-xs border-gray-300 rounded-md p-2"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="negoSalary"
-                className="block text-xs font-medium text-gray-700">
-                Expected Salary
-              </label>
-              <input
-                type="text"
-                id="negoSalary"
-                name="negoSalary"
-                required
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full text-xs border-gray-300 rounded-md p-2"
-                placeholder="Expected Salary"
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full text-xs border-gray-300 rounded-md border p-2"
               />
             </div>
 
@@ -105,14 +89,14 @@ const FreelanceApplicationForm: React.FC = () => {
                     type="text"
                     name={`links[${index}].label`}
                     required
-                    className="focus:ring-gray-400 focus:border-gray-400 block w-1/3 text-xs border-gray-300 rounded-md p-2 mr-4"
+                    className="focus:ring-gray-400 focus:border-gray-400 border block w-1/3 text-xs border-gray-300 rounded-md p-2 mr-4"
                     placeholder="Enter link label"
                   />
                   <input
                     type="text"
                     name={`links[${index}].link`}
                     required
-                    className="focus:ring-gray-400 focus:border-gray-400 block w-4/6 text-xs border-gray-300 rounded-md p-2"
+                    className="focus:ring-gray-400 focus:border-gray-400 border block w-4/6 text-xs border-gray-300 rounded-md p-2"
                     placeholder="Enter link URL"
                   />
                 </div>
@@ -124,7 +108,23 @@ const FreelanceApplicationForm: React.FC = () => {
               </button>
             </div>
 
-            <div className="flex justify-center">
+            <div>
+              <label
+                htmlFor="negoSalary"
+                className="block text-xs font-medium text-gray-700">
+                Expected Salary
+              </label>
+              <input
+                type="text"
+                id="negoSalary"
+                name="negoSalary"
+                required
+                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full text-xs border-gray-300 rounded-md border p-2"
+                placeholder="Expected Salary"
+              />
+            </div>
+
+            <div className="flex justify-end">
               <button
                 type="submit"
                 className="bg-slate-600 hover:bg-slate-700 text-white font-semibold py-1.5 px-4 rounded-lg focus:outline-none focus:shadow-outline">

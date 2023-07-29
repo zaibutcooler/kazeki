@@ -1,25 +1,42 @@
 import { Schema, model, models } from "mongoose";
+import { LinkType } from "./types";
+export interface JobApplicationType {
+  _id: string;
+  user: Schema.Types.ObjectId;
+  title: string;
+  description: string;
+  cv: string;
+  links: LinkType[];
+  approved: boolean;
+  reply: Schema.Types.ObjectId;
+  created: Date;
+}
+
+export interface JobApplicationCreateType {
+  user: string; // Assuming you have a string representation of Schema.Types.ObjectId
+  title: string;
+  description: string;
+  cv: string;
+  links: LinkType[];
+  // No need to include the 'approved', 'reply', and 'created' fields here as they are automatically set in the Mongoose schema with default values.
+}
 
 const jobApplicationSchema = new Schema({
-  user: { type: String, required: true },
+  user: { type: Schema.Types.ObjectId, ref: "User" },
   title: { type: String, required: true },
   description: { type: String, required: true },
   cv: { type: String, required: true },
   links: [
     {
       link: { type: String, required: true },
-      name: { type: String, required: true },
+      label: { type: String, required: true },
     },
   ],
   approved: { type: Boolean, default: false },
-  reply: {
-    message: { type: String, default: "" },
-    date: { type: Date, default: null },
-  },
+  reply: { type: Schema.Types.ObjectId, ref: "Reply" },
   created: { type: Date, default: Date.now },
 });
 
-const JobApplication =
-  models.JobApplication || model("JobApplication", jobApplicationSchema);
-
-export default JobApplication;
+export const JobApplication =
+  models.JobApplication ||
+  model<JobApplicationType>("JobApplication", jobApplicationSchema);

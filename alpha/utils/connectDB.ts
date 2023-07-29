@@ -2,7 +2,7 @@ import mongoose, { ConnectOptions } from "mongoose";
 
 let isConnected = false;
 
-export const connectToDB = () => {
+const connectDB = () => {
   try {
     mongoose.set("strictQuery", true);
 
@@ -22,3 +22,5 @@ export const connectToDB = () => {
     console.log("Error ->", error);
   }
 };
+
+export default connectDB;

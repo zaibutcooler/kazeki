@@ -1,42 +1,36 @@
-import { NextResponse } from "next/server";
-import FreelanceApplication from "@/models/FreelanceApplication";
+import Model from "@/models/FreelanceApplication";
+import connectDB from "@/utils/connectDB";
+import User from "@/models/User";
 
-export async function GET() {
-  const result = await FreelanceApplication.find();
-  return NextResponse.json(result);
-}
+export async function POST(req: Request) {
+  try {
+    await connectDB();
+    const { user, title, description, cv, negoSalary, links } =
+      await req.json();
 
-export async function POST(request: Request) {
-  const data = await request.json();
-  const { postData } = data;
-  const result = new FreelanceApplication({ postData });
+    const userExists = await User.findById(user);
 
-  await result.save();
-  return NextResponse.json(result);
-}
-
-export async function PATCH(request: Request) {
-  const data = await request.json();
-  const {} = data;
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
-
-  const result = await FreelanceApplication.findByIdAndUpdate(
-    id,
-    {},
-    {
-      new: true,
+    if (!userExists) {
+      return new Response(JSON.stringify({ message: "Invalid User" }), {
+        status: 400,
+      });
     }
-  );
+    const newItem = new Model({
+      user,
+      title,
+      description,
+      cv,
+      negoSalary,
+      links,
+    });
+    await newItem.save();
 
-  return NextResponse.json(result);
-}
-
-export async function DELETE(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
-
-  const result = await FreelanceApplication.findByIdAndDelete(id);
-
-  return NextResponse.json(result);
+    return new Response(JSON.stringify(newItem), {
+      status: 200,
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+      status: 500,
+    });
+  }
 }

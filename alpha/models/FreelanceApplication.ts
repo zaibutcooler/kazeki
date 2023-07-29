@@ -1,7 +1,29 @@
 import { Schema, model, models } from "mongoose";
+import { LinkType } from "./types";
+export interface FreelanceApplicationType {
+  _id: string;
+  user: Schema.Types.ObjectId;
+  title: string;
+  description: string;
+  cv: string;
+  negoSalary: number;
+  links: LinkType[];
+  approved: boolean;
+  reply: Schema.Types.ObjectId;
+  created: Date;
+}
+
+export interface FreelanceApplicationCreateType {
+  user: string;
+  title: string;
+  description: string;
+  cv: string;
+  negoSalary: number;
+  links: LinkType[];
+}
 
 const freelanceApplicationSchema = new Schema({
-  user: { type: String },
+  user: { type: Schema.Types.ObjectId, ref: "User" },
   title: { type: String },
   description: { type: String },
   cv: { type: String },
@@ -9,10 +31,11 @@ const freelanceApplicationSchema = new Schema({
   links: [
     {
       link: { type: String },
-      name: { type: String },
+      label: { type: String },
     },
   ],
   approved: { type: Boolean, default: false },
+  reply: { type: Schema.Types.ObjectId, ref: "Reply" },
   created: { type: Date, default: Date.now },
 });
 
