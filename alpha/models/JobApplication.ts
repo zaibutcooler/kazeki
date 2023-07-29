@@ -3,6 +3,7 @@ import { LinkType } from "./types";
 export interface JobApplicationType {
   _id: string;
   user: Schema.Types.ObjectId;
+  job: string;
   title: string;
   description: string;
   cv: string;
@@ -15,6 +16,7 @@ export interface JobApplicationType {
 export interface JobApplicationCreateType {
   user: string; // Assuming you have a string representation of Schema.Types.ObjectId
   title: string;
+  job: string;
   description: string;
   cv: string;
   links: LinkType[];
@@ -23,6 +25,7 @@ export interface JobApplicationCreateType {
 
 const jobApplicationSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User" },
+  job: { type: Schema.Types.ObjectId, ref: "JobOffer" },
   title: { type: String, required: true },
   description: { type: String, required: true },
   cv: { type: String, required: true },
@@ -37,6 +40,8 @@ const jobApplicationSchema = new Schema({
   created: { type: Date, default: Date.now },
 });
 
-export const JobApplication =
+const JobApplication =
   models.JobApplication ||
   model<JobApplicationType>("JobApplication", jobApplicationSchema);
+
+export default JobApplication;

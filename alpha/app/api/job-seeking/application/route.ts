@@ -5,7 +5,7 @@ import User from "@/models/User";
 export async function POST(req: Request) {
   try {
     await connectDB();
-    const { user, ttile, description, cv, links } = await req.json();
+    const { user, title, job, description, cv, links } = await req.json();
 
     const userExists = await User.findById(user);
 
@@ -16,7 +16,8 @@ export async function POST(req: Request) {
     }
     const newItem = new Model({
       user,
-      ttile,
+      title,
+      job,
       description,
       cv,
       links,

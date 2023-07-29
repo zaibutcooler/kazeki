@@ -3,6 +3,7 @@ import { LinkType } from "./types";
 export interface FreelanceApplicationType {
   _id: string;
   user: Schema.Types.ObjectId;
+  freelance: string;
   title: string;
   description: string;
   cv: string;
@@ -16,6 +17,7 @@ export interface FreelanceApplicationType {
 export interface FreelanceApplicationCreateType {
   user: string;
   title: string;
+  freelance: string;
   description: string;
   cv: string;
   negoSalary: number;

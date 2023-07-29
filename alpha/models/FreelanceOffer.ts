@@ -25,6 +25,7 @@ export interface FreelanceOfferCreateType {
   field: string[];
   timeRange: string;
   contact: LinkType[];
+  formClose: string;
   // No need to include the 'created' field here as it is automatically set in the Mongoose schema with default value.
 }
 

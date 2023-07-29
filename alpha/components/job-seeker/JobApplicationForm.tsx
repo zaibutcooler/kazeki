@@ -1,3 +1,4 @@
+import createJobApplication from "@/utils/forms/createJobApplication";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -26,9 +27,23 @@ const JobApplicationForm: React.FC = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [cv, setCv] = useState("http//example.com");
-  const [links, setLinks] = useState<LinkType[] | null>([
+  const [links, setLinks] = useState<LinkType[]>([
     { link: "www.example.com", label: "haha" },
   ]);
+
+  const userID = "64c0d142dfbaacc1e453061b";
+  const jobID = "64c579e9990e471ce5c2e236";
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    createJobApplication({
+      user: userID,
+      title,
+      description,
+      cv,
+      links,
+      job: jobID,
+    });
+  };
 
   return (
     <main className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur z-50 px-2">
@@ -40,7 +55,9 @@ const JobApplicationForm: React.FC = () => {
               <AiOutlineClose className="font-bold" />
             </button>
           </div>
-          <form className="bg-white space-y-4 px-8 py-3 max-h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white space-y-4 px-8 py-3 max-h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
             <div>
               <label
                 htmlFor="title"

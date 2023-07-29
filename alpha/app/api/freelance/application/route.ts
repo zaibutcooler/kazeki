@@ -5,7 +5,7 @@ import User from "@/models/User";
 export async function POST(req: Request) {
   try {
     await connectDB();
-    const { user, title, description, cv, negoSalary, links } =
+    const { user, title, description, cv, negoSalary, freelance, links } =
       await req.json();
 
     const userExists = await User.findById(user);
@@ -21,6 +21,7 @@ export async function POST(req: Request) {
       description,
       cv,
       negoSalary,
+      freelance,
       links,
     });
     await newItem.save();
