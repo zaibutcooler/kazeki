@@ -116,6 +116,18 @@ const JobOfferPage = () => {
               />
             ))}
             <div className="w-full flex justify-end">
+              {formData.requirements.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newRequirements = [...formData.requirements];
+                    newRequirements.pop();
+                    setFormData({ ...formData, requirements: newRequirements });
+                  }}
+                  className="mt-4 inline-flex mr-4 items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
+                  Remove
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => {
@@ -148,11 +160,26 @@ const JobOfferPage = () => {
               />
             ))}
             <div className="w-full flex justify-end">
+              {formData.responsibilities.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newResponsibilities = [...formData.responsibilities];
+                    newResponsibilities.pop();
+                    setFormData({
+                      ...formData,
+                      responsibilities: newResponsibilities,
+                    });
+                  }}
+                  className="mt-4 inline-flex mr-4 items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
+                  Remove
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => {
-                  const newForm = [...formData.requirements, ""];
-                  setFormData({ ...formData, requirements: newForm });
+                  const newForm = [...formData.responsibilities, ""];
+                  setFormData({ ...formData, responsibilities: newForm });
                 }}
                 className="mt-4 inline-flex items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
                 + Add More
@@ -270,6 +297,21 @@ const JobOfferPage = () => {
               />
             ))}
             <div className="w-full flex justify-end">
+              {formData.allowance.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newAllowance = [...formData.allowance];
+                    newAllowance.pop();
+                    setFormData({
+                      ...formData,
+                      allowance: newAllowance,
+                    });
+                  }}
+                  className="mt-4 inline-flex mr-4 items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
+                  Remove
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => {
@@ -331,6 +373,21 @@ const JobOfferPage = () => {
               </div>
             ))}
             <div className="w-full flex justify-end">
+              {formData.links.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newLinks = [...formData.links];
+                    newLinks.pop();
+                    setFormData({
+                      ...formData,
+                      links: newLinks,
+                    });
+                  }}
+                  className="mt-4 inline-flex mr-4 items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
+                  Remove
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => {
