@@ -1,5 +1,7 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { useState } from "react";
+import createFreelanceApplication from "@/utils/forms/createFreelanceApplication";
 
 interface LinkType {
   label: string;
@@ -15,12 +17,27 @@ interface FreelanceApplicationFormState {
 }
 
 const FreelanceApplicationForm: React.FC = () => {
-  const initialFormData: FreelanceApplicationFormState = {
-    title: "",
-    description: "",
-    cv: null,
-    negoSalary: 0,
-    links: [{ label: "", link: "" }],
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [cv, setCv] = useState("http//example.com");
+  const [links, setLinks] = useState<LinkType[]>([
+    { link: "www.example.com", label: "haha" },
+  ]);
+  const [negoSalary, setNegoSalary] = useState(0);
+
+  const userID = "64c0d142dfbaacc1e453061b";
+  const freelanceID = "64c58fe2990e471ce5c2e242";
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    createFreelanceApplication({
+      user: userID,
+      title,
+      description,
+      cv,
+      links,
+      freelance: freelanceID,
+      negoSalary,
+    });
   };
 
   return (
@@ -33,7 +50,9 @@ const FreelanceApplicationForm: React.FC = () => {
               <AiOutlineClose className="font-bold" />
             </button>
           </div>
-          <form className="bg-white space-y-4 px-8 py-3 max-h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white space-y-4 px-8 py-3 max-h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
             <div>
               <label
                 htmlFor="title"
@@ -43,6 +62,8 @@ const FreelanceApplicationForm: React.FC = () => {
               <input
                 type="text"
                 id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 name="title"
                 required
                 className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full text-xs border-gray-300 rounded-md border p-2"
@@ -55,6 +76,8 @@ const FreelanceApplicationForm: React.FC = () => {
                 id="description"
                 name="description"
                 required
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 rows={4}
                 className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full text-xs border-gray-300 rounded-md border p-2"
                 placeholder="Your Description"
@@ -83,7 +106,7 @@ const FreelanceApplicationForm: React.FC = () => {
                 className="block text-xs font-medium text-gray-700">
                 Links (e.g., LinkedIn, personal website)
               </label>
-              {initialFormData.links.map((link, index) => (
+              {links.map((link, index) => (
                 <div key={index} className="mt-1 flex justify-between">
                   <input
                     type="text"
@@ -118,6 +141,8 @@ const FreelanceApplicationForm: React.FC = () => {
                 type="text"
                 id="negoSalary"
                 name="negoSalary"
+                value={negoSalary}
+                onChange={(e) => setNegoSalary(parseInt(e.target.value))}
                 required
                 className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full text-xs border-gray-300 rounded-md border p-2"
                 placeholder="Expected Salary"

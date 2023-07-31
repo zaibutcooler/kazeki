@@ -1,37 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-
-interface LinkType {
-  label: string;
-  link: string;
-}
-
-interface FreelanceOfferFormState {
-  title: string;
-  detail: string;
-  requirements: string[];
-  responsibilities: string[];
-  salaryFrom: number;
-  salaryTo: number;
-  field: string[];
-  timeRange: string;
-  contact: LinkType[];
-  formClose: string;
-}
+import { FreelanceOfferCreateType } from "@/models/FreelanceOffer";
+import { LinkType } from "@/models/types";
 
 const FreelanceOfferForm: React.FC = () => {
-  const initialFormData: FreelanceOfferFormState = {
-    title: "",
-    detail: "",
-    requirements: [""],
-    responsibilities: [""],
-    salaryFrom: 0,
-    salaryTo: 0,
-    field: [],
-    timeRange: "",
-    contact: [{ label: "", link: "" }],
-    formClose: "",
+  const [title, setTitle] = useState<string>("");
+  const [detail, setDetail] = useState<string>("");
+  const [requirements, setRequirements] = useState<string[]>([""]);
+  const [responsibilities, setResponsibilities] = useState<string[]>([""]);
+  const [salaryFrom, setSalaryFrom] = useState<number>(0);
+  const [salaryTo, setSalaryTo] = useState<number>(0);
+  const [field, setField] = useState<string[]>([]);
+  const [timeRange, setTimeRange] = useState<string>("");
+  const [contact, setContact] = useState<LinkType[]>([{ label: "", link: "" }]);
+  const [formClose, setFormClose] = useState<string>("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
   };
+
+  const removeRequirements = () => {};
 
   return (
     <main className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur first-line:z-50 px-2">
@@ -43,7 +31,9 @@ const FreelanceOfferForm: React.FC = () => {
               <AiOutlineClose className="font-bold" />
             </button>
           </div>
-          <form className="bg-bg_white space-y-4 px-8 py-3 h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-bg_white space-y-4 px-8 py-3 h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
             <div>
               <label
                 htmlFor="title"
@@ -54,6 +44,8 @@ const FreelanceOfferForm: React.FC = () => {
                 type="text"
                 id="title"
                 name="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
                 required
                 className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the job title"
@@ -69,6 +61,8 @@ const FreelanceOfferForm: React.FC = () => {
               <textarea
                 id="detail"
                 name="detail"
+                value={detail}
+                onChange={(e) => setDetail(e.target.value)}
                 required
                 rows={4}
                 className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
@@ -82,7 +76,7 @@ const FreelanceOfferForm: React.FC = () => {
                 className="block text-sm font-medium text-gray-700">
                 Responsibilities
               </label>
-              {initialFormData.responsibilities.map((responsibility, index) => (
+              {responsibilities.map((responsibility, index) => (
                 <input
                   key={index}
                   type="text"
@@ -94,6 +88,7 @@ const FreelanceOfferForm: React.FC = () => {
               ))}
               <button
                 type="button"
+                onClick={() => setResponsibilities([...responsibilities, ""])}
                 className="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
                 + Add More
               </button>
@@ -105,7 +100,7 @@ const FreelanceOfferForm: React.FC = () => {
                 className="block text-sm font-medium text-gray-700">
                 Requirements
               </label>
-              {initialFormData.requirements.map((requirement, index) => (
+              {requirements.map((requirement, index) => (
                 <input
                   key={index}
                   type="text"
@@ -117,6 +112,7 @@ const FreelanceOfferForm: React.FC = () => {
               ))}
               <button
                 type="button"
+                onClick={() => setRequirements([...requirements, ""])}
                 className="mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
                 + Add Requirement
               </button>
@@ -132,6 +128,8 @@ const FreelanceOfferForm: React.FC = () => {
                 type="number"
                 id="salaryFrom"
                 name="salaryFrom"
+                value={salaryFrom}
+                onChange={(e) => setSalaryFrom(parseInt(e.target.value))}
                 required
                 className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the starting salary"
@@ -148,6 +146,8 @@ const FreelanceOfferForm: React.FC = () => {
                 type="number"
                 id="salaryTo"
                 name="salaryTo"
+                value={salaryTo}
+                onChange={(e) => setSalaryTo(parseInt(e.target.value))}
                 required
                 className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md p-2"
                 placeholder="Enter the maximum salary"
@@ -192,7 +192,7 @@ const FreelanceOfferForm: React.FC = () => {
                 className="block font-medium text-gray-700">
                 Contact
               </label>
-              {initialFormData.contact.map((contact, index) => (
+              {contact.map((contact, index) => (
                 <div key={index} className="mt-1 flex justify-between">
                   <input
                     type="text"

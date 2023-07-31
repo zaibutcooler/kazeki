@@ -45,6 +45,8 @@ const JobApplicationForm: React.FC = () => {
     });
   };
 
+
+
   return (
     <main className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur z-50 px-2">
       <div className="mx-auto">

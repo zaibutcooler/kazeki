@@ -20,7 +20,7 @@ const createFreelanceApplication = async ({
   };
 
   try {
-    const response = await fetch("/api/job-seeking/application", {
+    const response = await fetch("/api/freelance/application", {
       method: "POST",
       body: JSON.stringify(postBody),
     });

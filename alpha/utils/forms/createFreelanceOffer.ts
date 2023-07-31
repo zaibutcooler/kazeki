@@ -26,7 +26,7 @@ const createFreelanceOffer = async ({
   };
 
   try {
-    const response = await fetch("/api/job-seeking/application", {
+    const response = await fetch("/api/job-seeking/offer", {
       method: "POST",
       body: JSON.stringify(postBody),
     });

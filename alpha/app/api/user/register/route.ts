@@ -1,12 +1,12 @@
 import User from "@/models/User";
-import { UserType } from "@/models/types";
-import { connectToDB } from "@/utils/connectDB";
+import { UserType } from "@/models/User";
+import connectDB from "@/utils/connectDB";
 import bcrypt from "bcrypt";
 
 export async function POST(req: Request) {
   const { email, password } = await req.json();
   try {
-    await connectToDB();
+    await connectDB();
 
     const userExists = await User.findOne({ email });
     if (userExists) {

@@ -3,14 +3,15 @@ import { LinkType } from "./types";
 
 export interface JobOfferType {
   _id: string;
-  user: Schema.Types.ObjectId;
+  user: string;
   title: string;
   description: string;
+  company: string;
   requirements: string[];
-  requireCount: number;
+  responsibilities: string[];
   onSite: boolean;
   location: string | null;
-  salary: number;
+  salary: string[];
   allowance: string[];
   deadline: Date;
   contact: LinkType[];
@@ -18,29 +19,30 @@ export interface JobOfferType {
 }
 
 export interface JobOfferCreateType {
-  user: string; // Assuming you have a string representation of Schema.Types.ObjectId
+  user: string;
   title: string;
   description: string;
+  company: string;
   requirements: string[];
-  requireCount: number;
+  responsibilities: string[];
   onSite: boolean;
   location: string | null;
-  salary: number;
+  salary: string[];
   allowance: string[];
   deadline: Date;
   contact: LinkType[];
-  // No need to include the 'created' field here as it is automatically set in the Mongoose schema with default value.
 }
 
 const jobOfferSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User" },
   title: { type: String },
   description: { type: String },
+  company: { type: String },
   requirements: [{ type: String }],
-  requireCount: { type: Number },
+  responsibilities: [{ type: String }],
   onSite: { type: Boolean },
   location: { type: String, default: null },
-  salary: { type: Number },
+  salary: [{ type: String }],
   allowance: [{ type: String }],
   deadline: { type: Date },
   contact: [
