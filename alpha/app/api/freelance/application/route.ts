@@ -1,6 +1,6 @@
-import Model from "@/models/FreelanceApplication";
+import Model from "@/database/FreelanceApplication";
 import connectDB from "@/utils/connectDB";
-import User from "@/models/User";
+import User from "@/database/User";
 
 export async function POST(req: Request) {
   try {

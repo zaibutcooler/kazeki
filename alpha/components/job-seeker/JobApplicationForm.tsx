@@ -45,8 +45,6 @@ const JobApplicationForm: React.FC = () => {
     });
   };
 
-
-
   return (
     <main className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur z-50 px-2">
       <div className="mx-auto">
@@ -131,7 +129,7 @@ const JobApplicationForm: React.FC = () => {
               ))}
               <button
                 type="button"
-                className="mt-2 inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
+                className="mt-2 inline-flex items-center px-3 py-2  border-transparent leading-4 font-medium rounded-md border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
                 + Add Link
               </button>
             </div>

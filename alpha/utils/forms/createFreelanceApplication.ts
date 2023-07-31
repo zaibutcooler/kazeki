@@ -1,4 +1,4 @@
-import { FreelanceApplicationCreateType } from "@/models/FreelanceApplication";
+import { FreelanceApplicationCreateType } from "@/database/FreelanceApplication";
 
 const createFreelanceApplication = async ({
   user,

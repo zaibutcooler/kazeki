@@ -1,6 +1,6 @@
-import Model from "@/models/JobOffer";
+import Model from "@/database/JobOffer";
 import connectDB from "@/utils/connectDB";
-import User from "@/models/User";
+import User from "@/database/User";
 
 export async function POST(req: Request) {
   try {
@@ -9,8 +9,9 @@ export async function POST(req: Request) {
       user,
       title,
       description,
+      company,
       requirements,
-      requireCount,
+      responsibilities,
       onSite,
       location,
       salary,
@@ -30,8 +31,9 @@ export async function POST(req: Request) {
       user,
       title,
       description,
+      company,
       requirements,
-      requireCount,
+      responsibilities,
       onSite,
       location,
       salary,

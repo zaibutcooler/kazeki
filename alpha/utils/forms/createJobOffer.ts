@@ -1,13 +1,14 @@
 // import { JobApplication } from "@/models/JobApplication";
 
-import { JobOfferCreateType } from "@/models/JobOffer";
+import { JobOfferCreateType, JobOfferType } from "@/database/JobOffer";
 
 const createJobOffer = async ({
   user,
   title,
   description,
+  company,
   requirements,
-  requireCount,
+  responsibilities,
   onSite,
   location,
   salary,
@@ -19,8 +20,9 @@ const createJobOffer = async ({
     user,
     title,
     description,
+    company,
     requirements,
-    requireCount,
+    responsibilities,
     onSite,
     location,
     salary,
@@ -36,7 +38,10 @@ const createJobOffer = async ({
     });
     if (response.ok) {
       console.log("success");
+      const datas = await response.json();
+      return datas as JobOfferType;
     }
+    return false;
   } catch (err) {
     console.log("error", err);
   }

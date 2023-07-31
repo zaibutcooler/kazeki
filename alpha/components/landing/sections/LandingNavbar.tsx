@@ -11,6 +11,7 @@ const LandingNavbar = () => {
   const [authDropDown, setAuthDropDown] = useState(false);
 
   const { data: session } = useSession();
+  console.log("userID", session?.user._id);
 
   const toggleSidebar = () => {
     setSideBarIsShowed(!sidebarIsShowed);

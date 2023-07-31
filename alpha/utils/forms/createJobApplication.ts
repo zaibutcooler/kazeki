@@ -1,6 +1,6 @@
 // import { JobApplication } from "@/models/JobApplication";
 
-import { JobApplicationCreateType } from "@/models/JobApplication";
+import { JobApplicationCreateType } from "@/database/JobApplication";
 
 const createJobApplication = async ({
   user,

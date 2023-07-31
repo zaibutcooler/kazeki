@@ -1,6 +1,6 @@
-import Model from "@/models/FreelanceOffer";
+import Model from "@/database/FreelanceOffer";
 import connectDB from "@/utils/connectDB";
-import User from "@/models/User";
+import User from "@/database/User";
 
 export async function POST(req: Request) {
   try {
@@ -8,14 +8,14 @@ export async function POST(req: Request) {
     const {
       user,
       title,
-      detail,
+      description,
       requirements,
       responsibilities,
       salary,
       field,
-      timeRange,
+      projectDeadline,
       contact,
-      formClose,
+      deadline,
     } = await req.json();
 
     const userExists = await User.findById(user);
@@ -28,14 +28,14 @@ export async function POST(req: Request) {
     const newItem = new Model({
       user,
       title,
-      detail,
+      description,
       requirements,
       responsibilities,
       salary,
       field,
-      timeRange,
+      projectDeadline,
       contact,
-      formClose,
+      deadline,
     });
     await newItem.save();
 

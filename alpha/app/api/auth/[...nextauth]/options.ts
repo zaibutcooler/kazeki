@@ -3,9 +3,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import LinkedInProvider from "next-auth/providers/linkedin";
-import { connectToDB } from "@/utils/connectDB";
-import User from "@/models/User";
+
+import User, { UserType } from "@/database/User";
 import bcrypt from "bcrypt";
+import connectDB from "@/utils/connectDB";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -16,7 +17,7 @@ export const options: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        await connectToDB();
+        await connectDB();
         const user = await User.findOne({ email: credentials?.email });
 
         if (!credentials?.password || !user) {
@@ -46,11 +47,21 @@ export const options: NextAuthOptions = {
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET as string,
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+    async session({ session, token, user }) {
+      session.user = token._doc as UserType;
+      return { ...session };
+    },
+  },
   pages: {
     signIn: "/auth/login",
-    //signOut: "/", //after sign out
+    signOut: "/",
     // error: "/auth/error",
     // verifyRequest: "/auth/verify-request",
     // newUser: "/", //redirect for new users
   },
+  secret: process.env.NEXTAUTH_SECRET,
 };

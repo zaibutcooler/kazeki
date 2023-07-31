@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { FreelanceOfferCreateType } from "@/models/FreelanceOffer";
-import { LinkType } from "@/models/types";
+import { FreelanceOfferCreateType } from "@/database/FreelanceOffer";
+import { LinkType } from "@/database/types";
 
 const FreelanceOfferForm: React.FC = () => {
   const [title, setTitle] = useState<string>("");

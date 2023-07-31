@@ -1,5 +1,5 @@
-import User from "@/models/User";
-import { UserType } from "@/models/User";
+import User from "@/database/User";
+import { UserType } from "@/database/User";
 import connectDB from "@/utils/connectDB";
 import bcrypt from "bcrypt";
 

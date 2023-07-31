@@ -1,38 +1,44 @@
-import { FreelanceOfferCreateType } from "@/models/FreelanceOffer";
+import {
+  FreelanceOfferCreateType,
+  FreelanceOfferType,
+} from "@/database/FreelanceOffer";
 
 const createFreelanceOffer = async ({
   user,
   title,
-  detail,
+  description,
   requirements,
   responsibilities,
   salary,
   field,
-  timeRange,
+  projectDeadline,
   contact,
-  formClose,
+  deadline,
 }: FreelanceOfferCreateType) => {
   const postBody = {
     user,
     title,
-    detail,
+    description,
     requirements,
     responsibilities,
     salary,
     field,
-    timeRange,
+    projectDeadline,
     contact,
-    formClose,
+    deadline,
   };
 
   try {
-    const response = await fetch("/api/job-seeking/offer", {
+    const response = await fetch("/api/freelance/offer", {
       method: "POST",
       body: JSON.stringify(postBody),
     });
     if (response.ok) {
       console.log("success");
+      const datas = await response.json();
+      return datas as FreelanceOfferType;
     }
+    return false;
   } catch (err) {
     console.log("error", err);
   }

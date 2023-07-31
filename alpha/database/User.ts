@@ -1,6 +1,7 @@
 import { Schema, model, models } from "mongoose";
 
 export interface UserType {
+  _id: string;
   email: string;
   password: string;
   userProfile: string;

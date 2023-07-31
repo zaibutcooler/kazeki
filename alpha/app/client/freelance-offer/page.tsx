@@ -1,7 +1,10 @@
 "use client";
+import { FreelanceOfferCreateType } from "@/database/FreelanceOffer";
+import createFreelanceOffer from "@/utils/forms/createFreelanceOffer";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
-const JobOfferPage = () => {
+const FreelanceOfferPage = () => {
   const initialFormData = {
     title: "Frontend Developer",
     description: "We are looking for a skilled frontend developer...",
@@ -10,15 +13,13 @@ const JobOfferPage = () => {
       "Design and implement user interfaces...",
       "Collaborate with backe-end developers...",
     ],
-    company: "Example Company",
-    onSite: true,
-    location: "New York, USA",
-    salary: ["", ""],
-    allowance: ["Health insurance", "Paid time off"],
+    field: ["web-development"],
+    projectDeadline: "2023-08-31",
+    salary: ["300", "500"],
     deadline: "2023-08-31",
-    links: [{ label: "github", link: "" }],
+    contact: [{ label: "github", link: "https://github.com/zaiYellYintAung" }],
   };
-
+  const { data: session } = useSession();
   const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (field: any, value: any) => {
@@ -46,24 +47,33 @@ const JobOfferPage = () => {
     setFormData({ ...formData, responsibilities: newResponsibilities });
   };
 
-  const handleAllowanceChange = (index: number, value: string) => {
-    const newAllowance = [...formData.allowance];
-    newAllowance[index] = value;
-    setFormData({ ...formData, allowance: newAllowance });
-  };
-
   const handleLinkChange = (index: number, field: string, value: string) => {
-    const newLinks = [...formData.links];
+    const newLinks = [...formData.contact];
     newLinks[index] = {
       ...newLinks[index],
       [field]: value,
     };
-    setFormData({ ...formData, links: newLinks });
+    setFormData({ ...formData, contact: newLinks });
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("started");
+    const postBody: FreelanceOfferCreateType = {
+      user: session?.user._id as string,
+      ...formData,
+    };
+    const datas = await createFreelanceOffer(postBody);
+    if (datas) {
+      window.alert("fuck");
+    }
   };
 
   return (
     <div className="flex items-center justify-center bg-gray-50 min-h-screen px-2  md:px-6">
-      <div className="w-full bg-white p-4 md:p-8 rounded-lg shadow-md text-sm md:text-base">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full bg-white p-4 md:p-8 rounded-lg shadow-md text-sm md:text-base">
         <div className="grid grid-cols-6 md:grid-cols-4 gap-4">
           <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
             <label
@@ -77,8 +87,27 @@ const JobOfferPage = () => {
               type="text"
               id="title"
               name="title"
+              value={formData.title}
+              onChange={(e) => handleChange("title", e.target.value)}
               className="form-input w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
               placeholder="e.g. Frontend Developer"
+            />
+          </div>
+          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
+            <label
+              htmlFor="field"
+              className="block text-gray-600 font-semibold mb-3 ">
+              Related Field
+            </label>
+          </div>
+          <div className="col-span-4 md:col-span-3 mb-6">
+            <input
+              type="text"
+              id="field"
+              name="field"
+              disabled
+              className="form-input w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
+              placeholder="Will make it later"
             />
           </div>
           <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
@@ -92,6 +121,8 @@ const JobOfferPage = () => {
             <textarea
               id="description"
               name="description"
+              value={formData.description}
+              onChange={(e) => handleChange("description", e.target.value)}
               className="form-textarea w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
               placeholder="Enter job description here..."
               rows={4}
@@ -138,6 +169,24 @@ const JobOfferPage = () => {
                 + Add More
               </button>
             </div>
+          </div>
+          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
+            <label
+              htmlFor="projectDeadline"
+              className="block text-gray-600  font-semibold mb-3">
+              Project Deadline :
+            </label>
+          </div>
+          <div className="col-span-4 md:col-span-3 mb-6">
+            <input
+              type="date"
+              id="projectDeadline"
+              name="projectDeadline"
+              value={formData.projectDeadline}
+              onChange={(e) => handleChange("projectDeadline", e.target.value)}
+              className="form-input w-full px-4  py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
+              placeholder="City, Country"
+            />
           </div>
           <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
             <label
@@ -188,71 +237,6 @@ const JobOfferPage = () => {
           </div>
           <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
             <label
-              htmlFor="company"
-              className="block text-gray-600  font-semibold mb-3">
-              Company :
-            </label>
-          </div>
-          <div className="col-span-4 md:col-span-3 mb-6">
-            <input
-              type="text"
-              id="company"
-              name="company"
-              value={formData.company}
-              onChange={(e) => handleChange("company", e.target.value)}
-              className="form-input w-full  px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-              placeholder="Company Name"
-            />
-          </div>
-          {/* ... Onsite ... */}
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
-            <label
-              htmlFor="onSite"
-              className="block text-gray-600  font-semibold mb-3">
-              Onsite :
-            </label>
-          </div>
-          <div className="col-span-4 md:col-span-3 mb-6 flex gap-4">
-            <button
-              type="button"
-              className={`px-4 border py-2 rounded-lg ${
-                formData.onSite ? "bg-gray-300" : ""
-              }`}
-              onClick={() => setFormData({ ...formData, onSite: true })}>
-              On Site
-            </button>
-
-            <button
-              type="button"
-              className={`px-4 border py-2 rounded-lg ${
-                formData.onSite ? "" : "bg-gray-300"
-              }`}
-              onClick={() => setFormData({ ...formData, onSite: false })}>
-              Remote
-            </button>
-          </div>
-          {/* ... Location ... */}
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
-            <label
-              htmlFor="location"
-              className="block text-gray-600  font-semibold mb-3">
-              Location :
-            </label>
-          </div>
-          <div className="col-span-4 md:col-span-3 mb-6">
-            <input
-              type="text"
-              id="location"
-              name="location"
-              value={formData.location}
-              onChange={(e) => handleChange("location", e.target.value)}
-              className="form-input w-full  px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-              placeholder="This should be a check box"
-            />
-          </div>
-          {/* ... Salary ... */}
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
-            <label
               htmlFor="salary"
               className="block text-gray-600  font-semibold mb-3">
               Salary Range :
@@ -280,55 +264,9 @@ const JobOfferPage = () => {
           </div>
           <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
             <label
-              htmlFor="responsibilities"
-              className="block text-gray-600  font-semibold mb-3">
-              Allowance :
-            </label>
-          </div>
-          <div className="col-span-4 md:col-span-3 mb-6">
-            {formData.allowance.map((allow, index) => (
-              <input
-                type="text"
-                key={index}
-                value={allow}
-                onChange={(e) => handleAllowanceChange(index, e.target.value)}
-                className="form-input w-full px-4 py-2 rounded-lg mb-3 border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-                placeholder="Company Name"
-              />
-            ))}
-            <div className="w-full flex justify-end">
-              {formData.allowance.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    const newAllowance = [...formData.allowance];
-                    newAllowance.pop();
-                    setFormData({
-                      ...formData,
-                      allowance: newAllowance,
-                    });
-                  }}
-                  className="mt-4 inline-flex mr-4 items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
-                  Remove
-                </button>
-              )}
-              <button
-                type="button"
-                onClick={() => {
-                  const newForm = [...formData.allowance, ""];
-                  setFormData({ ...formData, allowance: newForm });
-                }}
-                className="mt-4 inline-flex items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
-                + Add More
-              </button>
-            </div>
-          </div>
-          {/* ... Deadline ... */}
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
-            <label
               htmlFor="deadline"
               className="block text-gray-600  font-semibold mb-3">
-              Deadline :
+              Form Deadline :
             </label>
           </div>
           <div className="col-span-4 md:col-span-3 mb-6">
@@ -350,7 +288,7 @@ const JobOfferPage = () => {
             </label>
           </div>{" "}
           <div className="col-span-4 md:col-span-3 mb-6">
-            {formData.links.map((link, index) => (
+            {formData.contact.map((link, index) => (
               <div className=" flex gap-3 mb-3" key={index}>
                 <input
                   type="text"
@@ -373,15 +311,15 @@ const JobOfferPage = () => {
               </div>
             ))}
             <div className="w-full flex justify-end">
-              {formData.links.length > 1 && (
+              {formData.contact.length > 1 && (
                 <button
                   type="button"
                   onClick={() => {
-                    const newLinks = [...formData.links];
+                    const newLinks = [...formData.contact];
                     newLinks.pop();
                     setFormData({
                       ...formData,
-                      links: newLinks,
+                      contact: newLinks,
                     });
                   }}
                   className="mt-4 inline-flex mr-4 items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
@@ -391,8 +329,11 @@ const JobOfferPage = () => {
               <button
                 type="button"
                 onClick={() => {
-                  const newLink = [...formData.links, { label: "", link: "" }];
-                  setFormData({ ...formData, links: newLink });
+                  const newLink = [
+                    ...formData.contact,
+                    { label: "", link: "" },
+                  ];
+                  setFormData({ ...formData, contact: newLink });
                 }}
                 className="mt-4 inline-flex items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
                 + Add More
@@ -407,8 +348,8 @@ const JobOfferPage = () => {
             Submit
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
-export default JobOfferPage;
+export default FreelanceOfferPage;

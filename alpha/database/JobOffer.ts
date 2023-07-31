@@ -13,7 +13,7 @@ export interface JobOfferType {
   location: string | null;
   salary: string[];
   allowance: string[];
-  deadline: Date;
+  deadline: Date | string;
   contact: LinkType[];
   created: Date;
 }
@@ -29,21 +29,8 @@ export interface JobOfferCreateType {
   location: string | null;
   salary: string[]; //
   allowance: string[];
-  deadline: Date; //
-  contact: LinkType[]; //
-}
-
-export interface FreelanceOfferCreateType {
-  user: Schema.Types.ObjectId;
-  title: string; //
-  detail: string; //
-  requirements: string[]; //
-  responsibilities: string[]; //
-  salary: string[]; //
-  field: (string | Date)[];
-  projectDeadline: Date | string;
-  contact: LinkType[]; //
   deadline: Date | string; //
+  contact: LinkType[]; //
 }
 
 const jobOfferSchema = new Schema({

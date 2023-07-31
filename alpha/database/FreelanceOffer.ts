@@ -16,7 +16,7 @@ export interface FreelanceOfferType {
 }
 
 export interface FreelanceOfferCreateType {
-  user: Schema.Types.ObjectId;
+  user: Schema.Types.ObjectId | string;
   title: string;
   description: string;
   requirements: string[];
