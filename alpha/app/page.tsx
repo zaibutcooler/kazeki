@@ -3,8 +3,9 @@ import ContactSupportSection from "@/components/landing/sections/ContactSupportS
 import LandingFooter from "@/components/landing/sections/LandingFooter";
 import LandingNavbar from "@/components/landing/sections/LandingNavbar";
 import FreelanceFeaturesSection from "@/components/landing/sections/FreelanceFeaturesSection";
-import JobSeekingSection from "@/components/landing/sections/JobSeekingSection";
+// import JobSeekingSection from "@/components/landing/sections/JobSeekingSection";
 import HeroSection from "@/components/landing/sections/HeroSection";
+import TapeSection from "@/components/landing/sections/TapeSection";
 
 export default function LandingPage() {
   return (
@@ -12,10 +13,15 @@ export default function LandingPage() {
       <LandingNavbar />
 
       <section className="flex justify-center">
-        <div className="container w-full md:w-[800px] lg:w-[1000px]">
+        <div className="container w-full md:w-[800px] lg:w-[1000px] px-2 md:px-4">
           <HeroSection />
+        </div>
+      </section>
+      <TapeSection />
+      <section className="flex justify-center">
+        <div className="container w-full md:w-[800px] lg:w-[1000px] px-2 md:px-4">
           <AboutSection />
-          <JobSeekingSection />
+          {/* <JobSeekingSection /> */}
           <FreelanceFeaturesSection />
           <ContactSupportSection />
         </div>

@@ -12,7 +12,7 @@ const MainCard = () => {
       case "client":
         return (
           <>
-            <h1 className="pt-2 text-4xl font-bold mb-3">
+            <h1 className="pt-2 text-3xl md:text-4xl font-bold mb-3">
               The best place to find your future employees
             </h1>
             <p className="text-[0.7rem]  mb-6 text-gray-600">
@@ -37,7 +37,7 @@ const MainCard = () => {
       case "seeker":
         return (
           <>
-            <h1 className="pt-2 text-4xl font-bold mb-3">
+            <h1 className="pt-2 text-3xl md:text-4xl font-bold mb-3">
               Unlock your door full of opportunities
             </h1>
             <p className="text-[0.7rem]  mb-6 text-gray-600">
@@ -67,7 +67,7 @@ const MainCard = () => {
       case "freelancer":
         return (
           <>
-            <h1 className="pt-2 text-4xl font-bold mb-3">
+            <h1 className="pt-2 text-3xl md:text-4xl font-bold mb-3">
               Show off your skills and get paid
             </h1>
             <p className="text-[0.7rem]  mb-6 text-gray-600">
@@ -98,7 +98,7 @@ const MainCard = () => {
   };
 
   return (
-    <main className="w-full md:w-[450px] h-[460px] border">
+    <main className="w-[450px] h-[460px] border border-slate-300">
       <div className="h-1/4 w-full  flex items-center font-semibold text-sm">
         <section
           className={`w-1/3 flex justify-center h-full pt-2 ${
