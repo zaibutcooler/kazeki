@@ -20,7 +20,8 @@ const titleArray = [
 const SeekerCreateForm: React.FC<Props> = ({}) => {
   const [section, setSection] = useState(1);
   const client = false;
-  const userID = useSelector((state: RootState) => state.user.userID);
+  // const userID = useSelector((state: RootState) => state.user.userID);
+  const userID = "64d12412ea7974dcc7925d02";
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -391,6 +392,21 @@ const SeekerCreateForm: React.FC<Props> = ({}) => {
   };
 
   const handleSubmit = async () => {
+    window.alert("starting");
+    console.log({
+      user: userID,
+      firstName,
+      lastName,
+      country,
+      city,
+      email,
+      phoneNumber,
+      client,
+      industry,
+      collage,
+      pastJobs,
+      links,
+    });
     const createdProfile = await createSeekerProfile({
       user: userID,
       firstName,

@@ -16,7 +16,8 @@ const titleArray = [
 const ClientCreateForm: React.FC<Props> = ({}) => {
   const [section, setSection] = useState(1);
   const client = true;
-  const userID = useSelector((state: RootState) => state.user.userID);
+  // const userID = useSelector((state: RootState) => state.user.userID);
+  const userID = "64d126d5b344f9c883148d2d";
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -255,9 +256,21 @@ const ClientCreateForm: React.FC<Props> = ({}) => {
     setLinks(updatedLinks);
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    window.alert('starting')
+  const handleSubmit = async () => {
+    window.alert("starting");
+    console.log({
+      user: userID,
+      firstName,
+      lastName,
+      country,
+      city,
+      email,
+      phoneNumber,
+      client,
+      company,
+      industry,
+      links,
+    });
     const createdProfile = await createClientProfile({
       user: userID,
       firstName,
@@ -277,9 +290,7 @@ const ClientCreateForm: React.FC<Props> = ({}) => {
     }
   };
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="md:w-[500px] lg:w-[600px] min-h-[440px] w-[350px] px-8 pt-6 bg-white shadow-md mx-3">
+    <form className="md:w-[500px] lg:w-[600px] min-h-[440px] w-[350px] px-8 pt-6 bg-white shadow-md mx-3">
       <h1 className="font-semibold text-lg">{titleArray[section - 1]}</h1>
 
       <div>{showSection()}</div>
@@ -293,7 +304,7 @@ const ClientCreateForm: React.FC<Props> = ({}) => {
           </button>
         )}
         {section === 3 ? (
-          <button type="submit">Finish</button>
+          <button onClick={() => handleSubmit()}>Finish</button>
         ) : (
           <button
             type="button"
