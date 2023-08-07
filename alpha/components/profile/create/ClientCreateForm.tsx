@@ -16,9 +16,9 @@ const titleArray = [
 const ClientCreateForm: React.FC<Props> = ({}) => {
   const [section, setSection] = useState(1);
   const client = true;
-  // const userID = useSelector((state: RootState) => state.user.userID);
-  const userID = "64d126d5b344f9c883148d2d";
-
+  const userID = localStorage.getItem("userID");
+  // const userID = "64d126d5b344f9c883148d2d";
+  console.log(userID);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -271,26 +271,27 @@ const ClientCreateForm: React.FC<Props> = ({}) => {
       industry,
       links,
     });
-    const createdProfile = await createClientProfile({
-      user: userID,
-      firstName,
-      lastName,
-      country,
-      city,
-      email,
-      phoneNumber,
-      client,
-      company,
-      industry,
-      links,
-    });
+    const createdProfile =
+      userID &&
+      (await createClientProfile({
+        user: userID,
+        firstName,
+        lastName,
+        country,
+        city,
+        email,
+        phoneNumber,
+        client,
+        company,
+        industry,
+        links,
+      }));
     if (createdProfile) {
-      window.alert("done");
       console.log(createdProfile);
     }
   };
   return (
-    <form className="md:w-[500px] lg:w-[600px] min-h-[440px] w-[350px] px-8 pt-6 bg-white shadow-md mx-3">
+    <main className="md:w-[500px] lg:w-[600px] min-h-[440px] w-[350px] px-8 pt-6 bg-white shadow-md mx-3">
       <h1 className="font-semibold text-lg">{titleArray[section - 1]}</h1>
 
       <div>{showSection()}</div>
@@ -314,7 +315,7 @@ const ClientCreateForm: React.FC<Props> = ({}) => {
           </button>
         )}
       </div>
-    </form>
+    </main>
   );
 };
 

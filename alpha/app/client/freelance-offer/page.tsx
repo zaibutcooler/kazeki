@@ -70,7 +70,7 @@ const FreelanceOfferPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center bg-gray-50 min-h-screen px-2  md:px-6">
+    <div className="flex items-center justify-center mt-16 min-h-screen px-2  md:px-6">
       <form
         onSubmit={handleSubmit}
         className="w-full bg-white p-4 md:p-8 rounded-lg shadow-md text-sm md:text-base">

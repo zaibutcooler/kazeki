@@ -17,7 +17,8 @@ const RegisterForm = () => {
 
   const [error, setError] = useState("");
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     if (password !== password2) {
       return;
     }
@@ -31,7 +32,8 @@ const RegisterForm = () => {
       });
       if (response.ok) {
         const data: UserType = await response.json();
-        dispatch(setUser(data._id));
+        // dispatch(setUser(data._id));
+        localStorage.setItem("userID", data._id);
         console.log("success user :", data._id);
       }
     } catch (error) {

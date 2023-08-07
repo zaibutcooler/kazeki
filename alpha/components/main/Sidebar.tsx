@@ -17,7 +17,7 @@ const Sidebar: React.FC<Props> = ({ toggleSidebar }) => {
     <div>
       <div className="fixed inset-0 z-10 backdrop-filter backdrop-blur">
         <div
-          className="w-2/3 md:w-2/5 lg:w-1/5 bg-superwhite h-screen p-4 border-r overflow-y-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-white"
+          className="w-[200px] md:w-[250px] bg-superwhite h-screen p-4 border-r overflow-y-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-white"
           onClick={() => {}}>
           <div className="text-sm font-bold flex justify-end">
             <button onClick={toggleSidebar}>Close</button>

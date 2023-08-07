@@ -12,22 +12,22 @@ import {
 export const jobSeekingLinks = [
   {
     name: "Job Listings",
-    go: "home/job-seeking/listing",
+    go: "/home/job-seeking/",
     icon: <AiOutlineFundView />,
   },
   {
     name: "Applied Jobs",
-    go: "home/job-seeking/applied",
+    go: "/home/job-seeking/applied",
     icon: <AiOutlineForm />,
   },
   {
     name: "Interviews",
-    go: "home/job-seeking/interview",
+    go: "/home/job-seeking/interview",
     icon: <AiOutlineClockCircle />,
   },
   {
     name: "Resources",
-    go: "home/job-seeking/resources",
+    go: "/home/job-seeking/resources",
     icon: <AiOutlineUsergroupAdd />,
   },
 ];
@@ -35,32 +35,32 @@ export const jobSeekingLinks = [
 export const freelanceLinks = [
   {
     name: "Freelance Projects",
-    go: "home/freelance/listing",
+    go: "/home/freelance/",
     icon: <AiOutlineFundView />,
   },
   {
     name: "Applied Projects",
-    go: "home/freelance/applied",
+    go: "/home/freelance/applied",
     icon: <AiOutlineForm />,
   },
   {
     name: "Contracts",
-    go: "home/freelance/contracts",
+    go: "/home/freelance/contracts",
     icon: <AiOutlineClockCircle />,
   },
   {
     name: "Appointments",
-    go: "home/freelance/appointments",
+    go: "/home/freelance/appointments",
     icon: <AiOutlineUsergroupAdd />,
   },
   {
     name: "Completed Projects",
-    go: "home/freelance/completed",
+    go: "/home/freelance/completed",
     icon: <AiOutlineCheckCircle />,
   },
   {
     name: "Ongoing Projects",
-    go: "home/freelance/ongoing",
+    go: "/home/freelance/ongoing",
     icon: <AiOutlineProject />,
   },
 ];
