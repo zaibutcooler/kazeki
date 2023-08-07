@@ -1,14 +1,19 @@
 "use client";
+import { UserType } from "@/database/User";
+import { setUser } from "@/store/userSlice";
 import { redirect } from "next/dist/server/api-utils";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+
+  const dispatch = useDispatch();
 
   const [error, setError] = useState("");
 
@@ -25,7 +30,9 @@ const RegisterForm = () => {
         }),
       });
       if (response.ok) {
-        console.log("success");
+        const data: UserType = await response.json();
+        dispatch(setUser(data._id));
+        console.log("success user :", data._id);
       }
     } catch (error) {
       console.log("Error", error);

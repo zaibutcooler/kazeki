@@ -5,12 +5,18 @@ export interface UserType {
   email: string;
   password: string;
   userProfile: string;
+  client: boolean;
 }
 
 const userSchema = new Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
-  userProfile: { type: Schema.Types.ObjectId, ref: "UserProfile" },
+  userProfile: {
+    type: Schema.Types.ObjectId,
+    ref: "UserProfile",
+    default: null,
+  },
+  client: { type: Boolean },
   created: { type: Date, default: Date.now },
 });
 

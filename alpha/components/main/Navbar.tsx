@@ -25,8 +25,8 @@ const Navbar = () => {
   }, [sidebarIsShowed]);
 
   return (
-    <main className="bg-superwhite text-superblack font-semibold ">
-      <div className="flex w-full justify-between py-1.5 px-2 lg:px-4 items-center border-b">
+    <main className=" text-superblack font-semibold ">
+      <div className="fixed left-0 top-0 flex w-full bg-superwhite justify-between py-1.5 px-2 lg:px-4 items-center border-b">
         <section>
           <button
             className="mx-2"

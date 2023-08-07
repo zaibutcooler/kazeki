@@ -7,9 +7,9 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main>
+    <main className="overflow-hidden">
       <Navbar />
-      <section className="flex justify-center ">
+      <section className="flex justify-center mt-12 ">
         <main className="container w-[900px] px-3 md:px-0">
           <div className="min-h-[100vh]">{children}</div>
           <Footer />

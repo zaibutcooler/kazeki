@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+      <body className="scrollbar-thin scrollbar-thumb-gray-100 scrollbar-track-gray-50">
         <Providers>{children}</Providers>
       </body>
     </html>
