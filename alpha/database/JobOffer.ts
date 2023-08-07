@@ -15,6 +15,7 @@ export interface JobOfferType {
   allowance: string[];
   deadline: Date | string;
   contact: LinkType[];
+  updated: Date;
   created: Date;
 }
 
@@ -51,7 +52,8 @@ const jobOfferSchema = new Schema({
       label: { type: String },
     },
   ],
-  created: { type: Date },
+  updated: { type: Date },
+  created: { type: Date, default: Date.now },
 });
 
 const JobOffer = models.JobOffer || model("JobOffer", jobOfferSchema);

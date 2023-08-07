@@ -3,7 +3,6 @@ import ContactSupportSection from "@/components/landing/sections/ContactSupportS
 import LandingFooter from "@/components/landing/sections/LandingFooter";
 import LandingNavbar from "@/components/landing/sections/LandingNavbar";
 import FreelanceFeaturesSection from "@/components/landing/sections/FreelanceFeaturesSection";
-// import JobSeekingSection from "@/components/landing/sections/JobSeekingSection";
 import HeroSection from "@/components/landing/sections/HeroSection";
 import TapeSection from "@/components/landing/sections/TapeSection";
 

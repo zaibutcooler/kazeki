@@ -13,6 +13,7 @@ export interface FreelanceOfferType {
   contact: LinkType[];
   deadline: Date | string; // 1 day / 2 days / 3 days / 1 week / 1 month
   created: Date;
+  updated: Date;
 }
 
 export interface FreelanceOfferCreateType {
@@ -44,6 +45,7 @@ const freelanceOfferSchema = new Schema({
     },
   ],
   deadline: { type: Date || String }, // 1 day / 2 days / 3 days / 1 week / 1 month
+  updated: { type: Date },
   created: { type: Date, default: Date.now },
 });
 
