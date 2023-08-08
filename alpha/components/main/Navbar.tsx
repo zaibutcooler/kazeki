@@ -5,16 +5,17 @@ import { FiMenu } from "react-icons/fi";
 import Sidebar from "./Sidebar";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const Navbar = () => {
   const [sidebarIsShowed, setSideBarIsShowed] = useState(false);
   const [authDropDown, setAuthDropDown] = useState(false);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   const toggleSidebar = () => {
     setSideBarIsShowed(!sidebarIsShowed);
   };
+
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (sidebarIsShowed) {
@@ -54,19 +55,34 @@ const Navbar = () => {
                 onMouseLeave={() => {
                   setAuthDropDown(false);
                 }}>
-                <Link
-                  href="/auth/login"
-                  onClick={() => setAuthDropDown(false)}
-                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
-                  Login
-                </Link>
-
-                <Link
-                  href="/auth/register"
-                  onClick={() => setAuthDropDown(false)}
-                  className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 ">
-                  Register
-                </Link>
+                {session?.user && (
+                  <button
+                    onClick={() => {
+                      setAuthDropDown(false);
+                      signOut();
+                    }}
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                    Log Out
+                  </button>
+                )}
+                {!session?.user && (
+                  <button
+                    onClick={() => {
+                      setAuthDropDown(false);
+                      signIn();
+                    }}
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                    Login
+                  </button>
+                )}
+                {!session?.user && (
+                  <Link
+                    href="/auth/register"
+                    onClick={() => setAuthDropDown(false)}
+                    className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                    Register
+                  </Link>
+                )}
 
                 <hr className="my-2" />
 

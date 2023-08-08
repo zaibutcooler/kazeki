@@ -7,6 +7,7 @@ import LinkedInProvider from "next-auth/providers/linkedin";
 import User, { UserType } from "@/database/User";
 import bcrypt from "bcrypt";
 import connectDB from "@/utils/connectDB";
+import UserProfile from "@/database/UserProfile";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -20,6 +21,12 @@ export const options: NextAuthOptions = {
         await connectDB();
         const user = await User.findOne({ email: credentials?.email });
 
+        if (user.userProfile) {
+          const userProfile = await UserProfile.findById(user.userProfile);
+          if (userProfile) {
+            user.userProfile = userProfile;
+          }
+        }
         if (!credentials?.password || !user) {
           return null;
         }
@@ -53,6 +60,7 @@ export const options: NextAuthOptions = {
     },
     async session({ session, token, user }) {
       session.user = token._doc as UserType;
+      console.log(session.user);
       return { ...session };
     },
   },

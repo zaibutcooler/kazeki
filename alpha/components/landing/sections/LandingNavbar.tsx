@@ -49,7 +49,7 @@ const LandingNavbar = () => {
                 onMouseLeave={() => {
                   setAuthDropDown(false);
                 }}>
-                {session && (
+                {session?.user && (
                   <button
                     onClick={() => {
                       setAuthDropDown(false);
@@ -59,7 +59,7 @@ const LandingNavbar = () => {
                     Log Out
                   </button>
                 )}
-                {!session && (
+                {!session?.user && (
                   <button
                     onClick={() => {
                       setAuthDropDown(false);
@@ -69,7 +69,7 @@ const LandingNavbar = () => {
                     Login
                   </button>
                 )}
-                {!session && (
+                {!session?.user && (
                   <Link
                     href="/auth/register"
                     onClick={() => setAuthDropDown(false)}

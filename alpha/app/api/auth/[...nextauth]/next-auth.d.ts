@@ -7,7 +7,7 @@ declare module "next-auth" {
       _id: string;
       email: string;
       password: string;
-      profile: ProfileType;
+      userProfile: ProfileType | string;
       created: string | Date;
     };
   }

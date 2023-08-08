@@ -1,11 +1,13 @@
 import { Schema, model, models } from "mongoose";
+import { ProfileType } from "./UserProfile";
 
 export interface UserType {
   _id: string;
   email: string;
   password: string;
-  userProfile: string;
+  userProfile: string | ProfileType;
   client: boolean;
+  created: string | Date;
 }
 
 const userSchema = new Schema({
@@ -14,7 +16,6 @@ const userSchema = new Schema({
   userProfile: {
     type: Schema.Types.ObjectId,
     ref: "UserProfile",
-    default: null,
   },
   client: { type: Boolean },
   created: { type: Date, default: Date.now },
