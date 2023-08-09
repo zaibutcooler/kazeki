@@ -3,6 +3,7 @@ import { RootState } from "@/store";
 import createClientProfile from "@/utils/forms/createClientProfile";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 interface Props {}
 
@@ -14,6 +15,8 @@ const titleArray = [
 ];
 
 const ClientCreateForm: React.FC<Props> = ({}) => {
+  const router = useRouter();
+
   const [section, setSection] = useState(1);
   const client = true;
   const userID = localStorage.getItem("userID");
@@ -288,6 +291,7 @@ const ClientCreateForm: React.FC<Props> = ({}) => {
       }));
     if (createdProfile) {
       console.log(createdProfile);
+      router.push("/auth/login");
     }
   };
   return (

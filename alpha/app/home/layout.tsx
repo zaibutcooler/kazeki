@@ -11,7 +11,7 @@ export default function HomeLayout({
     <main className="overflow-hidden">
       <Navbar />
       <section className="flex justify-center mt-12 ">
-        <main className="container w-[640px] border px-3 md:px-0">
+        <main className="container w-[640px] px-3 md:px-0">
           <div className="min-h-[100vh] px-4">{children}</div>
         </main>
       </section>

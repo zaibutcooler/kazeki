@@ -2,6 +2,7 @@ import { PastJobsType } from "@/database/UserProfile";
 import { LinkType } from "@/database/types";
 import { RootState } from "@/store";
 import createSeekerProfile from "@/utils/forms/createSeekerProfile";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { FaCheck, FaCross } from "react-icons/fa6";
@@ -18,6 +19,8 @@ const titleArray = [
 ];
 
 const SeekerCreateForm: React.FC<Props> = ({}) => {
+  const router = useRouter();
+
   const [section, setSection] = useState(1);
   const client = false;
   const userID = localStorage.getItem("userID");
@@ -423,8 +426,8 @@ const SeekerCreateForm: React.FC<Props> = ({}) => {
         links,
       }));
     if (createdProfile) {
-      window.alert("done");
       console.log(createdProfile);
+      router.push("/auth/login");
     }
   };
 

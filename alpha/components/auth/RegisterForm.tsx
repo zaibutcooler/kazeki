@@ -1,9 +1,8 @@
 "use client";
 import { UserType } from "@/database/User";
 import { setUser } from "@/store/userSlice";
-import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useDispatch } from "react-redux";
@@ -14,6 +13,7 @@ const RegisterForm = () => {
   const [password2, setPassword2] = useState("");
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [error, setError] = useState("");
 
@@ -35,6 +35,7 @@ const RegisterForm = () => {
         // dispatch(setUser(data._id));
         localStorage.setItem("userID", data._id);
         console.log("success user :", data._id);
+        router.push("/auth/create-profile");
       }
     } catch (error) {
       console.log("Error", error);

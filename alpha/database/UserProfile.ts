@@ -8,6 +8,7 @@ export interface PastJobsType {
 }
 
 export interface ProfileType {
+  _id: string;
   user: string;
   firstName: string;
   lastName: string;

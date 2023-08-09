@@ -1,3 +1,9 @@
-export function UserProfilePage() {
-  return <main>UserProfilePage</main>;
+import MyDetail from "@/components/profile/detail/MyDetail";
+
+export default function UserProfilePage() {
+  return (
+    <main>
+      <MyDetail />
+    </main>
+  );
 }
