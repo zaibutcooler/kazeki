@@ -1,3 +1,3 @@
-export function ProfilePage() {
-  return <main>Profile Page</main>;
+export function ProfilePage({ params }: { params: { id: string } }) {
+  return <div>My Post: {params.id}</div>;
 }
