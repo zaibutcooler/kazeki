@@ -9,7 +9,7 @@ const FreelanceHeaderCard = () => {
 
   return (
     <div className="mb-2 mt-3 w-full rounded-md border p-3">
-      {profile.client ? (
+      {profile && profile.client ? (
         <main>
           <h1>Welcome back Client!</h1>
         </main>

@@ -7,14 +7,15 @@ import { useSession } from "next-auth/react";
 
 const MyDetail = () => {
   const [profile, setProfile] = useState<ProfileType | null>(null);
-
   const { data: session } = useSession();
 
   useEffect(() => {
     const userProfile = session?.user.userProfile as ProfileType;
     const fillDatas = async () => {
-      const profileDatas = userProfile && (await fetchProfile(userProfile._id));
+      const profileDatas =
+        userProfile._id && (await fetchProfile(userProfile._id));
       profileDatas && setProfile(profileDatas);
+      console.log("profileID", userProfile._id);
       console.log("success", profile);
     };
     fillDatas();
