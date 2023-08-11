@@ -1,6 +1,13 @@
 import { FreelanceOfferType } from "@/database/FreelanceOffer";
+import JobOffer from "@/database/JobOffer";
+import { setBox } from "@/store/boxSlice";
 import { formatClassicDate } from "@/utils/formatDate";
 import { useState } from "react";
+import { AiOutlineCopy } from "react-icons/ai";
+import { FaDotCircle } from "react-icons/fa";
+import { FaCircle, FaCopy, FaRegCopy } from "react-icons/fa6";
+import { FiCopy } from "react-icons/fi";
+import { useDispatch } from "react-redux";
 
 interface Props {
   freelanceOffer: FreelanceOfferType;
@@ -8,6 +15,7 @@ interface Props {
 
 const FreelanceOfferCard: React.FC<Props> = ({ freelanceOffer }) => {
   const [showDetail, setShowDetail] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <div className="mb-2 w-full rounded-md border p-4 md:p-6">
@@ -16,13 +24,16 @@ const FreelanceOfferCard: React.FC<Props> = ({ freelanceOffer }) => {
           <section className="md:flex justify-between mb-2">
             <div className="flex items-center gap-3">
               <p className="font-semibold">{freelanceOffer.title}</p>
+              <span className="text-[0.7rem] text-gray-600 border-gray-100 py-1 px-3 rounded-full border capitalize">
+                {freelanceOffer.field}
+              </span>
             </div>
             <h1 className="text-xs font-medium md:w-auto text-end">
               {freelanceOffer.salary[0]}$ : {freelanceOffer.salary[1]}$
             </h1>
           </section>
 
-          <section className="leading-6">
+          <section className="leading-6 mb-2">
             <div className="mb-4">
               <h1 className="text-sm font-medium text-gray-800">Description</h1>
               <p className="text-xs text-gray-600 break-words">
@@ -55,13 +66,35 @@ const FreelanceOfferCard: React.FC<Props> = ({ freelanceOffer }) => {
             </div>
           </section>
 
+          <section className="flex md:justify-between justify-start gap-4 md:gap-6 mb-4 items-center">
+            <button
+              className="px-3 md:px-4 py-1.5 md:py-2  rounded-sm bg-slate-800 text-sm text-white hover:shadow-lg"
+              onClick={() => {
+                dispatch(
+                  setBox({ currentBox: "freelance", id: freelanceOffer._id })
+                );
+              }}>
+              Apply now
+            </button>
+            <div className=" flex  rounded-md w-auto md:w-3/4 p-1.5 items-center gap-3">
+              <h1 className="hidden md:block text-xs font-medium text-gray-600 ">
+                For More Info :
+              </h1>
+              <div className="flex gap-3 text-[0.7rem]">
+                {freelanceOffer.contact.map((item) => (
+                  <a className="capitalize flex items-center cursor-pointer py-1 px-3 rounded-sm border hover:border-slate-800">
+                    {item.label} <FaRegCopy className="ml-2" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+
           <section className="flex justify-between items-end mt-2">
             <div className="flex gap-3">
-              <p className="text-xs text-gray-600 py-1 ">
-                {freelanceOffer.applicants} applicants
-              </p>
-              <p className="text-xs text-gray-600 py-1 px-3 rounded-md border">
-                {formatClassicDate(String(freelanceOffer.deadline))} deadline
+              <p className="text-xs text-gray-600  py-1 ">1 hour ago</p>
+              <p className="text-xs text-gray-600  py-1 px-3 rounded-md border">
+                14 applicants
               </p>
             </div>
 
@@ -77,6 +110,9 @@ const FreelanceOfferCard: React.FC<Props> = ({ freelanceOffer }) => {
           <section className="md:flex justify-between mb-2">
             <div className="flex items-center gap-3">
               <p className="font-semibold">{freelanceOffer.title}</p>
+              <span className="text-[0.7rem] text-gray-600 border-gray-100 py-1 px-3 rounded-full border capitalize">
+                {freelanceOffer.field}
+              </span>
             </div>
             <h1 className="text-xs font-medium md:w-auto text-end">
               {freelanceOffer.salary[0]}$ : {freelanceOffer.salary[1]}$
@@ -85,11 +121,9 @@ const FreelanceOfferCard: React.FC<Props> = ({ freelanceOffer }) => {
 
           <section className="flex justify-between items-end mt-2">
             <div className="flex gap-3">
-              <p className="text-xs text-gray-600  py-1 ">
-                {freelanceOffer.applicants} applicants
-              </p>
+              <p className="text-xs text-gray-600  py-1 ">1 hour ago</p>
               <p className="text-xs text-gray-600  py-1 px-3 rounded-md border">
-                {formatClassicDate(String(freelanceOffer.deadline))} deadline
+                14 applicants
               </p>
             </div>
 

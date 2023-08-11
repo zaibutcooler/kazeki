@@ -1,4 +1,7 @@
-import { FreelanceApplicationCreateType } from "@/database/FreelanceApplication";
+import {
+  FreelanceApplicationCreateType,
+  FreelanceApplicationType,
+} from "@/database/FreelanceApplication";
 
 const createFreelanceApplication = async ({
   user,
@@ -25,7 +28,8 @@ const createFreelanceApplication = async ({
       body: JSON.stringify(postBody),
     });
     if (response.ok) {
-      console.log("success");
+      const data: FreelanceApplicationType = await response.json();
+      return data;
     }
   } catch (err) {
     console.log("error", err);

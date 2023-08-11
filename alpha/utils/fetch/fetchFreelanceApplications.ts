@@ -1,12 +1,26 @@
-// export const fetchDiariesWithID = async (userID: string) => {
-//   try {
-//     const response = await fetch(`/api/diary?userID=${userID}`);
-//     const datas = await response.json();
-//     if (response.ok) {
-//       const result: Fe[] = await datas.slice().reverse();
-//       return result;
-//     }
-//   } catch (err) {
-//     console.log("error", err);
-//   }
-// };
+import { FreelanceApplicationType } from "@/database/FreelanceApplication";
+
+export const fetchFreelanceApplication = async () => {
+  try {
+    const response = await fetch(`/api/freelance/application`);
+    if (response.ok) {
+      const datas: FreelanceApplicationType[] = await response.json();
+      return datas;
+    }
+  } catch (err) {
+    console.log("error", err);
+  }
+};
+
+export const fetchFreelanceApplicationWithID = async (id: string) => {
+  // need to fix
+  try {
+    const response = await fetch(`/api/freelance/application`);
+    if (response.ok) {
+      const datas: FreelanceApplicationType[] = await response.json();
+      return datas;
+    }
+  } catch (err) {
+    console.log("error", err);
+  }
+};

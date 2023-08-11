@@ -1,27 +1,16 @@
+import { LinkType } from "@/database/types";
+import { clearBox } from "@/store/boxSlice";
 import createJobApplication from "@/utils/forms/createJobApplication";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 
-interface LinkType {
-  label: string;
-  link: string;
+interface Props {
+  itemID: string;
 }
 
-interface JobApplicationFormState {
-  title: string;
-  description: string;
-  cv: File | null;
-  links: LinkType[];
-}
-
-const JobApplicationForm: React.FC = () => {
-  const initialFormData: JobApplicationFormState = {
-    title: "",
-    description: "",
-    cv: null,
-    links: [{ label: "", link: "" }],
-  };
+const JobApplicationForm: React.FC<Props> = ({ itemID }) => {
   const { data: session } = useSession();
 
   const [title, setTitle] = useState("");
@@ -31,18 +20,24 @@ const JobApplicationForm: React.FC = () => {
     { link: "www.example.com", label: "haha" },
   ]);
 
-  const userID = "64c0d142dfbaacc1e453061b";
-  const jobID = "64c579e9990e471ce5c2e236";
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    createJobApplication({
-      user: userID,
-      title,
-      description,
-      cv,
-      links,
-      job: jobID,
-    });
+    if (session?.user) {
+      const newItem = await createJobApplication({
+        user: session.user._id,
+        title,
+        description,
+        cv,
+        links,
+        job: itemID,
+      });
+      newItem && handleBack();
+    }
+  };
+
+  const dispatch = useDispatch();
+  const handleBack = () => {
+    dispatch(clearBox());
   };
 
   return (
@@ -51,7 +46,7 @@ const JobApplicationForm: React.FC = () => {
         <div className="bg-white shadow-md rounded-md py-4 w-full md:w-[500px] lg:w-[600px] text-xs md:text-sm">
           <div className="h-[40px] px-8 flex border-b border-gray-100 justify-between items-top">
             <span className="font-semibold">Apply This Job</span>
-            <button>
+            <button onClick={handleBack}>
               <AiOutlineClose className="font-bold" />
             </button>
           </div>
@@ -109,7 +104,7 @@ const JobApplicationForm: React.FC = () => {
                 className="block font-medium text-gray-700">
                 Links (e.g., LinkedIn, personal website)
               </label>
-              {initialFormData.links.map((link, index) => (
+              {links.map((link, index) => (
                 <div key={index} className="mt-1 flex justify-between">
                   <input
                     type="text"

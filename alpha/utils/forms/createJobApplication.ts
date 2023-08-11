@@ -1,6 +1,10 @@
 // import { JobApplication } from "@/models/JobApplication";
 
-import { JobApplicationCreateType } from "@/database/JobApplication";
+import { FreelanceApplicationType } from "@/database/FreelanceApplication";
+import {
+  JobApplicationCreateType,
+  JobApplicationType,
+} from "@/database/JobApplication";
 
 const createJobApplication = async ({
   user,
@@ -25,7 +29,8 @@ const createJobApplication = async ({
       body: JSON.stringify(postBody),
     });
     if (response.ok) {
-      console.log("success");
+      const data: JobApplicationType = await response.json();
+      return data;
     }
   } catch (err) {
     console.log("error", err);

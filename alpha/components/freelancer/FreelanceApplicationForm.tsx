@@ -2,21 +2,16 @@ import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import createFreelanceApplication from "@/utils/forms/createFreelanceApplication";
+import { LinkType } from "@/database/types";
+import { useSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { clearBox } from "@/store/boxSlice";
 
-interface LinkType {
-  label: string;
-  link: string;
+interface Props {
+  itemID: string;
 }
 
-interface FreelanceApplicationFormState {
-  title: string;
-  description: string;
-  cv: File | null;
-  negoSalary: number;
-  links: LinkType[];
-}
-
-const FreelanceApplicationForm: React.FC = () => {
+const FreelanceApplicationForm: React.FC<Props> = ({ itemID }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [cv, setCv] = useState("http//example.com");
@@ -25,19 +20,28 @@ const FreelanceApplicationForm: React.FC = () => {
   ]);
   const [negoSalary, setNegoSalary] = useState(0);
 
-  const userID = "64c0d142dfbaacc1e453061b";
-  const freelanceID = "64c58fe2990e471ce5c2e242";
-  const handleSubmit = (event: React.FormEvent) => {
+  const { data: session } = useSession();
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    createFreelanceApplication({
-      user: userID,
-      title,
-      description,
-      cv,
-      links,
-      freelance: freelanceID,
-      negoSalary,
-    });
+    if (session?.user) {
+      const newItem = await createFreelanceApplication({
+        user: session.user._id,
+        title,
+        description,
+        cv,
+        links,
+        freelance: itemID,
+        negoSalary,
+      });
+      newItem && handleBack();
+    }
+  };
+
+  const dispatch = useDispatch();
+
+  const handleBack = () => {
+    dispatch(clearBox());
   };
 
   return (
@@ -46,7 +50,7 @@ const FreelanceApplicationForm: React.FC = () => {
         <div className="bg-white shadow-md rounded-md py-4 w-full md:w-[500px] lg:w-[600px] text-xs md:text-sm">
           <div className="h-[40px] px-8 flex border-b border-gray-100 justify-between items-top">
             <span className="font-semibold">Apply This Job</span>
-            <button>
+            <button onClick={handleBack}>
               <AiOutlineClose className="font-bold" />
             </button>
           </div>

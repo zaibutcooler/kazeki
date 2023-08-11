@@ -3,15 +3,21 @@ import { JobOfferType } from "@/database/JobOffer";
 import { fetchJobOffer } from "@/utils/fetch/fetchJobOffers";
 import { useEffect, useState } from "react";
 import JobOfferCard from "./JobOfferCard";
+import { fetchJobApplication } from "@/utils/fetch/fetchJobApplications";
+import { FreelanceApplicationType } from "@/database/FreelanceApplication";
 
 const JobListing = () => {
   const [offers, setOffers] = useState<JobOfferType[]>([]);
+  const [applications, setApplications] = useState<FreelanceApplicationType[]>(
+    []
+  );
 
   useEffect(() => {
     const fillDatas = async () => {
-      const datas = await fetchJobOffer();
-      //I think I will need to filter more
-      datas && setOffers(datas);
+      const applicationDatas = await fetchJobApplication();
+      const offerDatas = await fetchJobOffer();
+
+      offerDatas && setOffers(offerDatas);
     };
     fillDatas();
   }, []);

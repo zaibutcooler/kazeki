@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
+import Box from "./Box";
 
 const Navbar = () => {
   const [sidebarIsShowed, setSideBarIsShowed] = useState(false);
@@ -27,6 +28,7 @@ const Navbar = () => {
 
   return (
     <main className=" text-superblack font-semibold ">
+      <Box />
       <div className="fixed left-0 top-0 flex w-full bg-superwhite justify-between py-1.5 px-2 lg:px-4 items-center border-b">
         <section>
           <button
