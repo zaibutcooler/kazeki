@@ -2,24 +2,31 @@
 import { JobOfferCreateType } from "@/database/JobOffer";
 import createJobOffer from "@/utils/forms/createJobOffer";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const JobOfferPage = () => {
   const initialFormData = {
     title: "Frontend Developer",
-    description: "We are looking for a skilled frontend developer...",
-    requirements: ["React", "JavaScript", "HTML", "CSS"],
+    description:
+      "We are looking for a skilled frontend developer to join our innovative team at Example Company. As a Frontend Developer, you will be responsible for creating engaging user interfaces, collaborating with backend developers, and ensuring the best possible user experience. If you are passionate about web development and have a strong foundation in React, JavaScript, HTML, and CSS, we'd love to hear from you.",
+    requirements: [
+      "Solid understanding of frontend technologies including React, JavaScript, HTML, and CSS.",
+      "Previous experience with responsive design and mobile-first development is a plus.",
+    ],
     responsibilities: [
-      "Design and implement user interfaces...",
-      "Collaborate with backe-end developers...",
+      "Design and implement user interfaces for web applications.",
+      "Collaborate with backend developers and UX/UI designers to improve usability.",
+      "Optimize web applications for maximum speed and scalability.",
+      "Stay up-to-date with emerging frontend technologies and best practices.",
     ],
     company: "Example Company",
     onSite: true,
     location: "New York, USA",
-    salary: ["500", "600"],
-    allowance: ["Health insurance", "Paid time off"],
+    salary: ["70000", "90000"],
+    allowance: ["Health insurance", "Paid time off", "Flexible work hours"],
     deadline: "2023-08-31",
-    contact: [{ label: "github", link: "" }],
+    contact: [{ label: "github", link: "https://github.com/examplecompany" }],
   };
 
   const { data: session } = useSession();
@@ -65,6 +72,8 @@ const JobOfferPage = () => {
     setFormData({ ...formData, contact: newLinks });
   };
 
+  const router = useRouter();
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     console.log("started");
@@ -74,7 +83,7 @@ const JobOfferPage = () => {
     };
     const datas = await createJobOffer(postBody);
     if (datas) {
-      window.alert("fuck");
+      router.push("/home/job-seeking");
     }
   };
 

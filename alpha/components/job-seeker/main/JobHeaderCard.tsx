@@ -1,6 +1,7 @@
 "use client";
 import { ProfileType } from "@/database/UserProfile";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const JobHeaderCard = () => {
   const { data: session } = useSession();
@@ -10,7 +11,13 @@ const JobHeaderCard = () => {
     <div className="mb-2 mt-3 w-full rounded-md border p-3">
       {profile && profile.client ? (
         <main>
-          <h1>Welcome back Client!</h1>
+          <h1 className="text-lg font-semibold mb-2">Welcome back Client!</h1>
+
+          <Link
+            href="/client/job-offer"
+            className="px-4 py-2 font-medium rounded-md border">
+            Post
+          </Link>
         </main>
       ) : (
         <main>

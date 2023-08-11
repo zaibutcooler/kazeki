@@ -2,23 +2,31 @@
 import { FreelanceOfferCreateType } from "@/database/FreelanceOffer";
 import createFreelanceOffer from "@/utils/forms/createFreelanceOffer";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const FreelanceOfferPage = () => {
   const initialFormData = {
     title: "Frontend Developer",
-    description: "We are looking for a skilled frontend developer...",
-    requirements: ["React", "JavaScript", "HTML", "CSS"],
+    description:
+      "We are looking for a skilled frontend developer to work on an exciting freelance project. As a Frontend Developer, you will have the opportunity to create captivating user interfaces and contribute to a cutting-edge web development project. If you have a strong foundation in React, JavaScript, HTML, and CSS, and you're passionate about creating high-quality web experiences, we'd love to collaborate with you.",
+    requirements: [
+      "Solid understanding of frontend technologies including React, JavaScript, HTML, and CSS.",
+      "Previous experience in freelance web development projects.",
+    ],
     responsibilities: [
-      "Design and implement user interfaces...",
-      "Collaborate with backe-end developers...",
+      "Design and implement user interfaces for web applications.",
+      "Collaborate with backend developers to integrate frontend components.",
+      "Optimize web applications for performance and responsiveness.",
+      "Adhere to project deadlines and deliver high-quality code.",
     ],
     field: ["web-development"],
     projectDeadline: "2023-08-31",
-    salary: ["300", "500"],
-    deadline: "2023-08-31",
+    salary: ["$300", "$500"],
+    deadline: "2023-08-15",
     contact: [{ label: "github", link: "https://github.com/zaiYellYintAung" }],
   };
+
   const { data: session } = useSession();
   const [formData, setFormData] = useState(initialFormData);
 
@@ -56,6 +64,8 @@ const FreelanceOfferPage = () => {
     setFormData({ ...formData, contact: newLinks });
   };
 
+  const router = useRouter();
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     console.log("started");
@@ -65,7 +75,7 @@ const FreelanceOfferPage = () => {
     };
     const datas = await createFreelanceOffer(postBody);
     if (datas) {
-      window.alert("fuck");
+      router.push("/home/freelance");
     }
   };
 

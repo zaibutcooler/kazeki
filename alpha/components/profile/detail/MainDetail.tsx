@@ -1,9 +1,14 @@
+import JobOfferCard from "@/components/job-seeker/main/JobOfferCard";
 import { FreelanceApplicationType } from "@/database/FreelanceApplication";
 import { FreelanceOfferType } from "@/database/FreelanceOffer";
 import { JobApplicationType } from "@/database/JobApplication";
-import { JobOfferType } from "@/database/JobOffer";
+import JobOffer, { JobOfferType } from "@/database/JobOffer";
 import { ProfileType } from "@/database/UserProfile";
 import { truncateText } from "@/utils";
+import {
+  fetchJobOffer,
+  fetchJobOfferWithID,
+} from "@/utils/fetch/fetchJobOffers";
 import { useEffect, useState } from "react";
 import { AiOutlineCopy } from "react-icons/ai";
 import { FaCopy, FaLink, FaShare } from "react-icons/fa6";
@@ -18,11 +23,19 @@ const MainDetail: React.FC<Props> = ({ profile }) => {
     []
   );
 
+  const [jobOffers, setJobOffers] = useState<JobOfferType[]>([]);
+
   const [applications, setApplications] = useState<
     JobApplicationType[] | FreelanceApplicationType[]
   >([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const fillDatas = async () => {
+      const datas = await fetchJobOffer();
+      datas && setJobOffers(datas);
+    };
+    fillDatas();
+  }, []);
 
   return (
     <div className=" w-full h-full py-4 font-medium text-gray-700">
@@ -100,8 +113,15 @@ const MainDetail: React.FC<Props> = ({ profile }) => {
             </div>
           </section>
 
-          <section className="w-3/5 ">
-            <div className="border rounded-md p-4 w-full min-h-[250px] "></div>
+          <section className="w-full md:w-3/5 ">
+            <div className="w-full min-h-[250px] ">
+              {jobOffers &&
+                jobOffers.map((item) => (
+                  <main>
+                    <JobOfferCard jobOffer={item as JobOfferType} />
+                  </main>
+                ))}
+            </div>
           </section>
         </main>
       </div>
