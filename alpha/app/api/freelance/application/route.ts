@@ -61,6 +61,7 @@ export async function GET(req: Request) {
     await connectDB();
     const { searchParams } = new URL(req.url);
     const userID = searchParams.get("userID");
+    const offerID = searchParams.get("offerID");
 
     if (userID) {
       const items = await Model.find({ user: userID });
@@ -69,6 +70,15 @@ export async function GET(req: Request) {
         status: 200,
       });
     }
+
+    if (offerID) {
+      const items = await Model.find({ freelance: offerID });
+
+      return new Response(JSON.stringify(items), {
+        status: 200,
+      });
+    }
+
     const items = await Model.find();
     return new Response(JSON.stringify(items), {
       status: 200,

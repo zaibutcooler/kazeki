@@ -1,9 +1,9 @@
-import AppliedJobsListing from "@/components/job-seeker/applied/AppliedJobsListing";
+import MainJobAppliedPage from "@/components/job-seeker/applied/MainJobAppliedPage";
 
 export default function AppliedJobs() {
   return (
     <main>
-      <AppliedJobsListing />
+      <MainJobAppliedPage />
     </main>
   );
 }

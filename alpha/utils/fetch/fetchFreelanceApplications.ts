@@ -25,3 +25,19 @@ export const fetchFreelanceApplicationWithUserID = async (userID: string) => {
     console.log("error", err);
   }
 };
+
+export const fetchFreelanceApplicationWithOfferID = async (offerID: string) => {
+  // need to fix
+  try {
+    const response = await fetch(
+      `/api/freelance/application?offerID=${offerID}`
+    );
+    if (response.ok) {
+      const datas: FreelanceApplicationType[] = await response.json();
+      const results = await datas.slice().reverse();
+      return results;
+    }
+  } catch (err) {
+    console.log("error", err);
+  }
+};

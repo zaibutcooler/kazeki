@@ -1,6 +1,7 @@
 "use client";
 
 import { JobApplicationType } from "@/database/JobApplication";
+import { ProfileType } from "@/database/UserProfile";
 import { fetchJobApplicationWithUserID } from "@/utils/fetch/fetchJobApplications";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";

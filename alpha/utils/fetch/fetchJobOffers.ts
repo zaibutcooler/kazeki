@@ -13,9 +13,9 @@ export const fetchJobOffer = async () => {
   }
 };
 
-export const fetchJobOfferWithID = async (userID: string) => {
+export const fetchJobOfferWithUserID = async (userID: string) => {
   try {
-    const response = await fetch(`/api/freelance/offer?userID=${userID}`);
+    const response = await fetch(`/api/job-seeking/offer?userID=${userID}`);
     const datas = await response.json();
     if (response.ok) {
       const result: JobOfferType[] = await datas.slice().reverse();
