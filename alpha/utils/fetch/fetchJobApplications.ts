@@ -12,13 +12,16 @@ export const fetchJobApplication = async () => {
   }
 };
 
-export const fetchJobApplicationWithID = async (userID: string) => {
+export const fetchJobApplicationWithUserID = async (userID: string) => {
   // need to fix
   try {
-    const response = await fetch(`/api/job-seeking/application`);
+    const response = await fetch(
+      `/api/job-seeking/application?userID=${userID}`
+    );
     if (response.ok) {
       const datas: JobApplicationType[] = await response.json();
-      return datas;
+      const results = await datas.slice().reverse();
+      return results;
     }
   } catch (err) {
     console.log("error", err);

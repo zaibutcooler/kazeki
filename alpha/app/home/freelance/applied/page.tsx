@@ -1,3 +1,9 @@
-export function FreelanceAppliedPage() {
-  return <main>Freelance applied</main>;
+import AppliedFreelanceListing from "@/components/freelancer/applied/AppliedFreelanceListing";
+
+export default function FreelanceAppliedPage() {
+  return (
+    <main>
+      <AppliedFreelanceListing />
+    </main>
+  );
 }

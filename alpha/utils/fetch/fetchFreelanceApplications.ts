@@ -12,13 +12,14 @@ export const fetchFreelanceApplication = async () => {
   }
 };
 
-export const fetchFreelanceApplicationWithID = async (id: string) => {
+export const fetchFreelanceApplicationWithUserID = async (userID: string) => {
   // need to fix
   try {
-    const response = await fetch(`/api/freelance/application`);
+    const response = await fetch(`/api/freelance/application?userID=${userID}`);
     if (response.ok) {
       const datas: FreelanceApplicationType[] = await response.json();
-      return datas;
+      const results = await datas.slice().reverse();
+      return results;
     }
   } catch (err) {
     console.log("error", err);

@@ -1,7 +1,6 @@
 import Model from "@/database/FreelanceApplication";
 import connectDB from "@/utils/connectDB";
 import User from "@/database/User";
-import FreelanceApplication from "@/database/FreelanceApplication";
 import FreelanceOffer from "@/database/FreelanceOffer";
 
 export async function POST(req: Request) {
@@ -34,6 +33,7 @@ export async function POST(req: Request) {
       freelance,
       links,
     });
+
     await newItem.save();
 
     const updatedOffer = await FreelanceOffer.findByIdAndUpdate(
@@ -47,6 +47,30 @@ export async function POST(req: Request) {
     console.log(updatedOffer);
 
     return new Response(JSON.stringify(newItem), {
+      status: 200,
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+      status: 500,
+    });
+  }
+}
+
+export async function GET(req: Request) {
+  try {
+    await connectDB();
+    const { searchParams } = new URL(req.url);
+    const userID = searchParams.get("userID");
+
+    if (userID) {
+      const items = await Model.find({ user: userID });
+      console.log("reached");
+      return new Response(JSON.stringify(items), {
+        status: 200,
+      });
+    }
+    const items = await Model.find();
+    return new Response(JSON.stringify(items), {
       status: 200,
     });
   } catch (error) {

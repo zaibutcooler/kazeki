@@ -1,6 +1,8 @@
+import ApplyNowButton from "@/components/mini/ApplyNowButton";
 import { JobOfferType } from "@/database/JobOffer";
 import { setBox } from "@/store/boxSlice";
 import { truncateText } from "@/utils";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { FaRegCopy } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
@@ -12,6 +14,7 @@ interface Props {
 const JobOfferCard: React.FC<Props> = ({ jobOffer }) => {
   const [showDetail, setShowDetail] = useState(false);
   const dispatch = useDispatch();
+  const { data: session } = useSession();
 
   return (
     <div className="mb-2 w-full rounded-md border p-4 md:p-6">
@@ -63,13 +66,15 @@ const JobOfferCard: React.FC<Props> = ({ jobOffer }) => {
           </section>
 
           <section className="flex md:justify-between justify-start gap-4 md:gap-6 mb-4 items-center">
-            <button
-              className="px-3 md:px-4 py-1.5 md:py-2  rounded-sm bg-slate-800 text-sm text-white hover:shadow-lg"
-              onClick={() => {
+            <ApplyNowButton
+              handleClick={() => {
                 dispatch(setBox({ currentBox: "job", id: jobOffer._id }));
-              }}>
-              Apply now
-            </button>
+              }}
+              disableCondition={
+                session?.user && jobOffer.applicants.includes(session.user._id)
+              }
+            />
+
             <div className=" flex  rounded-md w-auto md:w-3/4 p-1.5 items-center gap-3">
               <h1 className="hidden md:block text-xs font-medium text-gray-600 ">
                 For More Info :
