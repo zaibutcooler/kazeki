@@ -24,6 +24,8 @@ const FreelanceOfferPage = () => {
     projectDeadline: "2023-08-31",
     salary: ["$300", "$500"],
     deadline: "2023-08-15",
+    applicationLimit: 300,
+    recuritAmoumt: 5,
     contact: [{ label: "github", link: "https://github.com/zaiYellYintAung" }],
   };
 

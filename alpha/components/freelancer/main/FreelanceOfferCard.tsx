@@ -1,7 +1,9 @@
+import ApplyNowButton from "@/components/mini/ApplyNowButton";
 import { FreelanceOfferType } from "@/database/FreelanceOffer";
 import JobOffer from "@/database/JobOffer";
 import { setBox } from "@/store/boxSlice";
 import { formatClassicDate } from "@/utils/formatDate";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { AiOutlineCopy } from "react-icons/ai";
 import { FaDotCircle } from "react-icons/fa";
@@ -16,6 +18,8 @@ interface Props {
 const FreelanceOfferCard: React.FC<Props> = ({ freelanceOffer }) => {
   const [showDetail, setShowDetail] = useState(false);
   const dispatch = useDispatch();
+
+  const { data: session } = useSession();
 
   return (
     <div className="mb-2 w-full rounded-md border p-4 md:p-6">
@@ -67,15 +71,18 @@ const FreelanceOfferCard: React.FC<Props> = ({ freelanceOffer }) => {
           </section>
 
           <section className="flex md:justify-between justify-start gap-4 md:gap-6 mb-4 items-center">
-            <button
-              className="px-3 md:px-4 py-1.5 md:py-2  rounded-sm bg-slate-800 text-sm text-white hover:shadow-lg"
-              onClick={() => {
+            <ApplyNowButton
+              handleClick={() => {
                 dispatch(
                   setBox({ currentBox: "freelance", id: freelanceOffer._id })
                 );
-              }}>
-              Apply now
-            </button>
+              }}
+              disableCondition={
+                session?.user &&
+                freelanceOffer.applicants.includes(session.user._id)
+              }
+            />
+
             <div className=" flex  rounded-md w-auto md:w-3/4 p-1.5 items-center gap-3">
               <h1 className="hidden md:block text-xs font-medium text-gray-600 ">
                 For More Info :
@@ -94,7 +101,7 @@ const FreelanceOfferCard: React.FC<Props> = ({ freelanceOffer }) => {
             <div className="flex gap-3">
               <p className="text-xs text-gray-600  py-1 ">1 hour ago</p>
               <p className="text-xs text-gray-600  py-1 px-3 rounded-md border">
-                14 applicants
+                {freelanceOffer.applicants.length} applicants
               </p>
             </div>
 

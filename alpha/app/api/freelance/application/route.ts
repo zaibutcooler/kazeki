@@ -1,6 +1,8 @@
 import Model from "@/database/FreelanceApplication";
 import connectDB from "@/utils/connectDB";
 import User from "@/database/User";
+import FreelanceApplication from "@/database/FreelanceApplication";
+import FreelanceOffer from "@/database/FreelanceOffer";
 
 export async function POST(req: Request) {
   try {
@@ -15,6 +17,14 @@ export async function POST(req: Request) {
         status: 400,
       });
     }
+
+    const offer = await FreelanceOffer.findById(freelance);
+    if (offer.applicants.includes(user)) {
+      return new Response(JSON.stringify({ message: "User already applied" }), {
+        status: 400,
+      });
+    }
+
     const newItem = new Model({
       user,
       title,
@@ -25,6 +35,16 @@ export async function POST(req: Request) {
       links,
     });
     await newItem.save();
+
+    const updatedOffer = await FreelanceOffer.findByIdAndUpdate(
+      freelance,
+      {
+        $push: { applicants: user },
+      },
+      { new: true }
+    );
+
+    console.log(updatedOffer);
 
     return new Response(JSON.stringify(newItem), {
       status: 200,

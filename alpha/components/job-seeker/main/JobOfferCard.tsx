@@ -29,7 +29,7 @@ const JobOfferCard: React.FC<Props> = ({ jobOffer }) => {
             </h1>
           </section>
 
-          <section className="leading-6">
+          <section className="leading-6 mb-2">
             <div className="mb-4">
               <h1 className="text-sm font-medium text-gray-800">
                 Job Description
@@ -94,8 +94,8 @@ const JobOfferCard: React.FC<Props> = ({ jobOffer }) => {
 
             <button
               className="block text-sm font-medium leading-6 text-slate-900"
-              onClick={() => setShowDetail(true)}>
-              Detail
+              onClick={() => setShowDetail(false)}>
+              Close Detail
             </button>
           </section>
         </main>
@@ -117,7 +117,7 @@ const JobOfferCard: React.FC<Props> = ({ jobOffer }) => {
             <div className="flex gap-3">
               <p className="text-xs text-gray-600  py-1 ">1 hour ago</p>
               <p className="text-xs text-gray-600  py-1 px-3 rounded-md border">
-                14 applicants
+                {jobOffer.applicants.length} applicants
               </p>
             </div>
 

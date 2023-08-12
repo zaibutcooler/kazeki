@@ -15,6 +15,12 @@ export interface JobOfferType {
   allowance: string[];
   deadline: Date | string;
   contact: LinkType[];
+
+  applicationLimit: number;
+  recuritAmoumt: number;
+
+  applicants: string[];
+
   updated: Date;
   created: Date;
 }
@@ -30,6 +36,10 @@ export interface JobOfferCreateType {
   location: string | null;
   salary: string[]; //
   allowance: string[];
+
+  applicationLimit: number;
+  recuritAmoumt: number;
+
   deadline: Date | string; //
   contact: LinkType[]; //
 }
@@ -52,6 +62,12 @@ const jobOfferSchema = new Schema({
       label: { type: String },
     },
   ],
+
+  applicationLimit: { type: Number },
+  recuritAmoumt: { type: Number },
+
+  applicants: { type: [String] },
+
   updated: { type: Date },
   created: { type: Date, default: Date.now },
 });

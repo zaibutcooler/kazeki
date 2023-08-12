@@ -26,6 +26,8 @@ const JobOfferPage = () => {
     salary: ["70000", "90000"],
     allowance: ["Health insurance", "Paid time off", "Flexible work hours"],
     deadline: "2023-08-31",
+    applicationLimit: 300,
+    recuritAmoumt: 5, // left to add
     contact: [{ label: "github", link: "https://github.com/examplecompany" }],
   };
 
