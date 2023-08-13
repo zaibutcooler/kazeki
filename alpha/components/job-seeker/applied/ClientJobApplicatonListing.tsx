@@ -52,12 +52,12 @@ const ClientJobApplicationListing = () => {
   return (
     <div className="mt-2 md:flex flex-row-reverse gap-4">
       <section className="w-full md:w-1/3">
-        <div className="hidden md:block">
+        <div className="hidden md:block mt-2">
           {offers &&
             offers.map((offer) => (
               <div
                 key={offer._id}
-                className="hidden md:block w-full p-4 rounded-md border text-sm mb-2">
+                className="hidden md:block w-full p-4 rounded-sm border text-sm mb-2">
                 <h1
                   onClick={() => setCurrentOffer(offer._id)}
                   className="font-semibold mb-2 cursor-pointer">
