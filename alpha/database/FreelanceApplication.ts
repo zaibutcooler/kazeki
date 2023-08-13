@@ -1,8 +1,9 @@
 import { Schema, model, models } from "mongoose";
 import { LinkType } from "./types";
+import { UserType } from "./User";
 export interface FreelanceApplicationType {
   _id: string;
-  user: Schema.Types.ObjectId;
+  user: UserType;
   freelance: string;
   title: string;
   description: string;

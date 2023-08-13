@@ -22,7 +22,7 @@ export const jobSeekingLinks = [
   },
   {
     name: "Interviews",
-    go: "/home/job-seeking/interview",
+    go: "/home/job-seeking/interviews",
     icon: <AiOutlineClockCircle />,
   },
   {

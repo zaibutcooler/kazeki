@@ -26,9 +26,11 @@ const ReplyForm: React.FC<Props> = ({ itemID, type }) => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
     if (session?.user) {
       const combinedDateTime = new Date(`${date}T${time}`).toISOString();
-      if ((type = "job")) {
+      console.log(links);
+      if (type === "job") {
         const newReply = await createJobReply({
           user: session.user._id,
           title,
@@ -37,8 +39,8 @@ const ReplyForm: React.FC<Props> = ({ itemID, type }) => {
           links,
           itemID,
         });
-        newReply && window.alert("job fuck");
-      } else if ((type = "freelance")) {
+        newReply && window.alert(`${type} fuck`);
+      } else if (type === "freelance") {
         const newReply = await createFreelanceReply({
           user: session.user._id,
           title,
@@ -47,7 +49,7 @@ const ReplyForm: React.FC<Props> = ({ itemID, type }) => {
           links,
           itemID,
         });
-        newReply && window.alert("freelance fuck");
+        newReply && window.alert(`${type} fuck`);
       }
     }
   };
@@ -143,75 +145,79 @@ const ReplyForm: React.FC<Props> = ({ itemID, type }) => {
                 />
               </div>
             </div>
-            <div className="flex gap-6 w-full">
-              <div className="w-1/3">
-                <label
-                  htmlFor="label"
-                  className="block text-sm font-medium leading-6 text-slate-900">
-                  Label
-                </label>
+            <section>
+              <div className="flex gap-6 w-full">
+                <div className="w-1/3">
+                  <label
+                    htmlFor="label"
+                    className="block text-sm font-medium leading-6 text-slate-900">
+                    Label
+                  </label>
+                </div>
+                <div className="w-2/3">
+                  <label
+                    htmlFor="link"
+                    className="block text-sm font-medium leading-6 text-slate-900">
+                    Link
+                  </label>
+                </div>
               </div>
-              <div className="w-2/3">
-                <label
-                  htmlFor="link"
-                  className="block text-sm font-medium leading-6 text-slate-900">
-                  Link
-                </label>
-              </div>
-            </div>
-            <div className=" mb-6 w-full">
-              {links.map((item, index) => (
-                <section className="flex w-full gap-6 ">
-                  <div className="w-1/3">
-                    <input
-                      name="label"
-                      id="label"
-                      value={item.label}
-                      onChange={(e) =>
-                        handleLinkChange("label", index, e.target.value)
-                      }
-                      className="p-2 border rounded-md w-full mt-2"
-                    />
-                  </div>
-                  <div className="w-2/3">
-                    <input
-                      name="link"
-                      id="link"
-                      value={item.link}
-                      onChange={(e) =>
-                        handleLinkChange("link", index, e.target.value)
-                      }
-                      className="p-2 border rounded-md w-full mt-2"
-                    />
-                  </div>
-                </section>
-              ))}
+              <div className=" mb-6 w-full">
+                {links.map((item, index) => (
+                  <section className="flex w-full gap-6 ">
+                    <div className="w-1/3">
+                      <input
+                        name="label"
+                        id="label"
+                        value={item.label}
+                        onChange={(e) =>
+                          handleLinkChange("label", index, e.target.value)
+                        }
+                        className="p-2 border rounded-md w-full mt-2"
+                      />
+                    </div>
+                    <div className="w-2/3">
+                      <input
+                        name="link"
+                        id="link"
+                        value={item.link}
+                        onChange={(e) =>
+                          handleLinkChange("link", index, e.target.value)
+                        }
+                        className="p-2 border rounded-md w-full mt-2"
+                      />
+                    </div>
+                  </section>
+                ))}
 
-              <div className="mt-3 flex gap-4 w-full justify-end">
-                {links.length !== 1 && (
-                  <button
-                    type="button"
-                    className="py-1.5 px-3 text-xs border hover:bg-slate-50 "
-                    onClick={() => {
-                      const updatedLinks = [...links];
-                      updatedLinks.splice(links.length - 1, 1);
-                      setLinks(updatedLinks);
-                    }}>
-                    Remove
-                  </button>
-                )}
-                {links.length !== 5 && (
-                  <button
-                    type="button"
-                    className="py-1.5 px-3 text-xs border hover:bg-slate-50 "
-                    onClick={() => {
-                      setLinks([...links, { label: "", link: "" }]);
-                    }}>
-                    + Add more
-                  </button>
-                )}
+                <div className="mt-3 flex gap-4 w-full justify-end">
+                  {links.length !== 1 && (
+                    <button
+                      type="button"
+                      className="py-1.5 px-3 text-xs border hover:bg-slate-50 "
+                      onClick={() => {
+                        const updatedLinks = [...links];
+                        updatedLinks.splice(links.length - 1, 1);
+                        setLinks(updatedLinks);
+                      }}>
+                      Remove
+                    </button>
+                  )}
+                  {links.length !== 5 && (
+                    <button
+                      type="button"
+                      className="py-1.5 px-3 text-xs border hover:bg-slate-50 "
+                      onClick={() => {
+                        setLinks([...links, { label: "", link: "" }]);
+                      }}>
+                      + Add more
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
+            </section>
+
+            <section></section>
 
             <div className="flex justify-end">
               <button

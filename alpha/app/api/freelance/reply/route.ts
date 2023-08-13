@@ -29,6 +29,8 @@ export async function POST(req: Request) {
       itemType: "freelance",
     });
 
+    console.log(newItem);
+
     await newItem.save();
 
     const updatedApplication = await FreelanceApplication.findByIdAndUpdate(

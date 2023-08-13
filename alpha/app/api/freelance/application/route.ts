@@ -72,8 +72,13 @@ export async function GET(req: Request) {
     }
 
     if (offerID) {
-      const items = await Model.find({ freelance: offerID });
-
+      const items = await Model.find({ job: offerID }).populate({
+        path: "user",
+        populate: {
+          path: "userProfile",
+          model: "UserProfile",
+        },
+      });
       return new Response(JSON.stringify(items), {
         status: 200,
       });

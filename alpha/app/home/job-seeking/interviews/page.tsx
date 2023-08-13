@@ -1,3 +1,9 @@
+import MainReplyPage from "@/components/job-seeker/reply/MainReplyPage";
+
 export default function JobInterviewPage() {
-  return <main>Job interview</main>;
+  return (
+    <main>
+      <MainReplyPage />
+    </main>
+  );
 }

@@ -26,7 +26,7 @@ const replySchema = new Schema({
   title: { type: String },
   description: { type: String },
   appointment: { type: Date },
-  link: [
+  links: [
     {
       link: { type: String },
       label: { type: String },

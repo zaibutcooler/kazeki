@@ -15,10 +15,10 @@ const JobApplicationForm: React.FC<Props> = ({ itemID }) => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [cv, setCv] = useState("http//example.com");
   const [links, setLinks] = useState<LinkType[]>([
     { link: "www.example.com", label: "haha" },
   ]);
+  const [cv, setCv] = useState<File | null>(null);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -27,7 +27,7 @@ const JobApplicationForm: React.FC<Props> = ({ itemID }) => {
         user: session.user._id,
         title,
         description,
-        cv,
+        cv: "https://",
         links,
         job: itemID,
       });
@@ -40,100 +40,157 @@ const JobApplicationForm: React.FC<Props> = ({ itemID }) => {
     dispatch(clearBox());
   };
 
+  const handleLinkChange = (form: string, index: number, value: string) => {
+    const updatedLinks = [...links];
+    if (form === "label") {
+      updatedLinks[index].label = value;
+    } else if (form === "link") {
+      updatedLinks[index].link = value;
+    }
+    setLinks(updatedLinks);
+  };
+
   return (
     <main className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur z-50 px-2">
       <div className="mx-auto">
-        <div className="bg-white shadow-md rounded-md py-4 w-full md:w-[500px] lg:w-[600px] text-xs md:text-sm">
+        <div className="bg-white shadow-md rounded-md py-4 w-full md:w-[400px] lg:w-[500px] text-xs md:text-sm">
           <div className="h-[40px] px-8 flex border-b border-gray-100 justify-between items-top">
-            <span className="font-semibold">Job Reply</span>
+            <span className="font-semibold">Reply</span>
             <button onClick={handleBack}>
               <AiOutlineClose className="font-bold" />
             </button>
           </div>
           <form
             onSubmit={handleSubmit}
-            className="bg-white space-y-4 px-8 py-3 max-h-[75vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
-            <div>
+            className="bg-white space-y-4 px-8 py-3 max-h-[70vh] overflow-y-auto scrollbar-thin scrollbar-thumb-white scrollbar-track-white">
+            <div className="w-full mb-4">
               <label
                 htmlFor="title"
-                className="block font-medium text-gray-700">
-                Introduce Yourself
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Title
               </label>
               <input
-                type="text"
-                id="title"
+                type="title"
                 name="title"
+                id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                required
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md border p-2"
-                placeholder="Your Title"
+                className="p-2 border rounded-md w-full mt-1.5"
               />
             </div>
 
-            <div>
+            <div className="w-full mb-4">
+              <label
+                htmlFor="description"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Description
+              </label>
               <textarea
-                id="description"
                 name="description"
-                required
+                id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                rows={4}
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md border p-2"
-                placeholder="Your Description"
+                className="p-2 border rounded-md row-3  w-full mt-1.5"
               />
             </div>
 
-            <div>
-              <label htmlFor="cv" className="block font-medium text-gray-700">
-                CV (Upload your CV)
+            <section>
+              <div className="flex  w-full">
+                <div className="w-1/3">
+                  <label
+                    htmlFor="label"
+                    className="block text-sm font-medium leading-6 text-slate-900">
+                    Label
+                  </label>
+                </div>
+                <div className="w-2/3">
+                  <label
+                    htmlFor="link"
+                    className="block text-sm font-medium leading-6 text-slate-900">
+                    Link
+                  </label>
+                </div>
+              </div>
+              <div className=" mb-6 w-full">
+                {links.map((item, index) => (
+                  <section className="flex w-full gap-6 ">
+                    <div className="w-1/3">
+                      <input
+                        name="label"
+                        id="label"
+                        value={item.label}
+                        onChange={(e) =>
+                          handleLinkChange("label", index, e.target.value)
+                        }
+                        className="p-2 border rounded-md w-full mt-2"
+                      />
+                    </div>
+                    <div className="w-2/3">
+                      <input
+                        name="link"
+                        id="link"
+                        value={item.link}
+                        onChange={(e) =>
+                          handleLinkChange("link", index, e.target.value)
+                        }
+                        className="p-2 border rounded-md w-full mt-2"
+                      />
+                    </div>
+                  </section>
+                ))}
+
+                <div className="mt-3 flex gap-4 w-full justify-end">
+                  {links.length !== 1 && (
+                    <button
+                      type="button"
+                      className="py-1.5 px-3 text-xs border hover:bg-slate-50 "
+                      onClick={() => {
+                        const updatedLinks = [...links];
+                        updatedLinks.splice(links.length - 1, 1);
+                        setLinks(updatedLinks);
+                      }}>
+                      Remove
+                    </button>
+                  )}
+                  {links.length !== 5 && (
+                    <button
+                      type="button"
+                      className="py-1.5 px-3 text-xs border hover:bg-slate-50 "
+                      onClick={() => {
+                        setLinks([...links, { label: "", link: "" }]);
+                      }}>
+                      + Add more
+                    </button>
+                  )}
+                </div>
+              </div>
+            </section>
+
+            <div className="w-full mb-4 ">
+              <label
+                htmlFor="appointment"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Resume
               </label>
               <input
                 type="file"
-                id="cv"
                 name="cv"
-                required
+                id="cv"
                 accept=".pdf,.doc,.docx"
-                className="mt-1 focus:ring-gray-400 focus:border-gray-400 block w-full border-gray-300 rounded-md border p-2"
+                onChange={(e) => {
+                  if (e.target.files) {
+                    setCv(e.target.files[0]);
+                  }
+                }}
+                className="py-1 px-3 w-full rounded-md border text-slate-800 mt-2"
               />
             </div>
 
-            <div>
-              <label
-                htmlFor="links"
-                className="block font-medium text-gray-700">
-                Links (e.g., LinkedIn, personal website)
-              </label>
-              {links.map((link, index) => (
-                <div key={index} className="mt-1 flex justify-between">
-                  <input
-                    type="text"
-                    name={`links[${index}].label`}
-                    required
-                    className="focus:ring-gray-400 focus:border-gray-400 block w-1/3 border-gray-300 rounded-md border p-2 mr-4"
-                    placeholder="Enter link label"
-                  />
-                  <input
-                    type="text"
-                    name={`links[${index}].link`}
-                    required
-                    className="focus:ring-gray-400 focus:border-gray-400 block w-4/6 border-gray-300 rounded-md border p-2"
-                    placeholder="Enter link URL"
-                  />
-                </div>
-              ))}
-              <button
-                type="button"
-                className="mt-2 inline-flex items-center px-3 py-2  border-transparent leading-4 font-medium rounded-md border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-300 focus:ring-slate-500">
-                + Add Link
-              </button>
-            </div>
-
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-4">
               <button
                 type="submit"
-                className="bg-slate-600 hover:bg-slate-700 text-white font-semibold py-1.5 px-4 rounded-lg focus:outline-none focus:shadow-outline">
-                Apply This Job
+                className="py-1.5 px-3 rounded-sm bg-slate-800 text-white">
+                Reply
               </button>
             </div>
           </form>
