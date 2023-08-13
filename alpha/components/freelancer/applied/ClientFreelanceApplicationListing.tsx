@@ -27,7 +27,7 @@ const ClientFreelanceApplicationListing = () => {
           session.user._id
         );
         offerDatas && setOffers(offerDatas);
-        console.log('od',offerDatas)
+        console.log("od", offerDatas);
       }
     };
     fillDatas();
@@ -46,12 +46,12 @@ const ClientFreelanceApplicationListing = () => {
   }, [currentOffer]);
 
   return (
-    <div>
-      <section>
+    <div className="flex gap-4 mt-2">
+      <section className="w-1/3">
         <div>
           {offers &&
             offers.map((offer) => (
-              <div key={offer._id}>
+              <div key={offer._id} className="p-4 text-sm border rounded-md">
                 <h1 onClick={() => setCurrentOffer(offer._id)}>
                   {offer.title}
                 </h1>
@@ -59,7 +59,7 @@ const ClientFreelanceApplicationListing = () => {
             ))}
         </div>
       </section>
-      <section>
+      <section className="w-2/3">
         {applications &&
           applications.map((item) => (
             <div key={item._id}>
