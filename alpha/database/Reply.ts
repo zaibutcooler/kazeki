@@ -6,7 +6,7 @@ export interface ReplyType {
   user: string;
   title: string;
   description: string;
-  appointment: Date;
+  appointment: Date | string;
   links: LinkType[];
   itemID: string;
   created: Date;
@@ -16,7 +16,7 @@ export interface ReplyCreateType {
   user: string;
   title: string;
   description: string;
-  appointment: Date;
+  appointment: Date | string;
   links: LinkType[];
   itemID: string;
 }

@@ -1,6 +1,8 @@
 import { LinkType } from "@/database/types";
 import { clearBox } from "@/store/boxSlice";
+import { createFreelanceReply } from "@/utils/forms/createFreelanceReply";
 import createJobApplication from "@/utils/forms/createJobApplication";
+import { createJobReply } from "@/utils/forms/createJobReply";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -16,13 +18,38 @@ const ReplyForm: React.FC<Props> = ({ itemID, type }) => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [appointment, setAppointment] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
   const [links, setLinks] = useState<LinkType[]>([
     { link: "www.example.com", label: "haha" },
   ]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (session?.user) {
+      const combinedDateTime = new Date(`${date}T${time}`).toISOString();
+      if ((type = "job")) {
+        const newReply = await createJobReply({
+          user: session.user._id,
+          title,
+          description,
+          appointment: combinedDateTime,
+          links,
+          itemID,
+        });
+        newReply && window.alert("job fuck");
+      } else if ((type = "freelance")) {
+        const newReply = await createFreelanceReply({
+          user: session.user._id,
+          title,
+          description,
+          appointment: combinedDateTime,
+          links,
+          itemID,
+        });
+        newReply && window.alert("freelance fuck");
+      }
+    }
   };
 
   const dispatch = useDispatch();
@@ -95,8 +122,8 @@ const ReplyForm: React.FC<Props> = ({ itemID, type }) => {
                   type="date"
                   name="appointment"
                   id="appointment"
-                  value={appointment}
-                  onChange={(e) => setAppointment(e.target.value)}
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
                   className="p-2 border rounded-md w-full mt-1.5"
                 />
               </div>
@@ -110,8 +137,8 @@ const ReplyForm: React.FC<Props> = ({ itemID, type }) => {
                   type="time"
                   name="appointment"
                   id="appointment"
-                  value={appointment}
-                  onChange={(e) => setAppointment(e.target.value)}
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
                   className="p-2 border rounded-md w-full mt-1.5"
                 />
               </div>
@@ -189,8 +216,8 @@ const ReplyForm: React.FC<Props> = ({ itemID, type }) => {
             <div className="flex justify-end">
               <button
                 type="submit"
-                className="bg-slate-600 hover:bg-slate-700 text-white font-semibold py-1.5 px-4 rounded-lg focus:outline-none focus:shadow-outline">
-                Apply This Job
+                className="py-1.5 px-3 rounded-sm bg-slate-800 text-white">
+                Reply
               </button>
             </div>
           </form>

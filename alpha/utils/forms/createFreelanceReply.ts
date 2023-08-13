@@ -1,11 +1,6 @@
-import { FreelanceApplicationType } from "@/database/FreelanceApplication";
-import {
-  JobApplicationCreateType,
-  JobApplicationType,
-} from "@/database/JobApplication";
 import { ReplyCreateType, ReplyType } from "@/database/Reply";
 
-export const createJobReply = async ({
+export const createFreelanceReply = async ({
   user,
   title,
   description,
