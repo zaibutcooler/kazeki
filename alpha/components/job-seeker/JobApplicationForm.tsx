@@ -45,7 +45,7 @@ const JobApplicationForm: React.FC<Props> = ({ itemID }) => {
       <div className="mx-auto">
         <div className="bg-white shadow-md rounded-md py-4 w-full md:w-[500px] lg:w-[600px] text-xs md:text-sm">
           <div className="h-[40px] px-8 flex border-b border-gray-100 justify-between items-top">
-            <span className="font-semibold">Apply This Job</span>
+            <span className="font-semibold">Job Reply</span>
             <button onClick={handleBack}>
               <AiOutlineClose className="font-bold" />
             </button>

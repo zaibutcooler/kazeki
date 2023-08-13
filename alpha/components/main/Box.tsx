@@ -2,6 +2,7 @@ import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import JobApplicationForm from "../job-seeker/JobApplicationForm";
 import FreelanceApplicationForm from "../freelancer/FreelanceApplicationForm";
+import ReplyForm from "../job-seeker/ReplyForm";
 
 const Box = () => {
   const currentBox = useSelector((state: RootState) => state.box.currentBox);
@@ -14,9 +15,9 @@ const Box = () => {
       case "freelance":
         return <FreelanceApplicationForm itemID={id} />;
       case "jobReply":
-        return null;
+        return <ReplyForm itemID={id} type="job" />;
       case "freelanceReply":
-        return null;
+        return <ReplyForm itemID={id} type="freelance" />;
       default:
         return null;
     }
