@@ -8,6 +8,7 @@ export interface ReplyType {
   description: string;
   appointment: Date;
   links: LinkType[];
+  itemID: string;
   created: Date;
 }
 
@@ -17,6 +18,7 @@ export interface ReplyCreateType {
   description: string;
   appointment: Date;
   links: LinkType[];
+  itemID: string;
 }
 
 const replySchema = new Schema({
@@ -30,6 +32,8 @@ const replySchema = new Schema({
       label: { type: String },
     },
   ],
+  itemID: { type: Schema.Types.ObjectId },
+  itemType: { type: String },
   created: { type: Date, default: Date.now },
 });
 

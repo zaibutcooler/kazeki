@@ -13,6 +13,10 @@ const Box = () => {
         return <JobApplicationForm itemID={id} />;
       case "freelance":
         return <FreelanceApplicationForm itemID={id} />;
+      case "jobReply":
+        return null;
+      case "freelanceReply":
+        return null;
       default:
         return null;
     }

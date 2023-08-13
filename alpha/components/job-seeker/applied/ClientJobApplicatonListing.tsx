@@ -7,6 +7,7 @@ import React, { useEffect, useState, useRef } from "react";
 import JobApplicationCard from "./JobApplicationCard";
 import { BsChevronCompactDown } from "react-icons/bs";
 import { AiOutlineDown } from "react-icons/ai";
+import { createJobReply } from "@/utils/forms/createJobReply";
 
 const ClientJobApplicationListing = () => {
   const [offers, setOffers] = useState<JobOfferType[]>([]);
@@ -48,6 +49,10 @@ const ClientJobApplicationListing = () => {
     };
     fillApplications();
   }, [currentOffer]);
+
+  const handlePass = () => {};
+
+  const handleSubmit = async () => {};
 
   return (
     <div className="mt-2 md:flex flex-row-reverse gap-4">
