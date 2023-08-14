@@ -59,6 +59,7 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const userID = searchParams.get("userID");
     const offerID = searchParams.get("offerID");
+    const option = searchParams.get("option");
 
     if (userID) {
       const items = await Model.find({ user: userID });
