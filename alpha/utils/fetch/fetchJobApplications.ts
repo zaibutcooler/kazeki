@@ -12,11 +12,11 @@ export const fetchJobApplication = async () => {
   }
 };
 
-export const fetchJobApplicationWithUserID = async (offerID: string) => {
+export const fetchJobApplicationWithUserID = async (userID: string) => {
   // need to fix
   try {
     const response = await fetch(
-      `/api/job-seeking/application?offerID=${offerID}`
+      `/api/job-seeking/application?userID=${userID}`
     );
     if (response.ok) {
       const datas: JobApplicationType[] = await response.json();

@@ -5,7 +5,7 @@ export interface UserType {
   _id: string;
   email: string;
   password: string;
-  userProfile: string | ProfileType;
+  userProfile: ProfileType;
   client: boolean;
   created: string | Date;
 }

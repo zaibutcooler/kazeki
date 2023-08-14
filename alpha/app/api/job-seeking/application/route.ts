@@ -62,7 +62,31 @@ export async function GET(req: Request) {
     const option = searchParams.get("option");
 
     if (userID) {
-      const items = await Model.find({ user: userID });
+      const populateOptions = [
+        {
+          path: "user",
+          populate: {
+            path: "userProfile",
+            model: "UserProfile",
+          },
+        },
+        {
+          path: "job",
+          populate: [
+            {
+              path: "user",
+              populate: {
+                path: "userProfile",
+                model: "UserProfile",
+              },
+            },
+          ],
+        },
+      ];
+
+      const items = await Model.find({ user: userID }).populate(
+        populateOptions
+      );
       return new Response(JSON.stringify(items), {
         status: 200,
       });
