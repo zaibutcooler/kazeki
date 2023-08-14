@@ -60,30 +60,29 @@ export async function GET(req: Request) {
     const userID = searchParams.get("userID");
     const offerID = searchParams.get("offerID");
     const option = searchParams.get("option");
+    const populateOptions = [
+      {
+        path: "user",
+        populate: {
+          path: "userProfile",
+          model: "UserProfile",
+        },
+      },
+      {
+        path: "job",
+        populate: [
+          {
+            path: "user",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+            },
+          },
+        ],
+      },
+    ];
 
     if (userID) {
-      const populateOptions = [
-        {
-          path: "user",
-          populate: {
-            path: "userProfile",
-            model: "UserProfile",
-          },
-        },
-        {
-          path: "job",
-          populate: [
-            {
-              path: "user",
-              populate: {
-                path: "userProfile",
-                model: "UserProfile",
-              },
-            },
-          ],
-        },
-      ];
-
       const items = await Model.find({ user: userID }).populate(
         populateOptions
       );
@@ -93,13 +92,9 @@ export async function GET(req: Request) {
     }
 
     if (offerID) {
-      const items = await Model.find({ job: offerID }).populate({
-        path: "user",
-        populate: {
-          path: "userProfile",
-          model: "UserProfile",
-        },
-      });
+      const items = await Model.find({ job: offerID }).populate(
+        populateOptions
+      );
       return new Response(JSON.stringify(items), {
         status: 200,
       });

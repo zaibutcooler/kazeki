@@ -28,7 +28,7 @@ const AppliedJobsListing = () => {
     <div className="mt-3">
       {applications &&
         applications.map((item) => (
-          <div key={item._id} className="flex flex-col md:flex-row">
+          <div key={item._id} className="flex flex-col md:flex-row mb-3">
             <JobApplicationCard item={item} />
           </div>
         ))}

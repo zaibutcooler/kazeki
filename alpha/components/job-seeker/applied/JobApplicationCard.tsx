@@ -3,6 +3,7 @@ import { JobOfferType } from "@/database/JobOffer";
 import { UserType } from "@/database/User";
 import { ProfileType } from "@/database/UserProfile";
 import { setBox } from "@/store/boxSlice";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineDown, AiOutlineProfile, AiOutlineUp } from "react-icons/ai";
@@ -16,7 +17,8 @@ interface Props {
 
 const JobApplicationCard: React.FC<Props> = ({ item }) => {
   const [open, setOpen] = useState(false);
-  const profile = item.user.userProfile as ProfileType;
+  const { data: session } = useSession();
+  const profile = session?.user.userProfile as ProfileType;
   const dispatch = useDispatch();
 
   const offer: JobOfferType = item.job as any;
