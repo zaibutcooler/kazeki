@@ -1,6 +1,7 @@
 import { Schema, model, models } from "mongoose";
 import { LinkType } from "./types";
 import { UserType } from "./User";
+import { ReplyType } from "./Reply";
 export interface JobApplicationType {
   _id: string;
   user: UserType;
@@ -10,7 +11,7 @@ export interface JobApplicationType {
   cv: string;
   links: LinkType[];
   approved: boolean;
-  reply: Schema.Types.ObjectId;
+  reply: ReplyType;
   created: Date;
 }
 

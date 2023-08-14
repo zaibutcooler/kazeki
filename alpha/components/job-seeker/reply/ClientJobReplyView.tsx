@@ -36,24 +36,26 @@ const ClientJobReplyView = () => {
     fillReplies();
   }, [offers]);
 
+  const filteredReply = (
+    application: JobApplicationType[],
+    offer: JobOfferType
+  ) => {
+    const filteredApplication = application.filter(
+      (item) => item.job === offer._id
+    );
+    const result = filteredApplication.map((item) => item.reply);
+    return result;
+  };
+
   return (
     <div className="w-full mt-3">
-      {offers &&
+      {applications &&
         offers.map((item) => (
-          <div key={item._id} className="w-full p-4 border rounded-sm mb-3">
-            <main className="w-full ">
-              <h1 className="font-medium">{item.title}</h1>
-              <div className="">
-                {applications &&
-                  applications.map((application) => (
-                    <div>
-                      {application.job === item._id && (
-                        <div className="p-3 border rounded-sm">hi</div>
-                      )}
-                    </div>
-                  ))}
-              </div>
-            </main>
+          <div key={item._id}>
+            <ClientScheduleCard
+              offer={item}
+              replies={filteredReply(applications, item)}
+            />
           </div>
         ))}
     </div>
