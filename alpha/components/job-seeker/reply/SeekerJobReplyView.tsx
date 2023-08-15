@@ -2,6 +2,7 @@ import { JobApplicationType } from "@/database/JobApplication";
 import { fetchJobApplicationWithUserID } from "@/utils/fetch/fetchJobApplications";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import SeekerScheduleCard from "./SeekerScheduleCard";
 
 const SeekerJobReplyView = () => {
   const [applications, setApplications] = useState<JobApplicationType[] | null>(
@@ -33,7 +34,9 @@ const SeekerJobReplyView = () => {
       {applications && (
         <div className="">
           {applications.map((item) => (
-            <main key={item._id} className=""></main>
+            <main key={item._id} className="">
+              <SeekerScheduleCard offer={item} />
+            </main>
           ))}
         </div>
       )}

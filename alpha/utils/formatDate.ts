@@ -7,7 +7,7 @@ export const formatClassicDate = (input: string | Date) => {
 };
 
 export const formatDateTime = (
-  input: string | Date
+  input: string
 ): { date: string; time: string } => {
   const date = new Date(input);
   const dateOptions: Intl.DateTimeFormatOptions = {

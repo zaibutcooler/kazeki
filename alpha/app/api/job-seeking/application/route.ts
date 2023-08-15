@@ -102,7 +102,10 @@ export async function GET(req: Request) {
     }
 
     if (replyOfferID) {
-      const items = await Model.find({ job: offerID }).populate("reply");
+      const items = await Model.find({
+        job: replyOfferID,
+        approved: true,
+      }).populate(populateOptions);
       return new Response(JSON.stringify(items), {
         status: 200,
       });

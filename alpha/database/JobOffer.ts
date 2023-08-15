@@ -21,6 +21,8 @@ export interface JobOfferType {
 
   applicants: string[];
 
+  closed: boolean;
+  closedDate: Date;
   updated: Date;
   created: Date;
 }
@@ -68,6 +70,8 @@ const jobOfferSchema = new Schema({
 
   applicants: { type: [String] },
 
+  closed: { type: Boolean, default: false },
+  closedDate: { type: Date },
   updated: { type: Date },
   created: { type: Date, default: Date.now },
 });
