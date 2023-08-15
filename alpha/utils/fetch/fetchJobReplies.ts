@@ -8,7 +8,9 @@ export const fetchJobRepliesWithApplication = async (idArray: string[]) => {
     });
     if (response.ok) {
       const datas: JobApplicationType[] = await response.json();
+      console.log("dt", datas);
       const results = await datas.slice().reverse();
+
       return results;
     }
   } catch (err) {

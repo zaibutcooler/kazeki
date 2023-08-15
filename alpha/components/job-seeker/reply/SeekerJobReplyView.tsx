@@ -33,9 +33,7 @@ const SeekerJobReplyView = () => {
       {applications && (
         <div className="">
           {applications.map((item) => (
-            <main key={item._id} className="">
-              Test
-            </main>
+            <main key={item._id} className=""></main>
           ))}
         </div>
       )}

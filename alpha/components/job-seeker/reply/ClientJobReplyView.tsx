@@ -6,56 +6,41 @@ import { fetchJobOfferWithUserID } from "@/utils/fetch/fetchJobOffers";
 import { fetchJobRepliesWithApplication } from "@/utils/fetch/fetchJobReplies";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import ClientScheduleCard from "./ClientScheduleCard";
 
 const ClientJobReplyView = () => {
   const { data: session } = useSession();
 
   const [offers, setOffers] = useState<JobOfferType[]>([]);
-  const [applications, setApplications] = useState<JobApplicationType[]>([]);
-  const [replies, setReplies] = useState<ReplyType[]>([]);
-
   useEffect(() => {
     const fillDatas = async () => {
       if (session?.user) {
         const offerDatas = await fetchJobOfferWithUserID(session.user._id);
-        offerDatas && setOffers(offerDatas);
+        offerDatas && (await setOffers(offerDatas));
       }
     };
+
     fillDatas();
   }, []);
 
-  useEffect(() => {
-    const fillReplies = async () => {
-      if (session?.user && offers) {
-        const offerIds = offers.map((offer) => offer._id);
-        const applicationDatas = await fetchJobRepliesWithApplication(offerIds);
+  // useEffect(() => {
+  //   const fillReplies = async () => {
+  //     const offerIds = offers && offers.map((offer) => offer._id);
+  //     console.log("oid", offerIds);
+  //     const applicationDatas = await fetchJobRepliesWithApplication(offerIds);
 
-        applicationDatas && setApplications(applicationDatas);
-      }
-    };
-    fillReplies();
-  }, [offers]);
-
-  const filteredReply = (
-    application: JobApplicationType[],
-    offer: JobOfferType
-  ) => {
-    const filteredApplication = application.filter(
-      (item) => item.job === offer._id
-    );
-    const result = filteredApplication.map((item) => item.reply);
-    return result;
-  };
+  //     applicationDatas && setApplications(applicationDatas);
+  //     console.log("apl", applicationDatas);
+  //   };
+  //   if (offers) fillReplies();
+  // }, [offers]);
 
   return (
     <div className="w-full mt-3">
-      {applications &&
-        offers.map((item) => (
-          <div key={item._id}>
-            <ClientScheduleCard
-              offer={item}
-              replies={filteredReply(applications, item)}
-            />
+      {offers &&
+        offers.map((item, index) => (
+          <div key={index}>
+            <ClientScheduleCard offer={item} />
           </div>
         ))}
     </div>

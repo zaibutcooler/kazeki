@@ -43,3 +43,21 @@ export const fetchJobApplicationWithOfferID = async (offerID: string) => {
     console.log("error", err);
   }
 };
+
+export const fetchJobApplicationWithReplyOfferID = async (
+  replyOfferID: string
+) => {
+  // need to fix
+  try {
+    const response = await fetch(
+      `/api/job-seeking/application?replyOfferID=${replyOfferID}`
+    );
+    if (response.ok) {
+      const datas: JobApplicationType[] = await response.json();
+      const results = await datas.slice().reverse();
+      return results;
+    }
+  } catch (err) {
+    console.log("error", err);
+  }
+};

@@ -59,6 +59,7 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const userID = searchParams.get("userID");
     const offerID = searchParams.get("offerID");
+    const replyOfferID = searchParams.get("replyOfferID");
     const option = searchParams.get("option");
     const populateOptions = [
       {
@@ -95,6 +96,13 @@ export async function GET(req: Request) {
       const items = await Model.find({ job: offerID }).populate(
         populateOptions
       );
+      return new Response(JSON.stringify(items), {
+        status: 200,
+      });
+    }
+
+    if (replyOfferID) {
+      const items = await Model.find({ job: offerID }).populate("reply");
       return new Response(JSON.stringify(items), {
         status: 200,
       });
