@@ -61,3 +61,19 @@ export const fetchJobApplicationWithReplyOfferID = async (
     console.log("error", err);
   }
 };
+
+export const fetchApprovedJobApplicationWithUserID = async (userID: string) => {
+  // need to fix
+  try {
+    const response = await fetch(
+      `/api/job-seeking/application?userID=${userID}&option=approved`
+    );
+    if (response.ok) {
+      const datas: JobApplicationType[] = await response.json();
+      const results = await datas.slice().reverse();
+      return results;
+    }
+  } catch (err) {
+    console.log("error", err);
+  }
+};

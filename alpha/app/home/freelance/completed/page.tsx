@@ -1,3 +1,3 @@
-export function FreelanceCompletedPage() {
+export default function FreelanceCompletedPage() {
   return <main>Freelance completed</main>;
 }

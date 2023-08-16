@@ -2,6 +2,7 @@ import Model from "@/database/JobApplication";
 import connectDB from "@/utils/connectDB";
 import User from "@/database/User";
 import JobOffer from "@/database/JobOffer";
+import Reply from "@/database/Reply";
 
 export async function POST(req: Request) {
   try {
@@ -81,11 +82,22 @@ export async function GET(req: Request) {
           },
         ],
       },
-      {
-        path: "reply",
-        model: "Reply",
-      },
     ];
+    if (userID && option === "approved") {
+      console.log("reached");
+      const items = await Model.find({ user: userID, approved: true }).populate(
+        [
+          ...populateOptions,
+          {
+            path: "reply",
+            model: "Reply",
+          },
+        ]
+      );
+      return new Response(JSON.stringify(items), {
+        status: 200,
+      });
+    }
 
     if (userID) {
       const items = await Model.find({ user: userID }).populate(
@@ -120,6 +132,7 @@ export async function GET(req: Request) {
       status: 200,
     });
   } catch (error) {
+    console.log("err", error);
     return new Response(JSON.stringify({ message: "Internal Server Error" }), {
       status: 500,
     });

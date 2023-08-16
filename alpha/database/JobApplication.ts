@@ -2,6 +2,7 @@ import { Schema, model, models } from "mongoose";
 import { LinkType } from "./types";
 import { UserType } from "./User";
 import { ReplyType } from "./Reply";
+import { JobOfferType } from "./JobOffer";
 export interface JobApplicationType {
   _id: string;
   user: UserType;

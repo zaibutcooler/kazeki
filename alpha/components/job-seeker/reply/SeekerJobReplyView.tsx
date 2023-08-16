@@ -1,5 +1,5 @@
 import { JobApplicationType } from "@/database/JobApplication";
-import { fetchJobApplicationWithUserID } from "@/utils/fetch/fetchJobApplications";
+import { fetchApprovedJobApplicationWithUserID } from "@/utils/fetch/fetchJobApplications";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import SeekerScheduleCard from "./SeekerScheduleCard";
@@ -14,7 +14,7 @@ const SeekerJobReplyView = () => {
   useEffect(() => {
     const fillDatas = async () => {
       if (session?.user) {
-        const applicationDatas = await fetchJobApplicationWithUserID(
+        const applicationDatas = await fetchApprovedJobApplicationWithUserID(
           session.user._id
         );
         const filteredDatas = applicationDatas?.filter(

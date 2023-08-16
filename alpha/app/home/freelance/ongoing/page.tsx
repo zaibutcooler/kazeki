@@ -1,3 +1,3 @@
-export function FreelanceOngoings() {
+export default function FreelanceOngoings() {
   return <main>Freelance Ongoing</main>;
 }
