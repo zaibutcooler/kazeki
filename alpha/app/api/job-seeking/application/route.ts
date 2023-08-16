@@ -81,6 +81,10 @@ export async function GET(req: Request) {
           },
         ],
       },
+      {
+        path: "reply",
+        model: "Reply",
+      },
     ];
 
     if (userID) {

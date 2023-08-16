@@ -5,7 +5,7 @@ import { ReplyType } from "./Reply";
 export interface JobApplicationType {
   _id: string;
   user: UserType;
-  job: string;
+  job: string | JobOfferType;
   title: string;
   description: string;
   cv: string;

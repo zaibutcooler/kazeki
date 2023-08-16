@@ -22,7 +22,7 @@ const SeekerJobReplyView = () => {
         );
         if (filteredDatas) {
           setApplications(filteredDatas);
-          console.log(filteredDatas);
+          console.log("fd", filteredDatas);
         }
       }
     };
@@ -35,7 +35,7 @@ const SeekerJobReplyView = () => {
         <div className="">
           {applications.map((item) => (
             <main key={item._id} className="">
-              <SeekerScheduleCard offer={item} />
+              <SeekerScheduleCard application={item} reply={item.reply} />
             </main>
           ))}
         </div>

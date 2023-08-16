@@ -14,7 +14,7 @@ const LoginForm = () => {
       email: email,
       password: password,
       redirect: true,
-      callbackUrl: "/",
+      callbackUrl: "/home",
     });
   };
 

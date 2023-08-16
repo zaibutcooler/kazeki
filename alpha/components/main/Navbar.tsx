@@ -53,7 +53,7 @@ const Navbar = () => {
             </button>
             {authDropDown && (
               <div
-                className="absolute right-4 lg:right-6 py-4 bg-white border border-gray-200 lg:w-56 md:w-48 w-34 rounded-md shadow-md "
+                className="absolute right-4 lg:right-6 py-4 bg-white border border-gray-200 md:w-56 w-48 rounded-md shadow-md "
                 onMouseLeave={() => {
                   setAuthDropDown(false);
                 }}>

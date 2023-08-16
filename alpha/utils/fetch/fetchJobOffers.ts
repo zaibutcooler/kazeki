@@ -25,3 +25,15 @@ export const fetchJobOfferWithUserID = async (userID: string) => {
     console.log("error", err);
   }
 };
+
+export const fetchJobOfferWithID = async (id: string) => {
+  try {
+    const response = await fetch(`/api/job-seeking/offer?id=${id}`);
+    const result = await response.json();
+    if (response.ok) {
+      return result;
+    }
+  } catch (err) {
+    console.log("error", err);
+  }
+};
