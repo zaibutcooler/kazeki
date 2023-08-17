@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import JobOfferCard from "./JobOfferCard";
 import { fetchJobApplication } from "@/utils/fetch/fetchJobApplications";
 import { FreelanceApplicationType } from "@/database/FreelanceApplication";
+import JobHeaderCard from "./JobHeaderCard";
 
-const JobListing = () => {
+interface Props {}
+
+const JobListing: React.FC<Props> = ({}) => {
   const [offers, setOffers] = useState<JobOfferType[]>([]);
   const [applications, setApplications] = useState<FreelanceApplicationType[]>(
     []
@@ -22,8 +25,13 @@ const JobListing = () => {
     fillDatas();
   }, []);
 
+  const handleSearch = (items: JobOfferType[]) => {
+    setOffers(items);
+  };
+
   return (
     <div className="">
+      <JobHeaderCard handleSearch={handleSearch} />
       {offers &&
         offers.map((offer) => (
           <main>

@@ -60,6 +60,16 @@ export async function GET(req: Request) {
     const id = searchParams.get("id");
     const userID = searchParams.get("userID");
     const option = searchParams.get("option");
+    const search = searchParams.get("search");
+
+    if (search) {
+      const searchResults = await Model.find({
+        title: { $regex: search, $options: "i" },
+      });
+      return new Response(JSON.stringify(searchResults), {
+        status: 200,
+      });
+    }
 
     if (id) {
       const item = await Model.findOne({ _id: id });
