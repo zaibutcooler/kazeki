@@ -5,7 +5,7 @@ export const fetchProfile = async (profileID: string) => {
     const response = await fetch(`/api/user/profile?id=${profileID}`);
 
     if (response.ok) {
-      const datas:ProfileType = await response.json();
+      const datas: ProfileType = await response.json();
 
       return datas;
     }

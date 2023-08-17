@@ -17,13 +17,8 @@ const SeekerJobReplyView = () => {
         const applicationDatas = await fetchApprovedJobApplicationWithUserID(
           session.user._id
         );
-        const filteredDatas = applicationDatas?.filter(
-          (data) => data.approved === true
-        );
-        if (filteredDatas) {
-          setApplications(filteredDatas);
-          console.log("fd", filteredDatas);
-        }
+        applicationDatas && setApplications(applicationDatas);
+        console.log("fd", applicationDatas);
       }
     };
     fillDatas();
@@ -35,7 +30,7 @@ const SeekerJobReplyView = () => {
         <div className="">
           {applications.map((item) => (
             <main key={item._id} className="">
-              <SeekerScheduleCard application={item} reply={item.reply} />
+              <SeekerScheduleCard application={item} />
             </main>
           ))}
         </div>

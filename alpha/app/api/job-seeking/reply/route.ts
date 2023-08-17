@@ -47,3 +47,31 @@ export async function POST(req: Request) {
     });
   }
 }
+
+export async function GET(req: Request) {
+  try {
+    await connectDB();
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (id) {
+      console.log("reached");
+      const items = await Model.findOne({ _id: id });
+      console.log(items);
+      const result = await items;
+      return new Response(JSON.stringify(result), {
+        status: 200,
+      });
+    }
+
+    const items = await Model.find();
+    return new Response(JSON.stringify(items), {
+      status: 200,
+    });
+  } catch (error) {
+    console.log("err", error);
+    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+      status: 500,
+    });
+  }
+}

@@ -86,15 +86,11 @@ export async function GET(req: Request) {
     if (userID && option === "approved") {
       console.log("reached");
       const items = await Model.find({ user: userID, approved: true }).populate(
-        [
-          ...populateOptions,
-          {
-            path: "reply",
-            model: "Reply",
-          },
-        ]
+        populateOptions
       );
-      return new Response(JSON.stringify(items), {
+      console.log(items);
+      const result = await items;
+      return new Response(JSON.stringify(result), {
         status: 200,
       });
     }

@@ -1,11 +1,15 @@
 "use client";
 
+import { ProfileType } from "@/database/UserProfile";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaUser, FaBriefcase, FaSearchDollar } from "react-icons/fa";
 
 const MainCard = () => {
   const [selectedOne, setSelectedOne] = useState("client");
+  const { data: session } = useSession();
+  const profile = session?.user.userProfile as ProfileType;
 
   const displayContent = () => {
     switch (selectedOne) {
@@ -20,17 +24,35 @@ const MainCard = () => {
               efficently
             </p>
             <div className="mb-6">
-              <Link
-                href="/auth/register"
-                className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white hover:bg-gray-700">
-                Sign up and recruit
-              </Link>
+              {session?.user ? (
+                <Link
+                  href="/home"
+                  className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white hover:bg-gray-700">
+                  Head to Home
+                </Link>
+              ) : (
+                <Link
+                  href="/auth/register"
+                  className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white hover:bg-gray-700">
+                  Sign up and recruit
+                </Link>
+              )}
             </div>
             <p className="text-xs text-gray-500">
-              Already created a client account ?{" "}
-              <Link href="/auth/signin" className="text-black">
-                Sign in
-              </Link>
+              <span className="mr-2">
+                {session?.user
+                  ? `You are already logged in as ${profile.firstName}`
+                  : "Already created a client account?"}
+              </span>
+              {session?.user ? (
+                <button onClick={() => signOut()} className="text-black">
+                  Sign out
+                </button>
+              ) : (
+                <Link href="/auth/login" className="text-black">
+                  Sign in
+                </Link>
+              )}
             </p>
           </>
         );
@@ -45,11 +67,20 @@ const MainCard = () => {
               ideal job
             </p>
             <div className="mb-6 flex">
-              <Link
-                href="/auth/register"
-                className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white mr-6  hover:bg-gray-700">
-                Create Account
-              </Link>
+              {session?.user ? (
+                <Link
+                  href="/home"
+                  className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white mr-6  hover:bg-gray-700">
+                  Head To home
+                </Link>
+              ) : (
+                <Link
+                  href="/auth/register"
+                  className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white mr-6  hover:bg-gray-700">
+                  Create Account
+                </Link>
+              )}
+
               <Link
                 href="/home/job-seeking"
                 className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-200 text-gray-800 mr-6 hover:bg-gray-300">
@@ -57,10 +88,20 @@ const MainCard = () => {
               </Link>
             </div>
             <p className="text-xs text-gray-500">
-              Already created a client account ?{" "}
-              <Link href="/auth/login" className="text-black">
-                Sign in
-              </Link>
+              <span className="mr-2">
+                {session?.user
+                  ? `You are already signed in as ${profile.firstName}`
+                  : "Already created a client account?"}
+              </span>
+              {session?.user ? (
+                <button onClick={() => signOut()} className="text-black">
+                  Sign out
+                </button>
+              ) : (
+                <Link href="/auth/login" className="text-black">
+                  Sign in
+                </Link>
+              )}
             </p>
           </>
         );
@@ -75,11 +116,20 @@ const MainCard = () => {
               and talents.
             </p>
             <div className="mb-6 flex">
-              <Link
-                href="/auth/register"
-                className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white mr-6  hover:bg-gray-700">
-                Sign Up and Explore
-              </Link>
+              {session?.user ? (
+                <Link
+                  href="/home"
+                  className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white mr-6  hover:bg-gray-700">
+                  Head to Home
+                </Link>
+              ) : (
+                <Link
+                  href="/auth/register"
+                  className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-900 text-white mr-6  hover:bg-gray-700">
+                  Sign Up and Explore
+                </Link>
+              )}
+
               <Link
                 href="/home/freelance"
                 className="px-4 py-3 border rounded-md text-sm font-semibold bg-gray-200 text-gray-800 mr-6 hover:bg-gray-300">
@@ -87,10 +137,20 @@ const MainCard = () => {
               </Link>
             </div>
             <p className="text-xs text-gray-500">
-              Already created a client account ?{" "}
-              <Link href="/auth/login" className="text-black">
-                Sign in
-              </Link>
+              <span className="mr-2">
+                {session?.user
+                  ? `You are already logged in as ${profile.firstName}`
+                  : "Already created a client account?"}
+              </span>
+              {session?.user ? (
+                <button onClick={() => signOut()} className="text-black">
+                  Sign out
+                </button>
+              ) : (
+                <Link href="/auth/login" className="text-black">
+                  Sign in
+                </Link>
+              )}
             </p>
           </>
         );
