@@ -4,6 +4,7 @@ import { FreelanceApplicationType } from "@/database/FreelanceApplication";
 import { fetchFreelanceApplicationWithUserID } from "@/utils/fetch/fetchFreelanceApplications";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import FreelanceApplicationCard from "./FreelanceApplicationCard";
 
 const AppliedFreelanceListing = () => {
   const [applications, setApplications] = useState<FreelanceApplicationType[]>(
@@ -24,8 +25,13 @@ const AppliedFreelanceListing = () => {
   }, []);
 
   return (
-    <div>
-      {applications && applications.map((item) => <div>{item.title}</div>)}
+    <div className="mt-3">
+      {applications &&
+        applications.map((item) => (
+          <div key={item._id} className="flex flex-col md:flex-row mb-3">
+            <FreelanceApplicationCard item={item} />
+          </div>
+        ))}
     </div>
   );
 };

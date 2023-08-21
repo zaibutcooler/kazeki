@@ -1,17 +1,19 @@
 import { Schema, model, models } from "mongoose";
 import { LinkType } from "./types";
 import { UserType } from "./User";
+import { FreelanceOfferType } from "./FreelanceOffer";
+import { ReplyType } from "./Reply";
 export interface FreelanceApplicationType {
   _id: string;
   user: UserType;
-  freelance: string;
+  freelance: string | FreelanceOfferType;
   title: string;
   description: string;
   cv: string;
   negoSalary: number;
   links: LinkType[];
   approved: boolean;
-  reply: Schema.Types.ObjectId;
+  reply: ReplyType;
   created: Date;
 }
 
@@ -27,6 +29,7 @@ export interface FreelanceApplicationCreateType {
 
 const freelanceApplicationSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User" },
+  freelance: { type: Schema.Types.ObjectId, ref: "FreelanceOffer" },
   title: { type: String },
   description: { type: String },
   cv: { type: String },

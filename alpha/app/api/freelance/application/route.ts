@@ -17,6 +17,8 @@ export async function POST(req: Request) {
       });
     }
 
+    console.log({ user, title, description, cv, negoSalary, freelance, links });
+
     const offer = await FreelanceOffer.findById(freelance);
     if (offer.applicants.includes(user)) {
       return new Response(JSON.stringify({ message: "User already applied" }), {
@@ -50,6 +52,7 @@ export async function POST(req: Request) {
       status: 200,
     });
   } catch (error) {
+    console.log("create error", error);
     return new Response(JSON.stringify({ message: "Internal Server Error" }), {
       status: 500,
     });
@@ -62,23 +65,66 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const userID = searchParams.get("userID");
     const offerID = searchParams.get("offerID");
+    const replyOfferID = searchParams.get("replyOfferID");
+    const option = searchParams.get("option");
+    const populateOptions = [
+      {
+        path: "user",
+        populate: {
+          path: "userProfile",
+          model: "UserProfile",
+        },
+      },
+      {
+        path: "freelance",
+        populate: [
+          {
+            path: "user",
+            populate: {
+              path: "userProfile",
+              model: "UserProfile",
+            },
+          },
+        ],
+      },
+    ];
 
-    if (userID) {
-      const items = await Model.find({ user: userID });
+    if (userID && option === "approved") {
       console.log("reached");
+      const items = await Model.find({ user: userID, approved: true }).populate(
+        populateOptions
+      );
+      console.log(items);
+      const result = await items;
+      return new Response(JSON.stringify(result), {
+        status: 200,
+      });
+    }
+
+    console.log("userid", userID);
+    if (userID) {
+      const items = await Model.find({ user: userID }).populate(
+        populateOptions
+      );
       return new Response(JSON.stringify(items), {
         status: 200,
       });
     }
 
     if (offerID) {
-      const items = await Model.find({ job: offerID }).populate({
-        path: "user",
-        populate: {
-          path: "userProfile",
-          model: "UserProfile",
-        },
+      const items = await Model.find({ freelance: offerID }).populate(
+        populateOptions
+      );
+      return new Response(JSON.stringify(items), {
+        status: 200,
       });
+    }
+
+    if (replyOfferID) {
+      const items = await Model.find({
+        freelance: replyOfferID,
+        approved: true,
+      }).populate(populateOptions);
       return new Response(JSON.stringify(items), {
         status: 200,
       });
@@ -89,6 +135,7 @@ export async function GET(req: Request) {
       status: 200,
     });
   } catch (error) {
+    console.log("err", error);
     return new Response(JSON.stringify({ message: "Internal Server Error" }), {
       status: 500,
     });

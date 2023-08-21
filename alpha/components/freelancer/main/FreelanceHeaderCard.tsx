@@ -1,29 +1,75 @@
 "use client";
-
+import { FreelanceOfferType } from "@/database/FreelanceOffer";
 import { ProfileType } from "@/database/UserProfile";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const FreelanceHeaderCard = () => {
+interface Props {
+  handleSearch: (items: FreelanceOfferType[]) => void;
+}
+
+const FreelanceHeaderCard: React.FC<Props> = ({ handleSearch }) => {
   const { data: session } = useSession();
+  const [query, setQuery] = useState("");
   const profile = session?.user.userProfile as ProfileType;
+  const [offers, setOffers] = useState<FreelanceOfferType[]>([]);
+
+  useEffect(() => {
+    const searchFunction = async () => {
+      if (query) {
+        // query still needed
+      }
+    };
+    searchFunction();
+  }, [query]);
 
   return (
-    <div className="mb-2 mt-3 w-full rounded-md border p-3">
-      {profile && profile.client ? (
-        <main>
-          <h1>Welcome back Client!</h1>
-          <Link
-            href="/client/freelance-offer"
-            className="px-4 py-2 font-medium rounded-md border">
-            Post
-          </Link>
-        </main>
-      ) : (
-        <main>
-          <h1>Welcome back Seeker!</h1>
-        </main>
-      )}
+    <div className="mt-3 mb-4 p-4 rounded-md border font-medium text-slate-800 w-full">
+      <div className="flex justify-between items-center w-full">
+        {session?.user ? (
+          <section className="w-full">
+            <h1 className="text-lg mb-3">
+              Welcome back{" "}
+              <span className="text-black">{profile.firstName}</span> !
+            </h1>
+            {profile.client ? (
+              <div className="flex gap-4 md:gap-6 w-full text-sm">
+                <Link
+                  href="/client/freelance-offer"
+                  className="w-full px-4 py-2 rounded-full border hover:bg-slate-100 flex">
+                  Start Posting{" "}
+                  <span className="hidden md:block">Your Freelance Offer </span>{" "}
+                  ...
+                </Link>
+                <Link
+                  href="/home/interviews"
+                  className="w-40 py-2 border px-4 rounded-md flex justify-center hover:bg-slate-100">
+                  <h1>My Offers</h1>
+                </Link>
+              </div>
+            ) : (
+              <div className="flex  w-full text-sm">
+                <input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search Via Job Title"
+                  className="w-full px-4 py-2 rounded-l-full border hover:bg-slate-50 flex"
+                />
+                <button
+                  className="w-32 py-2 rounded-r-full border bg-slate-800 text-white hover:bg-slate-600"
+                  onClick={() => {
+                    handleSearch(offers);
+                  }}>
+                  Search
+                </button>
+              </div>
+            )}
+          </section>
+        ) : (
+          <section>Please login first before you apply...</section>
+        )}
+      </div>
     </div>
   );
 };

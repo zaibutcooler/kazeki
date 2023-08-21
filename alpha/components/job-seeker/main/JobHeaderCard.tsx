@@ -69,7 +69,7 @@ const JobHeaderCard: React.FC<Props> = ({ handleSearch }) => {
             )}
           </section>
         ) : (
-          <section>Please login first.</section>
+          <section>Please login first before you apply...</section>
         )}
       </div>
     </div>
