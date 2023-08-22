@@ -5,10 +5,11 @@ export default function ClientLayout({
 }) {
   return (
     <main>
-      <section className="flex justify-center ">
-        <main className="container w-[900px] px-3 md:px-0">
+      <section className="flex justify-center md:justify-between ">
+        <main className="container w-full md:w-[650px] px-3 md:px-0">
           <div className="min-h-[100vh]">{children}</div>
         </main>
+        <main className="hidden md:block">Illustration</main>
       </section>
     </main>
   );
