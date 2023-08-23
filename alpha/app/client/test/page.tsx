@@ -324,6 +324,115 @@ const page = () => {
         </section>
 
         <section>
+          <div className="flex w-full">
+            <label
+              htmlFor="label"
+              className="block text-sm font-medium leading-6 text-slate-900">
+              Allowances
+            </label>
+          </div>
+          <div className=" mb-5 w-full">
+            {formData.allowance.map((item, index) => (
+              <section className="flex w-full gap-6 ">
+                <input
+                  type="text"
+                  key={index}
+                  value={item}
+                  onChange={(e) => handleAllowanceChange(index, e.target.value)}
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </section>
+            ))}
+
+            <div className="w-full flex justify-end">
+              {formData.allowance.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newAllowance = [...formData.allowance];
+                    newAllowance.pop();
+                    setFormData({
+                      ...formData,
+                      allowance: newAllowance,
+                    });
+                  }}
+                  className="mt-4 inline-flex mr-4 items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
+                  Remove
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => {
+                  const newForm = [...formData.allowance, ""];
+                  setFormData({ ...formData, allowance: newForm });
+                }}
+                className="mt-4 inline-flex items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
+                + Add More
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section className="w-full mb-5">
+          <label
+            htmlFor="deadline"
+            className="block text-sm font-medium leading-6 text-slate-900">
+            Application Deadline
+          </label>
+          <input
+            type="date"
+            name="deadline"
+            id="deadline"
+            value={formData.deadline}
+            onChange={(e) => handleChange("deadline", e.target.value)}
+            className="p-2 border rounded-md w-full mt-2"
+          />
+        </section>
+
+        <section>
+          <div className="flex gap-6 w-full">
+            <div className="w-1/2">
+              <label
+                htmlFor="label"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Application Limit
+              </label>
+            </div>
+            <div className="w-1/2">
+              <label
+                htmlFor="link"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Recruit Count
+              </label>
+            </div>
+          </div>
+          <div className=" mb-6 w-full">
+            <section className="flex w-full gap-6 ">
+              <div className="w-1/2">
+                <input
+                  name="from"
+                  id="from"
+                  value={formData.applicationLimit}
+                  onChange={(e) =>
+                    handleChange("applicationLimit", e.target.value)
+                  }
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </div>
+              <div className="w-1/2">
+                <input
+                  name="to"
+                  id="to"
+                  value={formData.recuritAmount}
+                  onChange={(e) => handleChange('recuritAmount', e.target.value)}
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section>
           <div className="flex gap-6 w-full">
             <div className="w-1/3">
               <label
