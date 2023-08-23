@@ -4,31 +4,33 @@ import createJobOffer from "@/utils/forms/createJobOffer";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { FreelanceOfferCreateType } from "@/database/FreelanceOffer";
+import createFreelanceOffer from "@/utils/forms/createFreelanceOffer";
+
+const industriesArray = ["Tech", "Health", "Finance", "Design", "Marketing"]; // need to improve
 
 const page = () => {
   const initialFormData = {
     title: "Frontend Developer",
     description:
-      "We are looking for a skilled frontend developer to join our innovative team at Example Company. As a Frontend Developer, you will be responsible for creating engaging user interfaces, collaborating with backend developers, and ensuring the best possible user experience. If you are passionate about web development and have a strong foundation in React, JavaScript, HTML, and CSS, we'd love to hear from you.",
+      "We are looking for a skilled frontend developer to work on an exciting freelance project. As a Frontend Developer, you will have the opportunity to create captivating user interfaces and contribute to a cutting-edge web development project. If you have a strong foundation in React, JavaScript, HTML, and CSS, and you're passionate about creating high-quality web experiences, we'd love to collaborate with you.",
     requirements: [
       "Solid understanding of frontend technologies including React, JavaScript, HTML, and CSS.",
-      "Previous experience with responsive design and mobile-first development is a plus.",
+      "Previous experience in freelance web development projects.",
     ],
     responsibilities: [
       "Design and implement user interfaces for web applications.",
-      "Collaborate with backend developers and UX/UI designers to improve usability.",
-      "Optimize web applications for maximum speed and scalability.",
-      "Stay up-to-date with emerging frontend technologies and best practices.",
+      "Collaborate with backend developers to integrate frontend components.",
+      "Optimize web applications for performance and responsiveness.",
+      "Adhere to project deadlines and deliver high-quality code.",
     ],
-    company: "Example Company",
-    onSite: true,
-    location: "New York, USA",
-    salary: ["70000", "90000"], //from
-    allowance: ["Health insurance", "Paid time off", "Flexible work hours"],
-    deadline: "2023-08-31",
+    field: ["web-development"],
+    projectDeadline: "2023-08-31",
+    salary: ["$300", "$500"],
+    deadline: "2023-08-15",
     applicationLimit: 300,
-    recruitCount: 5, // to
-    contact: [{ label: "github", link: "https://github.com/examplecompany" }],
+    recruitCount: 5,
+    contact: [{ label: "github", link: "https://github.com/zaiYellYintAung" }],
   };
 
   const { data: session } = useSession();
@@ -59,10 +61,15 @@ const page = () => {
     setFormData({ ...formData, responsibilities: newResponsibilities });
   };
 
-  const handleAllowanceChange = (index: number, value: string) => {
-    const newAllowance = [...formData.allowance];
-    newAllowance[index] = value;
-    setFormData({ ...formData, allowance: newAllowance });
+  const toggleIndustry = (industry: string) => {
+    const updatedFields = formData.field.includes(industry)
+      ? formData.field.filter((item) => item !== industry)
+      : [...formData.field, industry];
+
+    setFormData({
+      ...formData,
+      field: updatedFields,
+    });
   };
 
   const handleLinkChange = (index: number, field: string, value: string) => {
@@ -79,13 +86,13 @@ const page = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     console.log("started");
-    const postBody: JobOfferCreateType = {
+    const postBody: FreelanceOfferCreateType = {
       user: session?.user._id as string,
       ...formData,
     };
-    const datas = await createJobOffer(postBody);
+    const datas = await createFreelanceOffer(postBody);
     if (datas) {
-      router.push("/home/job-seeking");
+      router.push("/home/freelance");
     }
   };
 
@@ -99,7 +106,7 @@ const page = () => {
           <label
             htmlFor="title"
             className="block text-sm font-medium leading-6 text-slate-900">
-            Job-Title
+            Project Title
           </label>
           <input
             type="title"
@@ -225,62 +232,71 @@ const page = () => {
             </div>
           </div>
         </section>
-        <section className="w-full mb-5">
-          <label
-            htmlFor="company"
-            className="block text-sm font-medium leading-6 text-slate-900">
-            Company Name
-          </label>
-          <input
-            type="company"
-            name="company"
-            id="company"
-            value={formData.company}
-            onChange={(e) => handleChange("company", e.target.value)}
-            className="p-2 border rounded-md w-full mt-2"
-          />
-        </section>
-        <section className="w-full mb-5">
-          <label
-            htmlFor="location"
-            className="block text-sm font-medium leading-6 text-slate-900">
-            Company Location
-          </label>
-          <input
-            type="location"
-            name="location"
-            id="location"
-            value={formData.location}
-            onChange={(e) => handleChange("location", e.target.value)}
-            className="p-2 border rounded-md w-full mt-2"
-          />
-        </section>
-        <section>
-          <div className="flex w-full mb-2">
-            <label
-              htmlFor="label"
-              className="block text-sm font-medium leading-6 text-slate-900">
-              Employment Type
-            </label>
-          </div>
-          <div className="col-span-4 md:col-span-3 mb-6 flex gap-4">
-            <button
-              type="button"
-              className={`px-4 border py-2 rounded-lg ${
-                formData.onSite ? "bg-gray-300" : ""
-              }`}
-              onClick={() => setFormData({ ...formData, onSite: true })}>
-              On Site
-            </button>
 
-            <button
-              type="button"
-              className={`px-4 border py-2 rounded-lg ${
-                formData.onSite ? "" : "bg-gray-300"
-              }`}
-              onClick={() => setFormData({ ...formData, onSite: false })}>
-              Remote
-            </button>
+        <section>
+          <div className="flex gap-6 w-full">
+            <div className="w-1/2">
+              <label
+                htmlFor="label"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Application Deadline
+              </label>
+            </div>
+            <div className="w-1/2">
+              <label
+                htmlFor="link"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Project Deadline
+              </label>
+            </div>
+          </div>
+          <div className=" mb-6 w-full">
+            <section className="flex w-full gap-6 ">
+              <div className="w-1/2">
+                <input
+                  type="date"
+                  name="from"
+                  id="from"
+                  value={formData.deadline}
+                  onChange={(e) => handleChange("deadline", e.target.value)}
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </div>
+              <div className="w-1/2">
+                <input
+                  type="date"
+                  name="to"
+                  id="to"
+                  value={formData.projectDeadline}
+                  onChange={(e) =>
+                    handleChange("projectDeadline", e.target.value)
+                  }
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section className="w-full mb-6">
+          <label
+            htmlFor="firstname"
+            className="block text-sm font-medium leading-6 text-slate-900">
+            Industry
+          </label>
+          <div className="mt-2 flex gap-3 p-3 border flex-wrap text-sm rounded-md">
+            {industriesArray.map((item) => (
+              <button
+                type="button"
+                onClick={() => toggleIndustry(item)} //here
+                className={`py-1 px-3 border rounded-full text-sm font-medium text-slate-600 ${
+                  formData.field.includes(item)
+                    ? "border-black text-black shadow-lg"
+                    : ""
+                }`}>
+                {item}
+              </button>
+            ))}
           </div>
         </section>
 
@@ -326,72 +342,6 @@ const page = () => {
         </section>
 
         <section>
-          <div className="flex w-full">
-            <label
-              htmlFor="label"
-              className="block text-sm font-medium leading-6 text-slate-900">
-              Allowances
-            </label>
-          </div>
-          <div className=" mb-5 w-full">
-            {formData.allowance.map((item, index) => (
-              <section className="flex w-full gap-6 ">
-                <input
-                  type="text"
-                  key={index}
-                  value={item}
-                  onChange={(e) => handleAllowanceChange(index, e.target.value)}
-                  className="p-2 border rounded-md w-full mt-2"
-                />
-              </section>
-            ))}
-
-            <div className="w-full flex justify-end">
-              {formData.allowance.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    const newAllowance = [...formData.allowance];
-                    newAllowance.pop();
-                    setFormData({
-                      ...formData,
-                      allowance: newAllowance,
-                    });
-                  }}
-                  className="mt-4 inline-flex mr-4 items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
-                  Remove
-                </button>
-              )}
-              <button
-                type="button"
-                onClick={() => {
-                  const newForm = [...formData.allowance, ""];
-                  setFormData({ ...formData, allowance: newForm });
-                }}
-                className="mt-4 inline-flex items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
-                + Add More
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <section className="w-full mb-5">
-          <label
-            htmlFor="deadline"
-            className="block text-sm font-medium leading-6 text-slate-900">
-            Application Deadline
-          </label>
-          <input
-            type="date"
-            name="deadline"
-            id="deadline"
-            value={formData.deadline}
-            onChange={(e) => handleChange("deadline", e.target.value)}
-            className="p-2 border rounded-md w-full mt-2"
-          />
-        </section>
-
-        <section>
           <div className="flex gap-6 w-full">
             <div className="w-1/2">
               <label
@@ -433,7 +383,6 @@ const page = () => {
             </section>
           </div>
         </section>
-
         <section>
           <div className="flex gap-6 w-full">
             <div className="w-1/3">

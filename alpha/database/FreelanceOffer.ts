@@ -14,7 +14,7 @@ export interface FreelanceOfferType {
   deadline: Date | string; // 1 day / 2 days / 3 days / 1 week / 1 month
 
   applicationLimit: number;
-  recuritAmoumt: number;
+  recruitCount: number;
 
   applicants: string[];
 
@@ -31,10 +31,8 @@ export interface FreelanceOfferCreateType {
   salary: string[]; // From 0 $
   field: (string | Date)[];
   projectDeadline: Date | string; // 1 day / 2 days / 3 days / 1 week / 1 month
-
   applicationLimit: number;
-  recuritAmoumt: number;
-
+  recruitCount: number;
   contact: LinkType[];
   deadline: Date | string;
 }
@@ -57,7 +55,7 @@ const freelanceOfferSchema = new Schema({
   ],
 
   applicationLimit: { type: Number },
-  recuritAmoumt: { type: Number },
+  recruitCount: { type: Number },
 
   applicants: { type: [String] },
 

@@ -12,6 +12,8 @@ const createFreelanceOffer = async ({
   salary,
   field,
   projectDeadline,
+  applicationLimit,
+  recruitCount,
   contact,
   deadline,
 }: FreelanceOfferCreateType) => {
@@ -24,6 +26,8 @@ const createFreelanceOffer = async ({
     salary,
     field,
     projectDeadline,
+    applicationLimit,
+    recruitCount,
     contact,
     deadline,
   };

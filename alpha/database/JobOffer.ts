@@ -38,10 +38,8 @@ export interface JobOfferCreateType {
   location: string | null;
   salary: string[]; //
   allowance: string[];
-
   applicationLimit: number;
   recruitCount: number;
-
   deadline: Date | string; //
   contact: LinkType[]; //
 }

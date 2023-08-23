@@ -13,6 +13,8 @@ const createJobOffer = async ({
   location,
   salary,
   allowance,
+  applicationLimit,
+  recruitCount,
   deadline,
   contact,
 }: JobOfferCreateType) => {
@@ -27,6 +29,8 @@ const createJobOffer = async ({
     location,
     salary,
     allowance,
+    applicationLimit,
+    recruitCount,
     deadline,
     contact,
   };
