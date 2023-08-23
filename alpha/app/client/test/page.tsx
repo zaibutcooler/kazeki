@@ -27,7 +27,7 @@ const page = () => {
     allowance: ["Health insurance", "Paid time off", "Flexible work hours"],
     deadline: "2023-08-31",
     applicationLimit: 300,
-    recuritAmoumt: 5, // to
+    recruitCount: 5, // to
     contact: [{ label: "github", link: "https://github.com/examplecompany" }],
   };
 
@@ -91,7 +91,9 @@ const page = () => {
 
   return (
     <main className="pt-4 flex justify-center w-full text-sm">
-      <form className="p-4 md:p-8 rounded-md w-full md:w-3/4 font-medium text-slate-800">
+      <form
+        onSubmit={handleSubmit}
+        className="p-4 md:p-8 rounded-md w-full md:w-3/4 font-medium text-slate-800">
         {/* <h1 className="text-xl text-black">Job Offer Form</h1> */}
         <section className="w-full mb-5">
           <label
@@ -423,8 +425,8 @@ const page = () => {
                 <input
                   name="to"
                   id="to"
-                  value={formData.recuritAmount}
-                  onChange={(e) => handleChange('recuritAmount', e.target.value)}
+                  value={formData.recruitCount}
+                  onChange={(e) => handleChange("recruitCount", e.target.value)}
                   className="p-2 border rounded-md w-full mt-2"
                 />
               </div>

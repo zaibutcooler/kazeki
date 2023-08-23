@@ -17,7 +17,7 @@ export interface JobOfferType {
   contact: LinkType[];
 
   applicationLimit: number;
-  recuritAmoumt: number;
+  recruitCount: number;
 
   applicants: string[];
 
@@ -40,7 +40,7 @@ export interface JobOfferCreateType {
   allowance: string[];
 
   applicationLimit: number;
-  recuritAmoumt: number;
+  recruitCount: number;
 
   deadline: Date | string; //
   contact: LinkType[]; //
@@ -66,7 +66,7 @@ const jobOfferSchema = new Schema({
   ],
 
   applicationLimit: { type: Number },
-  recuritAmoumt: { type: Number },
+  recruitCount: { type: Number },
 
   applicants: { type: [String] },
 
