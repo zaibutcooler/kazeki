@@ -28,7 +28,7 @@ const JobOfferCard: React.FC<Props> = ({ jobOffer }) => {
               </span>
             </div>
             <h1 className="text-xs font-medium md:w-auto text-end">
-              300$ : 500$
+              {jobOffer.salary[0]} $ : {jobOffer.salary[1]} $
             </h1>
           </section>
 
@@ -93,7 +93,7 @@ const JobOfferCard: React.FC<Props> = ({ jobOffer }) => {
             <div className="flex gap-3">
               <p className="text-xs text-gray-600  py-1 ">1 hour ago</p>
               <p className="text-xs text-gray-600  py-1 px-3 rounded-md border">
-                14 applicants
+                {jobOffer.applicants.length} applicants
               </p>
             </div>
 
@@ -114,7 +114,7 @@ const JobOfferCard: React.FC<Props> = ({ jobOffer }) => {
               </span>
             </div>
             <h1 className="text-xs font-medium md:w-auto text-end">
-              300$ : 500$
+              {jobOffer.salary[0]} $ : {jobOffer.salary[1]} $
             </h1>
           </section>
 

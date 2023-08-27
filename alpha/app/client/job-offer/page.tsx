@@ -511,6 +511,11 @@ const JobOfferPage = () => {
             </div>
           </div>
         </section>
+        <button
+          type="submit"
+          className="px-5 py-2 bg-slate-800  text-white rounded-sm">
+          Submit
+        </button>
       </form>
     </main>
   );

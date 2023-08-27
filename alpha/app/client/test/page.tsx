@@ -26,7 +26,7 @@ const page = () => {
     ],
     field: ["web-development"],
     projectDeadline: "2023-08-31",
-    salary: ["$300", "$500"],
+    salary: ["300", "500"],
     deadline: "2023-08-15",
     applicationLimit: 300,
     recruitCount: 5,
@@ -321,6 +321,7 @@ const page = () => {
             <section className="flex w-full gap-6 ">
               <div className="w-1/2">
                 <input
+                  type="number"
                   name="from"
                   id="from"
                   value={formData.salary[0]}
@@ -330,6 +331,7 @@ const page = () => {
               </div>
               <div className="w-1/2">
                 <input
+                  type="number"
                   name="to"
                   id="to"
                   value={formData.salary[1]}
@@ -460,6 +462,12 @@ const page = () => {
             </div>
           </div>
         </section>
+
+        <button
+          type="submit"
+          className="px-5 py-2 bg-slate-800  text-white rounded-sm">
+          Submit
+        </button>
       </form>
     </main>
   );

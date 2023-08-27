@@ -1,9 +1,11 @@
 "use client";
-import { FreelanceOfferCreateType } from "@/database/FreelanceOffer";
-import createFreelanceOffer from "@/utils/forms/createFreelanceOffer";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { FreelanceOfferCreateType } from "@/database/FreelanceOffer";
+import createFreelanceOffer from "@/utils/forms/createFreelanceOffer";
+
+const industriesArray = ["Tech", "Health", "Finance", "Design", "Marketing"]; // need to improve
 
 const FreelanceOfferPage = () => {
   const initialFormData = {
@@ -22,10 +24,10 @@ const FreelanceOfferPage = () => {
     ],
     field: ["web-development"],
     projectDeadline: "2023-08-31",
-    salary: ["$300", "$500"],
+    salary: ["300", "500"],
     deadline: "2023-08-15",
     applicationLimit: 300,
-    recuritAmoumt: 5,
+    recruitCount: 5,
     contact: [{ label: "github", link: "https://github.com/zaiYellYintAung" }],
   };
 
@@ -57,6 +59,17 @@ const FreelanceOfferPage = () => {
     setFormData({ ...formData, responsibilities: newResponsibilities });
   };
 
+  const toggleIndustry = (industry: string) => {
+    const updatedFields = formData.field.includes(industry)
+      ? formData.field.filter((item) => item !== industry)
+      : [...formData.field, industry];
+
+    setFormData({
+      ...formData,
+      field: updatedFields,
+    });
+  };
+
   const handleLinkChange = (index: number, field: string, value: string) => {
     const newLinks = [...formData.contact];
     newLinks[index] = {
@@ -82,82 +95,64 @@ const FreelanceOfferPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-16 min-h-screen px-2  md:px-6">
+    <main className="pt-4 flex justify-center w-full text-sm">
       <form
         onSubmit={handleSubmit}
-        className="w-full bg-white p-4 md:p-8 rounded-lg shadow-md text-sm md:text-base">
-        <div className="grid grid-cols-6 md:grid-cols-4 gap-4">
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
+        className="p-4 md:p-8 rounded-md w-full md:w-3/4 font-medium text-slate-800">
+        {/* <h1 className="text-xl text-black">Job Offer Form</h1> */}
+        <section className="w-full mb-5">
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium leading-6 text-slate-900">
+            Project Title
+          </label>
+          <input
+            type="title"
+            name="title"
+            id="title"
+            value={formData.title}
+            onChange={(e) => handleChange("title", e.target.value)}
+            className="p-2 border rounded-md w-full mt-2"
+          />
+        </section>
+        <section className="w-full mb-5">
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium leading-6 text-slate-900">
+            Description
+          </label>
+          <textarea
+            name="description"
+            id="description"
+            value={formData.description}
+            onChange={(e) => handleChange("description", e.target.value)}
+            rows={4}
+            className="p-2 border rounded-md w-full mt-2"
+          />
+        </section>
+        <section>
+          <div className="flex w-full">
             <label
-              htmlFor="title"
-              className="block text-gray-600 font-semibold mb-3 ">
-              Job Title :
+              htmlFor="label"
+              className="block text-sm font-medium leading-6 text-slate-900">
+              Requirements
             </label>
           </div>
-          <div className="col-span-4 md:col-span-3 mb-6">
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={formData.title}
-              onChange={(e) => handleChange("title", e.target.value)}
-              className="form-input w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-              placeholder="e.g. Frontend Developer"
-            />
-          </div>
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
-            <label
-              htmlFor="field"
-              className="block text-gray-600 font-semibold mb-3 ">
-              Related Field
-            </label>
-          </div>
-          <div className="col-span-4 md:col-span-3 mb-6">
-            <input
-              type="text"
-              id="field"
-              name="field"
-              disabled
-              className="form-input w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-              placeholder="Will make it later"
-            />
-          </div>
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
-            <label
-              htmlFor="description"
-              className="block text-gray-600 font-semibold mb-3">
-              Description :
-            </label>
-          </div>
-          <div className="col-span-4 md:col-span-3 mb-6">
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={(e) => handleChange("description", e.target.value)}
-              className="form-textarea w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-              placeholder="Enter job description here..."
-              rows={4}
-            />
-          </div>
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
-            <label
-              htmlFor="requirements"
-              className="block text-gray-600  font-semibold mb-3">
-              Requirements :
-            </label>
-          </div>
-          <div className="col-span-4 md:col-span-3 mb-6">
-            {formData.requirements.map((requirement, index) => (
-              <input
-                type="text"
-                key={index}
-                value={requirement}
-                onChange={(e) => handleRequirementChange(index, e.target.value)}
-                className="form-input w-full px-4 py-2 rounded-lg border mb-3 border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-                placeholder="Company Name"
-              />
+          <div className=" mb-5 w-full">
+            {formData.requirements.map((item, index) => (
+              <section className="flex w-full gap-6 ">
+                <input
+                  type="text"
+                  key={index}
+                  value={item}
+                  onChange={(e) =>
+                    handleRequirementChange(index, e.target.value)
+                  }
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </section>
             ))}
+
             <div className="w-full flex justify-end">
               {formData.requirements.length > 1 && (
                 <button
@@ -182,44 +177,31 @@ const FreelanceOfferPage = () => {
               </button>
             </div>
           </div>
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
+        </section>
+
+        <section>
+          <div className="flex w-full">
             <label
-              htmlFor="projectDeadline"
-              className="block text-gray-600  font-semibold mb-3">
-              Project Deadline :
+              htmlFor="label"
+              className="block text-sm font-medium leading-6 text-slate-900">
+              Responsibilities
             </label>
           </div>
-          <div className="col-span-4 md:col-span-3 mb-6">
-            <input
-              type="date"
-              id="projectDeadline"
-              name="projectDeadline"
-              value={formData.projectDeadline}
-              onChange={(e) => handleChange("projectDeadline", e.target.value)}
-              className="form-input w-full px-4  py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-              placeholder="City, Country"
-            />
-          </div>
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
-            <label
-              htmlFor="responsibilities"
-              className="block text-gray-600  font-semibold mb-3">
-              Responsibilities :
-            </label>
-          </div>
-          <div className="col-span-4 md:col-span-3 mb-6">
-            {formData.responsibilities.map((responsibility, index) => (
-              <input
-                type="text"
-                value={responsibility}
-                key={index}
-                onChange={(e) =>
-                  handleResponsibilityChange(index, e.target.value)
-                }
-                className="form-input w-full px-4 py-2 rounded-lg border mb-3 border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-                placeholder="Company Name"
-              />
+          <div className=" mb-5 w-full">
+            {formData.responsibilities.map((item, index) => (
+              <section className="flex w-full gap-6 ">
+                <input
+                  type="text"
+                  key={index}
+                  value={item}
+                  onChange={(e) =>
+                    handleResponsibilityChange(index, e.target.value)
+                  }
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </section>
             ))}
+
             <div className="w-full flex justify-end">
               {formData.responsibilities.length > 1 && (
                 <button
@@ -247,85 +229,210 @@ const FreelanceOfferPage = () => {
               </button>
             </div>
           </div>
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
-            <label
-              htmlFor="salary"
-              className="block text-gray-600  font-semibold mb-3">
-              Salary Range :
-            </label>
+        </section>
+
+        <section>
+          <div className="flex gap-6 w-full">
+            <div className="w-1/2">
+              <label
+                htmlFor="label"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Application Deadline
+              </label>
+            </div>
+            <div className="w-1/2">
+              <label
+                htmlFor="link"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Project Deadline
+              </label>
+            </div>
           </div>
-          <div className="col-span-4 md:col-span-3 mb-6 flex gap-4">
-            <input
-              type="number"
-              id="salary"
-              name="salary"
-              value={formData.salary[0]}
-              onChange={(e) => handleSalaryChange(0, e.target.value)}
-              className="form-input w-full  px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-              placeholder="Salary From"
-            />
-            <input
-              type="number"
-              id="salary"
-              name="salary"
-              value={formData.salary[1]}
-              onChange={(e) => handleSalaryChange(1, e.target.value)}
-              className="form-input w-full  px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-              placeholder="Salary To"
-            />
-          </div>
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
-            <label
-              htmlFor="deadline"
-              className="block text-gray-600  font-semibold mb-3">
-              Form Deadline :
-            </label>
-          </div>
-          <div className="col-span-4 md:col-span-3 mb-6">
-            <input
-              type="date"
-              id="deadline"
-              name="deadline"
-              value={formData.deadline}
-              onChange={(e) => handleChange("deadline", e.target.value)}
-              className="form-input w-full px-4  py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-              placeholder="City, Country"
-            />
-          </div>
-          <div className="col-span-2 md:col-span-1 pr-2 md:pr-4 mt-2 w-full flex justify-end">
-            <label
-              htmlFor="responsibilities"
-              className="block text-gray-600 font-semibold mb-3">
-              Links :
-            </label>
-          </div>{" "}
-          <div className="col-span-4 md:col-span-3 mb-6">
-            {formData.contact.map((link, index) => (
-              <div className=" flex gap-3 mb-3" key={index}>
+          <div className=" mb-6 w-full">
+            <section className="flex w-full gap-6 ">
+              <div className="w-1/2">
                 <input
-                  type="text"
-                  value={link.label}
-                  onChange={(e) =>
-                    handleLinkChange(index, "label", e.target.value)
-                  }
-                  className="form-input w-1/3 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-                  placeholder="Label"
-                />
-                <input
-                  type="text"
-                  value={link.link}
-                  onChange={(e) =>
-                    handleLinkChange(index, "link", e.target.value)
-                  }
-                  className="form-input w-2/3 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
-                  placeholder="Link URL"
+                  type="date"
+                  name="from"
+                  id="from"
+                  value={formData.deadline}
+                  onChange={(e) => handleChange("deadline", e.target.value)}
+                  className="p-2 border rounded-md w-full mt-2"
                 />
               </div>
+              <div className="w-1/2">
+                <input
+                  type="date"
+                  name="to"
+                  id="to"
+                  value={formData.projectDeadline}
+                  onChange={(e) =>
+                    handleChange("projectDeadline", e.target.value)
+                  }
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section className="w-full mb-6">
+          <label
+            htmlFor="firstname"
+            className="block text-sm font-medium leading-6 text-slate-900">
+            Industry
+          </label>
+          <div className="mt-2 flex gap-3 p-3 border flex-wrap text-sm rounded-md">
+            {industriesArray.map((item) => (
+              <button
+                type="button"
+                onClick={() => toggleIndustry(item)} //here
+                className={`py-1 px-3 border rounded-full text-sm font-medium text-slate-600 ${
+                  formData.field.includes(item)
+                    ? "border-black text-black shadow-lg"
+                    : ""
+                }`}>
+                {item}
+              </button>
             ))}
-            <div className="w-full flex justify-end">
-              {formData.contact.length > 1 && (
+          </div>
+        </section>
+
+        <section>
+          <div className="flex gap-6 w-full">
+            <div className="w-1/2">
+              <label
+                htmlFor="label"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Salary From
+              </label>
+            </div>
+            <div className="w-1/2">
+              <label
+                htmlFor="link"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                To
+              </label>
+            </div>
+          </div>
+          <div className=" mb-6 w-full">
+            <section className="flex w-full gap-6 ">
+              <div className="w-1/2">
+                <input
+                  type="number"
+                  name="from"
+                  id="from"
+                  value={formData.salary[0]}
+                  onChange={(e) => handleSalaryChange(0, e.target.value)}
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </div>
+              <div className="w-1/2">
+                <input
+                  type="number"
+                  name="to"
+                  id="to"
+                  value={formData.salary[1]}
+                  onChange={(e) => handleSalaryChange(1, e.target.value)}
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section>
+          <div className="flex gap-6 w-full">
+            <div className="w-1/2">
+              <label
+                htmlFor="label"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Application Limit
+              </label>
+            </div>
+            <div className="w-1/2">
+              <label
+                htmlFor="link"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Recruit Count
+              </label>
+            </div>
+          </div>
+          <div className=" mb-6 w-full">
+            <section className="flex w-full gap-6 ">
+              <div className="w-1/2">
+                <input
+                  name="from"
+                  id="from"
+                  value={formData.applicationLimit}
+                  onChange={(e) =>
+                    handleChange("applicationLimit", e.target.value)
+                  }
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </div>
+              <div className="w-1/2">
+                <input
+                  name="to"
+                  id="to"
+                  value={formData.recruitCount}
+                  onChange={(e) => handleChange("recruitCount", e.target.value)}
+                  className="p-2 border rounded-md w-full mt-2"
+                />
+              </div>
+            </section>
+          </div>
+        </section>
+        <section>
+          <div className="flex gap-6 w-full">
+            <div className="w-1/3">
+              <label
+                htmlFor="label"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Label
+              </label>
+            </div>
+            <div className="w-2/3">
+              <label
+                htmlFor="link"
+                className="block text-sm font-medium leading-6 text-slate-900">
+                Link
+              </label>
+            </div>
+          </div>
+          <div className=" mb-6 w-full">
+            {formData.contact.map((item, index) => (
+              <section className="flex w-full gap-6 " key={index}>
+                <div className="w-1/3">
+                  <input
+                    name="label"
+                    id="label"
+                    value={item.label}
+                    onChange={(e) =>
+                      handleLinkChange(index, "label", e.target.value)
+                    }
+                    className="p-2 border rounded-md w-full mt-2"
+                  />
+                </div>
+                <div className="w-2/3">
+                  <input
+                    name="link"
+                    id="link"
+                    value={item.link}
+                    onChange={(e) =>
+                      handleLinkChange(index, "link", e.target.value)
+                    }
+                    className="p-2 border rounded-md w-full mt-2"
+                  />
+                </div>
+              </section>
+            ))}
+
+            <div className="mt-3 flex gap-4 w-full justify-end">
+              {formData.contact.length !== 1 && (
                 <button
                   type="button"
+                  className="py-1.5 px-3 text-xs border hover:bg-slate-50"
                   onClick={() => {
                     const newLinks = [...formData.contact];
                     newLinks.pop();
@@ -333,35 +440,35 @@ const FreelanceOfferPage = () => {
                       ...formData,
                       contact: newLinks,
                     });
-                  }}
-                  className="mt-4 inline-flex mr-4 items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
+                  }}>
                   Remove
                 </button>
               )}
+
               <button
                 type="button"
+                className="py-1.5 px-3 text-xs border hover:bg-slate-50"
                 onClick={() => {
                   const newLink = [
                     ...formData.contact,
                     { label: "", link: "" },
                   ];
                   setFormData({ ...formData, contact: newLink });
-                }}
-                className="mt-4 inline-flex items-center px-3 py-2 rounded-md text-sm leading-4 font-medium border text-slate-600 bg-white hover:bg-slate-50 focus:outline-none focus:border-slate-700 border-gray-200 focus:ring-slate-500">
-                + Add More
+                }}>
+                + Add more
               </button>
             </div>
           </div>
-        </div>
-        <div className="flex justify-end mt-6">
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700">
-            Submit
-          </button>
-        </div>
+        </section>
+
+        <button
+          type="submit"
+          className="px-5 py-2 bg-slate-800  text-white rounded-sm">
+          Submit
+        </button>
       </form>
-    </div>
+    </main>
   );
 };
+
 export default FreelanceOfferPage;
