@@ -10,13 +10,18 @@ import ClientScheduleCard from "./ClientScheduleCard";
 
 const ClientJobReplyView = () => {
   const { data: session } = useSession();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isNone, setIsNone] = useState(true);
 
   const [offers, setOffers] = useState<JobOfferType[]>([]);
   useEffect(() => {
     const fillDatas = async () => {
       if (session?.user) {
+        setIsLoading(true);
         const offerDatas = await fetchJobOfferWithUserID(session.user._id);
         offerDatas && (await setOffers(offerDatas));
+        offerDatas && setIsNone(false);
+        setIsLoading(false);
       }
     };
 
@@ -37,12 +42,23 @@ const ClientJobReplyView = () => {
 
   return (
     <div className="w-full mt-3">
-      {offers &&
-        offers.map((item, index) => (
-          <div key={index}>
-            <ClientScheduleCard offer={item} />
-          </div>
-        ))}
+      {!isLoading ? (
+        <div>
+          {isNone ? (
+            <div>None</div>
+          ) : (
+            <div>
+              {offers.map((item, index) => (
+                <div key={index}>
+                  <ClientScheduleCard offer={item} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ) : (
+        <div>Loading</div>
+      )}
     </div>
   );
 };

@@ -26,7 +26,7 @@ const LoginPage = () => {
       </Link>
       <div className="max-w-md w-full px-6 py-8 bg-white shadow-md mx-3">
         <div className="text-2xl font-semibold mb-6 text-center">Login</div>
-        <form>
+        <form className="mb-2">
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -69,10 +69,16 @@ const LoginPage = () => {
             <Link
               href="#"
               className="text-gray-800 hover:text-gray-500 text-sm font-semibold">
-              Forgot Password?
+              Don't have an account? Sign-Up
             </Link>
           </div>
         </form>
+        <button className="w-full py-2 bg-black text-white mt-4 rounded-sm">
+          Continue with Google
+        </button>
+        <button className="w-full py-2 bg-black text-white mt-4 rounded-sm">
+          Continue with GitHub
+        </button>
       </div>
     </div>
   );

@@ -15,12 +15,18 @@ const JobListing: React.FC<Props> = ({}) => {
     []
   );
 
+  const [isNone, setIsNone] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const fillDatas = async () => {
+      setIsLoading(true);
       const applicationDatas = await fetchJobApplication();
       const offerDatas = await fetchJobOffer();
 
       offerDatas && setOffers(offerDatas);
+      !offers && setIsNone(true);
+      setIsLoading(false);
     };
     fillDatas();
   }, []);
@@ -31,13 +37,22 @@ const JobListing: React.FC<Props> = ({}) => {
 
   return (
     <div className="">
-      <JobHeaderCard handleSearch={handleSearch} />
-      {offers &&
-        offers.map((offer) => (
-          <main>
-            <JobOfferCard jobOffer={offer} />
-          </main>
-        ))}
+      {isLoading ? (
+        <div>Loading</div>
+      ) : (
+        <div>
+          <JobHeaderCard handleSearch={handleSearch} />
+          {!isNone ? (
+            offers.map((offer) => (
+              <main>
+                <JobOfferCard jobOffer={offer} />
+              </main>
+            ))
+          ) : (
+            <div>Is none</div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -73,6 +73,12 @@ const LoginForm = () => {
             </Link>
           </div>
         </form>
+        <button className="w-full bg-black text-white py-1.5">
+          Continue With Google
+        </button>
+        <button className="w-full bg-black text-white py-1.5">
+          Continue With GitHub
+        </button>
       </div>
     </div>
   );

@@ -11,14 +11,19 @@ const SeekerJobReplyView = () => {
 
   const { data: session } = useSession();
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [isNone, setIsNone] = useState(true);
+
   useEffect(() => {
     const fillDatas = async () => {
       if (session?.user) {
+        setIsLoading(true);
         const applicationDatas = await fetchApprovedJobApplicationWithUserID(
           session.user._id
         );
         applicationDatas && setApplications(applicationDatas);
-        console.log("fd", applicationDatas);
+        applicationDatas && setIsNone(false);
+        setIsLoading(false);
       }
     };
     fillDatas();
@@ -26,14 +31,23 @@ const SeekerJobReplyView = () => {
 
   return (
     <div>
-      {applications && (
-        <div className="">
-          {applications.map((item) => (
-            <main key={item._id} className="">
-              <SeekerScheduleCard application={item} />
-            </main>
-          ))}
+      {!isLoading ? (
+        <div>
+          {isNone ? (
+            <div>None</div>
+          ) : (
+            <div>
+              {applications &&
+                applications.map((item) => (
+                  <main key={item._id} className="">
+                    <SeekerScheduleCard application={item} />
+                  </main>
+                ))}
+            </div>
+          )}
         </div>
+      ) : (
+        <div>Loading</div>
       )}
     </div>
   );

@@ -7,8 +7,7 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { AiOutlineCopy } from "react-icons/ai";
 import { FaDotCircle } from "react-icons/fa";
-import { FaCircle, FaCopy, FaRegCopy } from "react-icons/fa6";
-import { FiCopy } from "react-icons/fi";
+import { FaRegCopy } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 
 interface Props {

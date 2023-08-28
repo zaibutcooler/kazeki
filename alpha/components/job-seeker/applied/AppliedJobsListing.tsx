@@ -1,7 +1,6 @@
 "use client";
 
 import { JobApplicationType } from "@/database/JobApplication";
-import { ProfileType } from "@/database/UserProfile";
 import { fetchJobApplicationWithUserID } from "@/utils/fetch/fetchJobApplications";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -11,14 +10,20 @@ const AppliedJobsListing = () => {
   const [applications, setApplications] = useState<JobApplicationType[]>([]);
   const { data: session } = useSession();
 
+  const [loading, setLoading] = useState(true);
+  const [isNone, setIsNone] = useState(true);
+
   useEffect(() => {
     const fillDatas = async () => {
+      setLoading(true);
       if (session?.user) {
         const applicationDatas = await fetchJobApplicationWithUserID(
           session.user._id
         );
         applicationDatas && setApplications(applicationDatas);
-        applicationDatas && console.log("ad", applicationDatas);
+        applicationDatas && setIsNone(false);
+        applicationDatas && console.log("dt", applicationDatas);
+        setLoading(false);
       }
     };
     fillDatas();
@@ -26,12 +31,23 @@ const AppliedJobsListing = () => {
 
   return (
     <div className="mt-3">
-      {applications &&
-        applications.map((item) => (
-          <div key={item._id} className="flex flex-col md:flex-row mb-3">
-            <JobApplicationCard item={item} />
-          </div>
-        ))}
+      {!loading ? (
+        <div>
+          {isNone ? (
+            <div>None</div>
+          ) : (
+            <div>
+              {applications.map((item) => (
+                <div key={item._id} className="flex flex-col md:flex-row mb-3">
+                  <JobApplicationCard item={item} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 };
