@@ -6,6 +6,7 @@ import JobOfferCard from "./JobOfferCard";
 import { fetchJobApplication } from "@/utils/fetch/fetchJobApplications";
 import { FreelanceApplicationType } from "@/database/FreelanceApplication";
 import JobHeaderCard from "./JobHeaderCard";
+import MainLoading from "@/components/loadings/MainLoading";
 
 interface Props {}
 
@@ -37,11 +38,13 @@ const JobListing: React.FC<Props> = ({}) => {
 
   return (
     <div className="">
+      <JobHeaderCard handleSearch={handleSearch} />
       {isLoading ? (
-        <div>Loading</div>
+        <div>
+          <MainLoading />
+        </div>
       ) : (
         <div>
-          <JobHeaderCard handleSearch={handleSearch} />
           {!isNone ? (
             offers.map((offer) => (
               <main>
