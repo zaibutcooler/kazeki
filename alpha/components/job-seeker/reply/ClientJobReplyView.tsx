@@ -7,6 +7,7 @@ import { fetchJobRepliesWithApplication } from "@/utils/fetch/fetchJobReplies";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import ClientScheduleCard from "./ClientScheduleCard";
+import InterviewLoadingOne from "@/components/loadings/InterviewLoadingOne";
 
 const ClientJobReplyView = () => {
   const { data: session } = useSession();
@@ -57,7 +58,9 @@ const ClientJobReplyView = () => {
           )}
         </div>
       ) : (
-        <div>Loading</div>
+        <div>
+          <InterviewLoadingOne />
+        </div>
       )}
     </div>
   );

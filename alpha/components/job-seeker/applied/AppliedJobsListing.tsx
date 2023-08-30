@@ -5,6 +5,8 @@ import { fetchJobApplicationWithUserID } from "@/utils/fetch/fetchJobApplication
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import JobApplicationCard from "./JobApplicationCard";
+import ApplicationLoadingOne from "@/components/loadings/ApplicationLoadingOne";
+import ApplicationLoadingTwo from "@/components/loadings/ApplicationLoadingTwo";
 
 const AppliedJobsListing = () => {
   const [applications, setApplications] = useState<JobApplicationType[]>([]);
@@ -46,7 +48,9 @@ const AppliedJobsListing = () => {
           )}
         </div>
       ) : (
-        <div>Loading...</div>
+        <div>
+          <ApplicationLoadingTwo />
+        </div>
       )}
     </div>
   );
