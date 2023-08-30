@@ -8,6 +8,8 @@ import JobApplicationCard from "./JobApplicationCard";
 import { BsChevronCompactDown } from "react-icons/bs";
 import { AiOutlineDown } from "react-icons/ai";
 import { createJobReply } from "@/utils/forms/createJobReply";
+import ApplicationLoadingOne from "@/components/loadings/ApplicationLoadingOne";
+import ApplicationLoadingTwo from "@/components/loadings/ApplicationLoadingTwo";
 
 const ClientJobApplicationListing = () => {
   const [offers, setOffers] = useState<JobOfferType[]>([]);
@@ -95,7 +97,9 @@ const ClientJobApplicationListing = () => {
               )}
             </div>
           ) : (
-            <div>Loading</div>
+            <div>
+              <ApplicationLoadingOne />
+            </div>
           )}
         </div>
 
@@ -146,7 +150,9 @@ const ClientJobApplicationListing = () => {
             )}
           </div>
         ) : (
-          <div>Loading</div>
+          <div className="mt-2">
+            <ApplicationLoadingTwo />
+          </div>
         )}
       </section>
     </div>
