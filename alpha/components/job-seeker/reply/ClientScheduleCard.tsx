@@ -1,3 +1,4 @@
+import InterviewLoadingTwo from "@/components/loadings/InterviewLoadingTwo";
 import { JobApplicationType } from "@/database/JobApplication";
 import { JobOfferType } from "@/database/JobOffer";
 import { ReplyType } from "@/database/Reply";
@@ -17,11 +18,15 @@ interface Props {
 const ClientScheduleCard: React.FC<Props> = ({ offer }) => {
   const [replies, setReplies] = useState<JobApplicationType[]>([]);
 
+  const [loadingOne, setLoadingOne] = useState(true);
+
   useEffect(() => {
     const fillDatas = async () => {
+      setLoadingOne(true);
       const replyDatas = await fetchJobApplicationWithReplyOfferID(offer._id);
       replyDatas && setReplies(replyDatas);
       replyDatas && console.log(replyDatas);
+      setLoadingOne(false);
     };
     fillDatas();
   }, []);
@@ -48,7 +53,7 @@ const ClientScheduleCard: React.FC<Props> = ({ offer }) => {
         </div>
       </main>
       <section>
-        {replies &&
+        {!loadingOne ? (
           replies.map((item, index) => (
             <div
               key={index}
@@ -65,7 +70,12 @@ const ClientScheduleCard: React.FC<Props> = ({ offer }) => {
                 <h1>{formatDateTime(String(item.created)).time}</h1>
               </section>
             </div>
-          ))}
+          ))
+        ) : (
+          <div>
+            <InterviewLoadingTwo />
+          </div>
+        )}
       </section>
     </div>
   );

@@ -3,6 +3,7 @@ import { fetchApprovedJobApplicationWithUserID } from "@/utils/fetch/fetchJobApp
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import SeekerScheduleCard from "./SeekerScheduleCard";
+import InterviewLoadingThree from "@/components/loadings/InterviewLoadingThree";
 
 const SeekerJobReplyView = () => {
   const [applications, setApplications] = useState<JobApplicationType[] | null>(
@@ -47,7 +48,9 @@ const SeekerJobReplyView = () => {
           )}
         </div>
       ) : (
-        <div>Loading</div>
+        <div className="mt-2">
+          <InterviewLoadingThree />
+        </div>
       )}
     </div>
   );

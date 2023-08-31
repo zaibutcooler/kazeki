@@ -17,8 +17,8 @@ const ClientJobApplicationListing = () => {
   const [currentOffer, setCurrentOffer] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const [loadingOne, setLoadingOne] = useState(false);
-  const [loadingTwo, setLoadingTwo] = useState(false);
+  const [loadingOne, setLoadingOne] = useState(true);
+  const [loadingTwo, setLoadingTwo] = useState(true);
 
   const [isNoneOne, setIsNoneOne] = useState(true);
   const [isNoneTwo, setIsNoneTwo] = useState(true);

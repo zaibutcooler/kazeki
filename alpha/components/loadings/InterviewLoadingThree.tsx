@@ -1,7 +1,7 @@
 import React from "react";
 import InterviewLoadingTwo from "./InterviewLoadingTwo";
 
-const InterviewLoadingOne = () => {
+const InterviewLoadingThree = () => {
   const arr = ["", "", ""];
 
   return (
@@ -12,6 +12,8 @@ const InterviewLoadingOne = () => {
           <div className="mb-2 p-4 border rounded animate-pulse">
             <div className="w-full h-5 mb-2 bg-gray-100 rounded"></div>
             <InterviewLoadingTwo />
+            <div className="w-full h-5 bg-gray-100 rounded mb-2"></div>
+            <div className="w-full h-5 bg-gray-100 rounded mb-2"></div>
           </div>
         </div>
       ))}
@@ -19,4 +21,4 @@ const InterviewLoadingOne = () => {
   );
 };
 
-export default InterviewLoadingOne;
+export default InterviewLoadingThree;
