@@ -2,11 +2,7 @@ import InterviewLoadingTwo from "@/components/loadings/InterviewLoadingTwo";
 import { JobApplicationType } from "@/database/JobApplication";
 import { JobOfferType } from "@/database/JobOffer";
 import { ReplyType } from "@/database/Reply";
-import {
-  fetchJobApplication,
-  fetchJobApplicationWithOfferID,
-  fetchJobApplicationWithReplyOfferID,
-} from "@/utils/fetch/fetchJobApplications";
+import { fetchJobApplicationWithReplyOfferID } from "@/utils/fetch/fetchJobApplications";
 import { formatDateTime } from "@/utils/formatDate";
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
