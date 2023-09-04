@@ -2,7 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import {
+  AiOutlineApple,
+  AiOutlineArrowLeft,
+  AiOutlineGoogle,
+} from "react-icons/ai";
 import { signIn } from "next-auth/react";
 
 const LoginPage = () => {
@@ -73,12 +77,26 @@ const LoginPage = () => {
             </Link>
           </div>
         </form>
-        <button className="w-full py-2 bg-black text-white mt-4 rounded-sm">
-          Continue with Google
-        </button>
-        <button className="w-full py-2 bg-black text-white mt-4 rounded-sm">
-          Continue with GitHub
-        </button>
+        <div className="mt-4 text-sm font-medium">
+          <button
+            onClick={() => signIn("google")}
+            className="w-full rounded-lg bg-[#4285F4] text-white px-4 py-2 flex justify-center items-center gap-2">
+            <span className="text-xl">
+              <AiOutlineGoogle />
+            </span>{" "}
+            Continue With Google
+          </button>
+        </div>
+        <div className="mt-4 text-sm font-medium">
+          <button
+            onClick={() => signIn("apple")}
+            className="w-full rounded-lg bg-[#888888] text-white px-4 py-2 flex justify-center items-center gap-2">
+            <span className="text-xl">
+              <AiOutlineApple />
+            </span>{" "}
+            Continue With Apple
+          </button>
+        </div>
       </div>
     </div>
   );
