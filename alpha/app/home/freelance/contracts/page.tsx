@@ -1,3 +1,9 @@
-export default function FreelanceContracts() {
-  return <main>Freelance Contracts</main>;
+import MainContractPage from "@/components/freelancer/contracts/MainContractPage";
+
+export default async function FreelanceContracts() {
+  return (
+    <main>
+      <MainContractPage />
+    </main>
+  );
 }
