@@ -1,9 +1,10 @@
+"use client";
 import { ProfileType } from "@/database/UserProfile";
 import { useSession } from "next-auth/react";
-import ClientOngoingPage from "./ClientOngoingPage";
-import SeekerOngoingPage from "./SeekerOngoingPage";
+import ClientCompletedView from "./ClientCompletedView";
+import SeekerCompletedView from "./SeekerCompletedView";
 
-const MainOngointPage = () => {
+const MainCompletedPage = () => {
   const { data: session } = useSession();
   if (!session?.user) {
     return null;
@@ -15,15 +16,15 @@ const MainOngointPage = () => {
     <div>
       {profile.client ? (
         <div>
-          <ClientOngoingPage />
+          <ClientCompletedView />
         </div>
       ) : (
         <div>
-          <SeekerOngoingPage />
+          <SeekerCompletedView />
         </div>
       )}
     </div>
   );
 };
 
-export default MainOngointPage;
+export default MainCompletedPage;
