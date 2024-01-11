@@ -1,7 +1,0 @@
-version: "2.19.1"
-services:
-  job_alpha:
-    build: "./alpha"
-    container_name: "frontend_management_test"
-    ports:
-      - "3000:3000"
