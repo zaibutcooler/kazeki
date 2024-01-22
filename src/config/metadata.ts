@@ -1,5 +1,6 @@
-import { siteConfig } from "@/config/siteConfig";
-import { Metadata } from "next";
+import { Metadata } from "next"
+
+import { siteConfig } from "@/config/siteConfig"
 
 export const siteMetaData: Metadata = {
   title: {
@@ -16,11 +17,11 @@ export const siteMetaData: Metadata = {
   ],
   authors: [
     {
-      name: "archaic",
-      url: "https://archaic.vercel.app",
+      name: "zai",
+      url: "https://zaibutcooler.vercel.app",
     },
   ],
-  creator: "archaic",
+  creator: "zai",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
@@ -48,4 +49,4 @@ export const siteMetaData: Metadata = {
   },
 
   manifest: `${siteConfig.url}/site.webmanifest`,
-};
+}

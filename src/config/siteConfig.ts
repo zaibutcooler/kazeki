@@ -6,7 +6,7 @@ export const siteConfig = {
   mainNav: [],
   url: process.env.WEBSITE_URL,
   links: {
-    twitter: "https://twitter.com/ArchaicAI",
-    docs: `${process.env.ARCHAIC_URL}/docs`,
+    twitter: "https://twitter.com/zaibutcooler",
+    docs: `${process.env.WEBSITE_URL}/about`,
   },
 }
