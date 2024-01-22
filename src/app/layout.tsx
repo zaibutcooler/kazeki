@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 
 import "./globals.css"
 
+import { ClerkProvider } from "@clerk/nextjs"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -22,11 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <SpeedInsights />
-        <Analytics />
-        <Footer />
+        <ClerkProvider>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <SpeedInsights />
+          <Analytics />
+          <Footer />
+        </ClerkProvider>
       </body>
     </html>
   )
