@@ -3,7 +3,7 @@
 import { Job } from "@prisma/client"
 import { useFormState } from "react-dom"
 
-import {FormSubmitButton} from "@/components/ui/form-submit-button
+import { FormSubmitButton } from "@/components/ui/form-submit-button"
 import {
   approveSubmission,
   deleteJob,
